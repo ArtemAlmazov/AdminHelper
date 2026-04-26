@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Helper v1 by A.Almazov</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #05080d;
+      --panel: rgba(12, 18, 29, 0.86);
+      --panel-2: rgba(18, 25, 39, 0.92);
+      --gold: #ffb52e;
+      --gold-2: #ff8c00;
+      --blue: #2aa8ff;
+      --text: #f3f6fb;
+      --muted: #aab6c8;
+      --green: #64ff9a;
+      --red: #ff5d5d;
+      --border: rgba(255, 181, 46, 0.35);
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(42, 168, 255, 0.18), transparent 32%),
+        radial-gradient(circle at top right, rgba(255, 181, 46, 0.16), transparent 28%),
+        linear-gradient(135deg, #05080d 0%, #08111d 45%, #030509 100%);
+      color: var(--text);
+      font-family: "Segoe UI", Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+      pointer-events: none;
+    }
+
+    .wrapper {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 34px 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo {
+      width: 52px;
+      height: 52px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(145deg, rgba(255,181,46,0.18), rgba(42,168,255,0.06));
+      box-shadow: 0 0 28px rgba(255,181,46,0.16);
+      font-size: 28px;
+    }
+
+    .brand-title {
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      font-size: 20px;
+    }
+
+    .brand-subtitle {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 3px;
+    }
+
+    .status-pill {
+      border: 1px solid rgba(100,255,154,0.35);
+      background: rgba(100,255,154,0.08);
+      color: var(--green);
+      padding: 9px 14px;
+      border-radius: 999px;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .hero {
+      position: relative;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 28px;
+      padding: 52px;
+      background:
+        linear-gradient(145deg, rgba(12,18,29,0.94), rgba(8,12,20,0.82)),
+        radial-gradient(circle at 20% 10%, rgba(255,181,46,0.16), transparent 35%);
+      box-shadow:
+        0 0 60px rgba(0,0,0,0.5),
+        inset 0 0 0 1px rgba(255,255,255,0.04);
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 520px;
+      height: 520px;
+      right: -180px;
+      top: -190px;
+      background: radial-gradient(circle, rgba(42,168,255,0.22), transparent 65%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 34px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--gold);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-size: 13px;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-size: clamp(42px, 6vw, 78px);
+      line-height: 0.95;
+      letter-spacing: -2px;
+      margin-bottom: 18px;
+    }
+
+    .accent {
+      color: var(--gold);
+      text-shadow: 0 0 22px rgba(255,181,46,0.22);
+    }
+
+    .hero-text {
+      color: #dbe3ef;
+      font-size: 20px;
+      line-height: 1.55;
+      max-width: 720px;
+      margin-bottom: 28px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 17px 24px;
+      border-radius: 14px;
+      font-weight: 800;
+      text-decoration: none;
+      transition: 0.18s ease;
+      border: 1px solid transparent;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--gold), var(--gold-2));
+      color: #080808;
+      box-shadow: 0 0 28px rgba(255,181,46,0.25);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 40px rgba(255,181,46,0.35);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.05);
+      color: var(--text);
+      border-color: rgba(255,255,255,0.16);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    .version-line {
+      color: var(--muted);
+      font-size: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .version-line b {
+      color: var(--text);
+    }
+
+    .preview-card {
+      border: 1px solid rgba(42,168,255,0.35);
+      border-radius: 22px;
+      padding: 22px;
+      background:
+        linear-gradient(180deg, rgba(8,20,34,0.86), rgba(4,8,14,0.9));
+      box-shadow: inset 0 0 35px rgba(42,168,255,0.08);
+    }
+
+    .screen {
+      height: 260px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,181,46,0.35);
+      background:
+        radial-gradient(circle at 50% 30%, rgba(255,181,46,0.18), transparent 32%),
+        linear-gradient(145deg, rgba(255,181,46,0.08), rgba(42,168,255,0.08));
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .screen::before {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+    }
+
+    .screen-main {
+      position: relative;
+      z-index: 1;
+    }
+
+    .screen-main .key {
+      display: inline-block;
+      padding: 14px 22px;
+      border: 2px solid var(--gold);
+      border-radius: 12px;
+      color: var(--gold);
+      font-size: 36px;
+      font-weight: 900;
+      margin-bottom: 18px;
+      box-shadow: 0 0 24px rgba(255,181,46,0.18);
+    }
+
+    .screen-main p {
+      color: #dce8f8;
+      font-size: 18px;
+      line-height: 1.4;
+      font-weight: 700;
+    }
+
+    .section {
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .info-card {
+      background: var(--panel);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 20px;
+      padding: 24px;
+      min-height: 210px;
+    }
+
+    .info-card h3 {
+      color: var(--gold);
+      margin-bottom: 14px;
+      font-size: 22px;
+    }
+
+    .info-card ul {
+      list-style: none;
+      display: grid;
+      gap: 12px;
+      color: #d7e0ee;
+      line-height: 1.45;
+    }
+
+    .info-card li::before {
+      content: "◆";
+      color: var(--gold);
+      margin-right: 9px;
+      font-size: 11px;
+    }
+
+    .guide {
+      margin-top: 28px;
+      background: var(--panel-2);
+      border: 1px solid rgba(42,168,255,0.22);
+      border-radius: 24px;
+      padding: 30px;
+    }
+
+    .guide h2 {
+      font-size: 30px;
+      margin-bottom: 18px;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .step {
+      background: rgba(255,255,255,0.045);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 18px;
+      padding: 22px;
+    }
+
+    .step-number {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: rgba(255,181,46,0.14);
+      color: var(--gold);
+      font-weight: 900;
+      margin-bottom: 14px;
+    }
+
+    .step h4 {
+      margin-bottom: 8px;
+      font-size: 18px;
+    }
+
+    .step p {
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .warning {
+      margin-top: 28px;
+      border: 1px solid rgba(255,181,46,0.25);
+      background: rgba(255,181,46,0.08);
+      border-radius: 18px;
+      padding: 18px 20px;
+      color: #ffe3ab;
+      line-height: 1.55;
+    }
+
+    .contacts {
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .contact-card {
+      background: rgba(255,255,255,0.045);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 18px;
+      padding: 22px;
+    }
+
+    .contact-card span {
+      color: var(--muted);
+      display: block;
+      margin-bottom: 7px;
+      font-size: 14px;
+    }
+
+    .contact-card b {
+      color: var(--gold);
+      font-size: 22px;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      padding: 30px 0 10px;
+      font-size: 14px;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 26px;
+      transform: translateX(-50%);
+      background: rgba(8, 12, 20, 0.95);
+      border: 1px solid rgba(100,255,154,0.35);
+      color: var(--green);
+      padding: 13px 18px;
+      border-radius: 999px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.45);
+      display: none;
+      z-index: 10;
+    }
+
+    @media (max-width: 920px) {
+      .hero {
+        padding: 34px 24px;
+      }
+
+      .hero-grid,
+      .section,
+      .steps,
+      .contacts {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .screen {
+        height: 220px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">👑</div>
+        <div>
+          <div class="brand-title">Admin Helper v1 by A.Almazov</div>
+          <div class="brand-subtitle">Помощник для администрации CRASH CRMP</div>
+        </div>
+      </div>
+
+      <div class="status-pill" id="statusText">Проверка актуальной версии...</div>
+    </header>
+
+    <main class="hero">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow">⚡ Быстрый доступ к регламенту</div>
+
+          <h1>
+            Admin Helper<br>
+            <span class="accent">для админов</span>
+          </h1>
+
+          <p class="hero-text">
+            Удобная программа с подсказкой администратора для CRASH CRMP.
+            Открывай регламент прямо во время игры, быстро находи нужное наказание
+            и меньше трать времени на поиск пунктов.
+          </p>
+
+          <div class="buttons">
+            <a class="btn btn-primary" id="downloadBtn"
+               href="https://github.com/ArtemAlmazov/AdminHelper/releases/latest/download/AdminHelper.exe">
+              ⬇ Скачать последнюю версию
+            </a>
+
+            <a class="btn btn-secondary"
+               href="https://github.com/ArtemAlmazov/AdminHelper/releases/latest">
+              📋 Открыть релиз
+            </a>
+          </div>
+
+          <div class="version-line">
+            <span>Версия: <b id="versionText">загрузка...</b></span>
+            <span>•</span>
+            <span>Файл: <b>AdminHelper.exe</b></span>
+            <span>•</span>
+            <span>Клавиша: <b>F9</b></span>
+          </div>
+        </div>
+
+        <div class="preview-card">
+          <div class="screen">
+            <div class="screen-main">
+              <div class="key">F9</div>
+              <p>Открыть / закрыть<br>подсказку администратора</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <section class="section">
+      <div class="info-card">
+        <h3>Что внутри</h3>
+        <ul>
+          <li>Краткая подсказка по частым нарушениям</li>
+          <li>Основные наказания по регламенту</li>
+          <li>Разделы: аккаунт, чат, RP, памятка админу</li>
+          <li>Удобное открытие прямо поверх игры</li>
+        </ul>
+      </div>
+
+      <div class="info-card">
+        <h3>Для чего</h3>
+        <ul>
+          <li>Быстро ориентироваться в наказаниях</li>
+          <li>Не тратить время на поиск пунктов</li>
+          <li>Уверенно разбирать спорные ситуации</li>
+          <li>Снизить количество ошибок при выдаче наказаний</li>
+        </ul>
+      </div>
+
+      <div class="info-card">
+        <h3>Особенности</h3>
+        <ul>
+          <li>Один файл для запуска</li>
+          <li>Проверка обновлений через GitHub</li>
+          <li>Простое управление через F9</li>
+          <li>Сделано специально для админ-состава</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="guide">
+      <h2>Как установить и запустить</h2>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h4>Скачай файл</h4>
+          <p>Нажми кнопку «Скачать последнюю версию» и скачай файл AdminHelper.exe.</p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">2</div>
+          <h4>Запусти от администратора</h4>
+          <p>Нажми правой кнопкой по файлу и выбери «Запуск от имени администратора».</p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">3</div>
+          <h4>Используй F9</h4>
+          <p>В игре нажми F9, чтобы открыть или закрыть подсказку администратора.</p>
+        </div>
+      </div>
+
+      <div class="warning">
+        <b>Важно:</b> если подсказка не открывается в игре, запусти программу от имени администратора.
+        Для обновлений используй кнопку «Проверить обновления» внутри программы.
+      </div>
+    </section>
+
+    <section class="contacts">
+      <div class="contact-card">
+        <span>Telegram</span>
+        <b>@temashokk</b>
+      </div>
+
+      <div class="contact-card">
+        <span>Discord</span>
+        <b>artemiiooo</b>
+      </div>
+    </section>
+
+    <footer>
+      Admin Helper v1 by A.Almazov • CRASH CRMP • Сделано для удобной работы администрации
+    </footer>
+  </div>
+
+  <div class="toast" id="toast">Готово</div>
+
+  <script>
+    const versionText = document.getElementById("versionText");
+    const statusText = document.getElementById("statusText");
+
+    async function loadLatestRelease() {
+      try {
+        const response = await fetch("https://api.github.com/repos/ArtemAlmazov/AdminHelper/releases/latest");
+        if (!response.ok) throw new Error("Ошибка GitHub API");
+
+        const data = await response.json();
+        const version = data.tag_name || "v1.0.0";
+
+        versionText.textContent = version;
+        statusText.textContent = "Актуальная версия: " + version;
+      } catch (error) {
+        versionText.textContent = "v1.0.0";
+        statusText.textContent = "Версия доступна на GitHub";
+      }
+    }
+
+    loadLatestRelease();
+  </script>
+</body>
+</html>
