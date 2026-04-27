@@ -4,31 +4,42 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Admin Helper v1 by A.Almazov</title>
+  <title>Admin Helper — инструмент для администрации CRMP-проектов</title>
 
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="apple-touch-icon" href="favicon.png" />
 
-  <meta name="description" content="Admin Helper — удобная подсказка для администрации CRASH CRMP." />
-  <meta property="og:title" content="Admin Helper v1 by A.Almazov" />
-  <meta property="og:description" content="Удобная подсказка для администрации CRASH CRMP." />
+  <meta name="description" content="Admin Helper — удобный инструмент для администрации CRMP/RP-проектов. Быстрый доступ к подсказке, регламенту и обновлениям." />
+  <meta name="theme-color" content="#050914" />
+
+  <meta property="og:title" content="Admin Helper by A.Almazov" />
+  <meta property="og:description" content="Инструмент для администрации CRMP-проектов. Первая версия создана для CRASH CRMP." />
   <meta property="og:image" content="favicon.png" />
+  <meta property="og:type" content="website" />
 
   <style>
     :root {
       --bg: #050914;
-      --bg-soft: #0b1220;
-      --card: rgba(12, 18, 30, 0.86);
-      --card-strong: rgba(15, 24, 39, 0.94);
-      --border: rgba(80, 140, 190, 0.35);
-      --border-gold: rgba(255, 184, 43, 0.55);
+      --bg-2: #07101d;
+      --card: rgba(10, 16, 28, 0.78);
+      --card-strong: rgba(13, 21, 35, 0.92);
+      --line: rgba(120, 170, 215, 0.28);
+      --line-soft: rgba(255, 255, 255, 0.08);
+
       --text: #f4f7ff;
       --muted: #aebbd0;
+      --muted-2: #7f8fa7;
+
       --gold: #ffb82b;
       --orange: #ff8f1f;
       --blue: #2aa8ff;
       --green: #66ff9a;
-      --shadow: rgba(0, 0, 0, 0.45);
+      --danger: #ff6b6b;
+
+      --shadow: rgba(0, 0, 0, 0.46);
+      --radius-xl: 34px;
+      --radius-lg: 26px;
+      --radius-md: 18px;
     }
 
     * {
@@ -46,9 +57,9 @@
       font-family: "Segoe UI", Arial, sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at 85% 15%, rgba(42, 168, 255, 0.18), transparent 30%),
-        radial-gradient(circle at 10% 90%, rgba(255, 184, 43, 0.13), transparent 28%),
-        linear-gradient(135deg, #040711 0%, #07111f 45%, #091828 100%);
+        radial-gradient(circle at 80% 10%, rgba(42, 168, 255, 0.18), transparent 30%),
+        radial-gradient(circle at 12% 92%, rgba(255, 184, 43, 0.14), transparent 30%),
+        linear-gradient(135deg, #030610 0%, #07101d 48%, #091929 100%);
       overflow-x: hidden;
     }
 
@@ -56,43 +67,50 @@
       content: "";
       position: fixed;
       inset: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
-      background-size: 48px 48px;
-      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0.35));
-      pointer-events: none;
       z-index: -2;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0.28));
     }
 
     body::after {
       content: "";
       position: fixed;
       inset: 0;
-      background:
-        linear-gradient(90deg, rgba(0,0,0,0.48), transparent 35%, rgba(0,0,0,0.34)),
-        radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.34) 100%);
-      pointer-events: none;
       z-index: -1;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg, rgba(0, 0, 0, 0.55), transparent 40%, rgba(0,0,0,0.35)),
+        radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.36) 100%);
+    }
+
+    a {
+      color: inherit;
     }
 
     .page {
       width: min(1180px, calc(100% - 36px));
       margin: 0 auto;
-      padding: 28px 0 42px;
+      padding: 26px 0 46px;
     }
 
     .topbar {
+      position: sticky;
+      top: 14px;
+      z-index: 50;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 18px;
-      padding: 14px 18px;
-      border: 1px solid rgba(255,255,255,0.08);
+      padding: 14px 16px;
+      border: 1px solid var(--line-soft);
       border-radius: 24px;
-      background: rgba(7, 12, 22, 0.72);
-      box-shadow: 0 18px 50px var(--shadow);
-      backdrop-filter: blur(16px);
+      background: rgba(6, 11, 20, 0.74);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 18px 60px rgba(0,0,0,0.34);
     }
 
     .brand {
@@ -105,42 +123,53 @@
     .brand-logo {
       width: 54px;
       height: 54px;
+      flex: 0 0 auto;
       border-radius: 50%;
       object-fit: cover;
-      border: 2px solid var(--border-gold);
+      border: 2px solid rgba(255, 184, 43, 0.9);
+      background: #07101d;
       box-shadow:
         0 0 0 4px rgba(255,184,43,0.08),
-        0 0 28px rgba(42,168,255,0.22);
-      background: #07101d;
+        0 0 30px rgba(42,168,255,0.20);
     }
 
-    .brand-text strong {
+    .brand-title {
+      min-width: 0;
+    }
+
+    .brand-title strong {
       display: block;
-      font-size: 19px;
+      font-size: 18px;
       line-height: 1.1;
       letter-spacing: 0.2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    .brand-text span {
+    .brand-title span {
       display: block;
-      margin-top: 4px;
+      margin-top: 5px;
       color: var(--muted);
       font-size: 13px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .nav {
       display: flex;
       align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
       justify-content: flex-end;
+      gap: 9px;
+      flex-wrap: wrap;
     }
 
     .nav a {
-      color: var(--text);
       text-decoration: none;
-      font-weight: 700;
       font-size: 13px;
+      font-weight: 800;
+      color: #eaf1ff;
       padding: 10px 14px;
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,0.08);
@@ -149,28 +178,28 @@
     }
 
     .nav a:hover {
-      border-color: rgba(255,184,43,0.65);
-      background: rgba(255,184,43,0.10);
       transform: translateY(-1px);
+      border-color: rgba(255, 184, 43, 0.56);
+      background: rgba(255, 184, 43, 0.10);
     }
 
     .hero {
       position: relative;
       display: grid;
-      grid-template-columns: 1.08fr 0.92fr;
-      gap: 26px;
+      grid-template-columns: 1.06fr 0.94fr;
+      gap: 30px;
       margin-top: 30px;
-      min-height: 610px;
-      padding: 38px;
-      border-radius: 34px;
-      border: 1px solid var(--border);
-      background:
-        linear-gradient(135deg, rgba(10, 17, 29, 0.94), rgba(7, 13, 24, 0.74)),
-        radial-gradient(circle at 75% 35%, rgba(42,168,255,0.18), transparent 34%);
-      box-shadow:
-        0 30px 90px rgba(0,0,0,0.52),
-        inset 0 0 0 1px rgba(255,255,255,0.04);
+      min-height: 650px;
+      padding: 42px;
       overflow: hidden;
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(135deg, rgba(10, 17, 29, 0.96), rgba(7, 13, 24, 0.76)),
+        radial-gradient(circle at 78% 38%, rgba(42,168,255,0.17), transparent 34%);
+      box-shadow:
+        0 34px 100px rgba(0,0,0,0.55),
+        inset 0 0 0 1px rgba(255,255,255,0.045);
     }
 
     .hero::before {
@@ -178,33 +207,33 @@
       position: absolute;
       inset: 18px;
       border-radius: 28px;
-      border: 1px solid rgba(255,184,43,0.14);
+      border: 1px solid rgba(255,184,43,0.13);
       pointer-events: none;
     }
 
     .hero-content {
       position: relative;
-      z-index: 2;
-      max-width: 620px;
-      padding-top: 24px;
+      z-index: 3;
+      max-width: 650px;
+      padding-top: 22px;
     }
 
-    .tag {
+    .kicker {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      margin-bottom: 20px;
+      gap: 9px;
+      margin-bottom: 22px;
       padding: 10px 14px;
-      border-radius: 999px;
       color: var(--green);
-      background: rgba(102, 255, 154, 0.09);
-      border: 1px solid rgba(102, 255, 154, 0.26);
-      font-weight: 800;
+      background: rgba(102, 255, 154, 0.085);
+      border: 1px solid rgba(102, 255, 154, 0.28);
+      border-radius: 999px;
       font-size: 14px;
-      box-shadow: 0 0 30px rgba(102,255,154,0.06);
+      font-weight: 900;
+      box-shadow: 0 0 30px rgba(102, 255, 154, 0.055);
     }
 
-    .tag::before {
+    .kicker::before {
       content: "";
       width: 9px;
       height: 9px;
@@ -214,59 +243,65 @@
     }
 
     h1 {
-      font-size: clamp(48px, 6vw, 82px);
-      line-height: 0.98;
-      letter-spacing: -2.5px;
-      margin-bottom: 18px;
+      max-width: 720px;
+      margin-bottom: 20px;
+      font-size: clamp(48px, 6.5vw, 84px);
+      line-height: 0.96;
+      letter-spacing: -2.8px;
     }
 
     h1 span {
       display: block;
       color: var(--gold);
-      text-shadow: 0 0 34px rgba(255,184,43,0.18);
+      text-shadow: 0 0 36px rgba(255,184,43,0.18);
     }
 
     .lead {
-      color: #dbe5f6;
-      font-size: clamp(18px, 2vw, 24px);
-      line-height: 1.55;
       max-width: 620px;
       margin-bottom: 30px;
+      color: #dce6f7;
+      font-size: clamp(18px, 2vw, 23px);
+      line-height: 1.55;
+    }
+
+    .lead b {
+      color: white;
     }
 
     .actions {
       display: flex;
+      align-items: center;
       gap: 14px;
       flex-wrap: wrap;
       margin-bottom: 24px;
     }
 
     .btn {
+      min-height: 54px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
-      min-height: 54px;
       padding: 0 24px;
       border-radius: 16px;
       font-weight: 900;
-      font-size: 16px;
+      font-size: 15px;
       text-decoration: none;
-      transition: 0.22s ease;
       border: 1px solid transparent;
       cursor: pointer;
       user-select: none;
+      transition: 0.22s ease;
     }
 
     .btn-primary {
       color: #06101c;
-      background: linear-gradient(135deg, #ffc247, #ff921f);
-      box-shadow: 0 16px 38px rgba(255, 145, 31, 0.23);
+      background: linear-gradient(135deg, #ffc247, #ff911f);
+      box-shadow: 0 18px 40px rgba(255, 145, 31, 0.24);
     }
 
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 22px 48px rgba(255, 145, 31, 0.32);
+      box-shadow: 0 24px 54px rgba(255, 145, 31, 0.34);
     }
 
     .btn-secondary {
@@ -281,98 +316,133 @@
       background: rgba(42,168,255,0.10);
     }
 
-    .meta {
+    .status-row {
       display: flex;
-      flex-wrap: wrap;
       gap: 10px;
+      flex-wrap: wrap;
       color: var(--muted);
       font-size: 14px;
-      font-weight: 700;
+      font-weight: 800;
     }
 
-    .meta span {
+    .status-row span {
       padding: 9px 12px;
       border-radius: 999px;
       background: rgba(255,255,255,0.045);
       border: 1px solid rgba(255,255,255,0.08);
     }
 
+    .status-row b {
+      color: white;
+    }
+
+    .hero-note {
+      margin-top: 26px;
+      max-width: 600px;
+      padding: 18px 20px;
+      border-radius: 20px;
+      border: 1px solid rgba(42,168,255,0.22);
+      background: rgba(5, 11, 20, 0.52);
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 14px;
+    }
+
+    .hero-note strong {
+      color: var(--gold);
+    }
+
     .hero-visual {
       position: relative;
-      z-index: 1;
-      min-height: 520px;
+      z-index: 2;
       display: flex;
       align-items: flex-end;
       justify-content: center;
+      min-height: 540px;
     }
 
     .person-glow {
       position: absolute;
-      width: 420px;
-      height: 420px;
+      width: 440px;
+      height: 440px;
+      bottom: 70px;
+      right: 32px;
       border-radius: 50%;
       background:
         radial-gradient(circle, rgba(42,168,255,0.32), transparent 62%),
-        radial-gradient(circle at 75% 35%, rgba(255,184,43,0.22), transparent 48%);
-      filter: blur(10px);
-      bottom: 56px;
-      right: 42px;
-      opacity: 0.92;
+        radial-gradient(circle at 72% 34%, rgba(255,184,43,0.20), transparent 50%);
+      filter: blur(12px);
+      opacity: 0.95;
     }
 
-    .person-card {
+    .person-frame {
       position: relative;
-      width: min(420px, 100%);
-      min-height: 500px;
+      width: min(430px, 100%);
+      min-height: 535px;
       display: flex;
       align-items: flex-end;
       justify-content: center;
-      border-radius: 30px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01)),
-        radial-gradient(circle at 50% 55%, rgba(42,168,255,0.14), transparent 55%);
-      border: 1px solid rgba(42,168,255,0.22);
       overflow: hidden;
-      box-shadow: inset 0 0 60px rgba(42,168,255,0.05);
+      border-radius: 32px;
+      border: 1px solid rgba(42,168,255,0.23);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015)),
+        radial-gradient(circle at 50% 54%, rgba(42,168,255,0.14), transparent 56%);
+      box-shadow:
+        inset 0 0 70px rgba(42,168,255,0.05),
+        0 26px 80px rgba(0,0,0,0.38);
+    }
+
+    .person-frame::before {
+      content: "";
+      position: absolute;
+      inset: 22px;
+      border-radius: 25px;
+      border: 1px solid rgba(255,184,43,0.16);
+      pointer-events: none;
+      z-index: 1;
     }
 
     .person-image {
       position: relative;
       z-index: 2;
       width: 100%;
-      max-width: 420px;
+      max-width: 430px;
       height: auto;
       object-fit: contain;
       filter:
-        drop-shadow(0 0 22px rgba(42,168,255,0.28))
+        drop-shadow(0 0 24px rgba(42,168,255,0.28))
         drop-shadow(0 0 18px rgba(255,145,31,0.14));
     }
 
-    .visual-badge {
+    .visual-caption {
       position: absolute;
       left: 26px;
+      right: 26px;
       bottom: 24px;
-      z-index: 3;
-      padding: 12px 14px;
-      border-radius: 16px;
-      background: rgba(5, 10, 18, 0.76);
-      border: 1px solid rgba(255,184,43,0.35);
+      z-index: 4;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(5, 10, 18, 0.74);
+      border: 1px solid rgba(255,184,43,0.30);
       backdrop-filter: blur(14px);
-      box-shadow: 0 14px 40px rgba(0,0,0,0.34);
+      box-shadow: 0 16px 44px rgba(0,0,0,0.32);
     }
 
-    .visual-badge strong {
-      display: block;
+    .visual-caption strong {
       color: var(--gold);
       font-size: 14px;
-      margin-bottom: 4px;
+      letter-spacing: 0.3px;
     }
 
-    .visual-badge span {
-      display: block;
+    .visual-caption span {
       color: var(--muted);
       font-size: 12px;
-      font-weight: 700;
+      font-weight: 800;
     }
 
     .section {
@@ -385,71 +455,198 @@
       backdrop-filter: blur(14px);
     }
 
-    .section-title {
+    .section-head {
       display: flex;
-      align-items: center;
-      gap: 12px;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 18px;
       margin-bottom: 22px;
     }
 
-    .section-title::before {
-      content: "";
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: var(--gold);
-      box-shadow: 0 0 18px var(--gold);
+    .section-title {
+      max-width: 650px;
+    }
+
+    .section-title small {
+      display: inline-flex;
+      margin-bottom: 9px;
+      color: var(--gold);
+      font-weight: 900;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      font-size: 12px;
     }
 
     .section-title h2 {
-      font-size: clamp(26px, 3vw, 36px);
+      font-size: clamp(26px, 3vw, 38px);
       line-height: 1.1;
+      letter-spacing: -0.8px;
+      margin-bottom: 10px;
     }
 
-    .features {
+    .section-title p {
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 15px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      color: var(--green);
+      background: rgba(102,255,154,0.08);
+      border: 1px solid rgba(102,255,154,0.24);
+      font-weight: 900;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .cards-3 {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 16px;
     }
 
-    .feature {
-      padding: 22px;
+    .card {
+      position: relative;
+      min-height: 190px;
+      padding: 24px;
+      overflow: hidden;
       border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.09);
       background:
         linear-gradient(180deg, rgba(255,255,255,0.055), rgba(255,255,255,0.025));
-      border: 1px solid rgba(255,255,255,0.09);
-      min-height: 160px;
       transition: 0.22s ease;
     }
 
-    .feature:hover {
-      transform: translateY(-4px);
-      border-color: rgba(255,184,43,0.34);
-      box-shadow: 0 18px 50px rgba(0,0,0,0.26);
+    .card::after {
+      content: "";
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      right: -70px;
+      top: -70px;
+      border-radius: 50%;
+      background: rgba(42,168,255,0.10);
+      filter: blur(2px);
     }
 
-    .feature-icon {
-      width: 48px;
-      height: 48px;
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255,184,43,0.34);
+      box-shadow: 0 20px 54px rgba(0,0,0,0.28);
+    }
+
+    .card-mark {
+      width: 46px;
+      height: 46px;
       display: grid;
       place-items: center;
-      margin-bottom: 16px;
-      border-radius: 16px;
+      margin-bottom: 17px;
+      border-radius: 15px;
       color: var(--gold);
-      font-size: 24px;
+      font-size: 20px;
+      font-weight: 900;
       background: rgba(255,184,43,0.10);
       border: 1px solid rgba(255,184,43,0.24);
     }
 
-    .feature h3 {
+    .card h3 {
+      position: relative;
+      z-index: 2;
       font-size: 18px;
-      margin-bottom: 8px;
+      margin-bottom: 9px;
     }
 
-    .feature p {
+    .card p {
+      position: relative;
+      z-index: 2;
       color: var(--muted);
-      line-height: 1.55;
+      line-height: 1.58;
       font-size: 14px;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .product-panel {
+      padding: 28px;
+      border-radius: 26px;
+      border: 1px solid rgba(255,184,43,0.26);
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255,184,43,0.12), transparent 34%),
+        rgba(9, 15, 26, 0.86);
+    }
+
+    .product-panel h3 {
+      font-size: 26px;
+      margin-bottom: 12px;
+      letter-spacing: -0.4px;
+    }
+
+    .product-panel p {
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+
+    .mini-list {
+      display: grid;
+      gap: 10px;
+      list-style: none;
+    }
+
+    .mini-list li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      color: #d9e4f5;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .mini-list li::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      flex: 0 0 auto;
+      margin-top: 7px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 14px rgba(255,184,43,0.65);
+    }
+
+    .adapt-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .adapt-item {
+      padding: 20px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.045);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .adapt-item strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+
+    .adapt-item span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
     }
 
     .steps {
@@ -460,21 +657,21 @@
     }
 
     .step {
+      min-height: 142px;
       position: relative;
       padding: 20px;
       border-radius: 22px;
       background: rgba(255,255,255,0.045);
       border: 1px solid rgba(255,255,255,0.08);
-      min-height: 138px;
       counter-increment: step;
     }
 
     .step::before {
       content: counter(step);
-      display: grid;
-      place-items: center;
       width: 36px;
       height: 36px;
+      display: grid;
+      place-items: center;
       margin-bottom: 14px;
       border-radius: 50%;
       color: #07101d;
@@ -496,42 +693,74 @@
       line-height: 1.5;
     }
 
-    .contacts {
-      display: flex;
+    .cta {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 22px;
       align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      flex-wrap: wrap;
+      padding: 30px;
+      border-radius: 30px;
+      border: 1px solid rgba(255,184,43,0.26);
+      background:
+        radial-gradient(circle at 15% 30%, rgba(255,184,43,0.13), transparent 34%),
+        radial-gradient(circle at 88% 18%, rgba(42,168,255,0.12), transparent 30%),
+        rgba(7, 12, 22, 0.78);
+      box-shadow: 0 22px 70px rgba(0,0,0,0.34);
     }
 
-    .contacts-text strong {
-      display: block;
-      font-size: 24px;
-      margin-bottom: 8px;
+    .cta h2 {
+      font-size: clamp(26px, 3vw, 38px);
+      margin-bottom: 10px;
+      letter-spacing: -0.8px;
     }
 
-    .contacts-text span {
+    .cta p {
       color: var(--muted);
-      line-height: 1.5;
+      line-height: 1.55;
+      max-width: 680px;
     }
 
-    .contact-links {
+    .cta-actions {
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
+      justify-content: flex-end;
     }
 
     .footer {
-      margin-top: 28px;
-      color: rgba(222,232,248,0.58);
-      text-align: center;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-top: 26px;
+      color: rgba(222,232,248,0.60);
       font-size: 13px;
+      padding: 0 4px;
+    }
+
+    .footer a {
+      text-decoration: none;
+      color: rgba(222,232,248,0.72);
+      transition: 0.2s ease;
+    }
+
+    .footer a:hover {
+      color: var(--gold);
     }
 
     @media (max-width: 980px) {
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav {
+        justify-content: flex-start;
+      }
+
       .hero {
         grid-template-columns: 1fr;
-        padding: 28px;
+        padding: 30px;
       }
 
       .hero-content {
@@ -539,19 +768,28 @@
       }
 
       .hero-visual {
-        min-height: 420px;
+        min-height: 430px;
       }
 
-      .person-card {
-        min-height: 420px;
+      .person-frame {
+        min-height: 430px;
       }
 
-      .features {
+      .cards-3,
+      .split {
         grid-template-columns: 1fr;
       }
 
       .steps {
         grid-template-columns: repeat(2, 1fr);
+      }
+
+      .cta {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-actions {
+        justify-content: flex-start;
       }
     }
 
@@ -562,14 +800,26 @@
       }
 
       .topbar {
-        align-items: flex-start;
-        flex-direction: column;
+        top: 8px;
         border-radius: 20px;
       }
 
-      .nav {
-        width: 100%;
-        justify-content: flex-start;
+      .brand-logo {
+        width: 48px;
+        height: 48px;
+      }
+
+      .brand-title strong {
+        font-size: 16px;
+      }
+
+      .brand-title span {
+        font-size: 12px;
+      }
+
+      .nav a {
+        padding: 9px 12px;
+        font-size: 12px;
       }
 
       .hero {
@@ -579,12 +829,17 @@
       }
 
       h1 {
-        font-size: 48px;
+        font-size: 46px;
         letter-spacing: -1px;
       }
 
       .lead {
-        font-size: 18px;
+        font-size: 17px;
+      }
+
+      .actions,
+      .cta-actions {
+        width: 100%;
       }
 
       .btn {
@@ -592,29 +847,36 @@
       }
 
       .hero-visual {
-        min-height: 360px;
+        min-height: 350px;
       }
 
-      .person-card {
-        min-height: 360px;
+      .person-frame {
+        min-height: 350px;
+        border-radius: 24px;
       }
 
-      .visual-badge {
+      .visual-caption {
         left: 16px;
+        right: 16px;
         bottom: 16px;
+        flex-direction: column;
+        align-items: flex-start;
       }
 
-      .section {
+      .section,
+      .cta {
         padding: 22px;
         border-radius: 24px;
       }
 
-      .steps {
-        grid-template-columns: 1fr;
+      .section-head {
+        align-items: flex-start;
+        flex-direction: column;
       }
 
-      .contacts {
-        align-items: flex-start;
+      .adapt-grid,
+      .steps {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -625,15 +887,16 @@
     <header class="topbar">
       <div class="brand">
         <img class="brand-logo" src="favicon.png" alt="Admin Helper" />
-        <div class="brand-text">
-          <strong>Admin Helper v1 by A.Almazov</strong>
-          <span>Подсказка для администрации CRASH CRMP</span>
+        <div class="brand-title">
+          <strong>Admin Helper by A.Almazov</strong>
+          <span>Инструмент для администрации CRMP/RP-проектов</span>
         </div>
       </div>
 
       <nav class="nav">
         <a href="#download">Скачать</a>
-        <a href="#about">О программе</a>
+        <a href="#features">Возможности</a>
+        <a href="#projects">Для проектов</a>
         <a href="#install">Инструкция</a>
         <a href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Telegram</a>
       </nav>
@@ -641,7 +904,7 @@
 
     <section class="hero" id="download">
       <div class="hero-content">
-        <div class="tag">Актуальная версия: v1.0.0</div>
+        <div class="kicker">Первая версия подготовлена для CRASH CRMP</div>
 
         <h1>
           Admin Helper
@@ -649,153 +912,213 @@
         </h1>
 
         <p class="lead">
-          Удобная программа с подсказкой администратора для CRASH CRMP.
-          Открывай регламент прямо во время игры, быстро находи нужный пункт
-          и меньше трать времени на поиск информации.
+          Солидный инструмент для администрации: быстрый доступ к подсказке,
+          регламенту и важной информации прямо во время игры.
+          Открытие по <b>F9</b>, отдельная программа, сайт загрузки и проверка версии.
         </p>
 
         <div class="actions">
           <a class="btn btn-primary" href="https://github.com/ArtemAlmazov/AdminHelper/releases/latest/download/AdminHelper.exe">
-            ↓ Скачать последнюю версию
+            Скачать AdminHelper.exe
           </a>
 
-          <a class="btn btn-secondary" href="https://github.com/ArtemAlmazov/AdminHelper/releases/latest" target="_blank" rel="noopener">
-            📋 Открыть релиз
+          <a class="btn btn-secondary" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">
+            Telegram-канал
           </a>
         </div>
 
-        <div class="meta">
+        <div class="status-row">
           <span>Версия: <b>v1.0.0</b></span>
-          <span>Файл: <b>AdminHelper.exe</b></span>
           <span>Клавиша: <b>F9</b></span>
+          <span>Статус: <b>готово</b></span>
+        </div>
+
+        <div class="hero-note">
+          <strong>Admin Helper</strong> — не просто подсказка, а заготовка полноценного
+          инструмента под CRMP/RP-проекты. Решение можно адаптировать под правила,
+          стиль и задачи конкретного сервера.
         </div>
       </div>
 
       <div class="hero-visual" aria-hidden="true">
         <div class="person-glow"></div>
 
-        <div class="person-card">
+        <div class="person-frame">
           <img class="person-image" src="favicon.png" alt="" />
 
-          <div class="visual-badge">
-            <strong>CRASH CRMP</strong>
-            <span>Admin Helper by A.Almazov</span>
+          <div class="visual-caption">
+            <div>
+              <strong>CRASH CRMP</strong><br />
+              <span>первая версия продукта</span>
+            </div>
+            <div>
+              <strong>A.Almazov</strong><br />
+              <span>developer / product</span>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="about">
-      <div class="section-title">
-        <h2>Что внутри</h2>
+    <section class="section" id="features">
+      <div class="section-head">
+        <div class="section-title">
+          <small>Возможности</small>
+          <h2>Минимум лишнего. Максимум пользы.</h2>
+          <p>
+            Программа создана для ситуаций, где администратору нужно быстро
+            открыть нужную информацию и не тратить время на поиск пунктов.
+          </p>
+        </div>
+
+        <div class="pill">Актуальная версия: 1.0.0</div>
       </div>
 
-      <div class="features">
-        <article class="feature">
-          <div class="feature-icon">⚡</div>
-          <h3>Быстрый доступ</h3>
+      <div class="cards-3">
+        <article class="card">
+          <div class="card-mark">F9</div>
+          <h3>Быстрая подсказка</h3>
           <p>
-            Подсказка открывается по клавише F9 прямо во время игры.
-            Нужная информация всегда под рукой.
+            Открытие и закрытие подсказки одной клавишей прямо во время игры.
+            Удобно для спорных ситуаций и быстрой проверки регламента.
           </p>
         </article>
 
-        <article class="feature">
-          <div class="feature-icon">📘</div>
-          <h3>Регламент рядом</h3>
+        <article class="card">
+          <div class="card-mark">R</div>
+          <h3>Регламент под рукой</h3>
           <p>
-            Удобный формат подсказки помогает быстрее ориентироваться
-            в ситуациях и наказаниях.
+            Вся нужная информация находится в одном месте. Администратор быстрее
+            ориентируется в наказаниях и правилах.
           </p>
         </article>
 
-        <article class="feature">
-          <div class="feature-icon">🖥</div>
-          <h3>Отдельная программа</h3>
+        <article class="card">
+          <div class="card-mark">U</div>
+          <h3>Проверка версии</h3>
           <p>
-            Admin Helper запускается отдельным файлом и не требует сложной установки.
+            Встроенная проверка обновлений помогает держать у администрации
+            актуальную версию программы.
           </p>
         </article>
+      </div>
+    </section>
 
-        <article class="feature">
-          <div class="feature-icon">🔄</div>
-          <h3>Проверка обновлений</h3>
+    <section class="section" id="projects">
+      <div class="section-head">
+        <div class="section-title">
+          <small>Для проектов</small>
+          <h2>Можно адаптировать под другой сервер.</h2>
           <p>
-            В программе есть проверка актуальной версии, чтобы админы не сидели
-            на старой сборке.
+            Первая версия сделана для CRASH CRMP, но сама идея подходит для других
+            CRMP/RP-проектов: свой стиль, свои правила, свой сайт и своя сборка.
           </p>
-        </article>
+        </div>
+      </div>
 
-        <article class="feature">
-          <div class="feature-icon">🌐</div>
-          <h3>Сайт загрузки</h3>
+      <div class="split">
+        <div class="product-panel">
+          <h3>Admin Helper как продукт</h3>
           <p>
-            На этой странице всегда можно быстро скачать актуальную версию программы.
+            Это решение можно использовать как основу для отдельного инструмента
+            под администрацию конкретного проекта.
           </p>
-        </article>
 
-        <article class="feature">
-          <div class="feature-icon">💬</div>
-          <h3>Telegram-канал</h3>
-          <p>
-            Новости, изменения и важная информация по Admin Helper публикуются в Telegram.
-          </p>
-        </article>
+          <ul class="mini-list">
+            <li>отдельная программа под стиль проекта;</li>
+            <li>собственная подсказка с правилами и регламентом;</li>
+            <li>сайт загрузки актуальной версии;</li>
+            <li>Telegram-канал для новостей и обновлений;</li>
+            <li>возможность расширения функционала в будущем.</li>
+          </ul>
+        </div>
+
+        <div class="adapt-grid">
+          <div class="adapt-item">
+            <strong>Свой дизайн</strong>
+            <span>Цвета, название, аватарка, оформление и стиль можно сделать под конкретный проект.</span>
+          </div>
+
+          <div class="adapt-item">
+            <strong>Свой регламент</strong>
+            <span>В подсказку можно добавить правила, наказания, инструкции и частые ситуации проекта.</span>
+          </div>
+
+          <div class="adapt-item">
+            <strong>Своя версия</strong>
+            <span>Для каждого проекта можно сделать отдельную сборку с нужным названием и файлами.</span>
+          </div>
+
+          <div class="adapt-item">
+            <strong>Развитие</strong>
+            <span>В будущем можно добавить доступы, роли, уведомления, обновления и расширенную панель.</span>
+          </div>
+        </div>
       </div>
     </section>
 
     <section class="section" id="install">
-      <div class="section-title">
-        <h2>Как пользоваться</h2>
+      <div class="section-head">
+        <div class="section-title">
+          <small>Запуск</small>
+          <h2>Как пользоваться</h2>
+          <p>
+            Всё сделано максимально просто: скачал, запустил, открыл подсказку.
+          </p>
+        </div>
       </div>
 
       <div class="steps">
         <div class="step">
-          <strong>Скачай файл</strong>
+          <strong>Скачать файл</strong>
           <span>Нажми кнопку скачивания и получи AdminHelper.exe.</span>
         </div>
 
         <div class="step">
-          <strong>Запусти программу</strong>
-          <span>Открой файл. При необходимости запусти от имени администратора.</span>
+          <strong>Запустить программу</strong>
+          <span>При необходимости запускай от имени администратора.</span>
         </div>
 
         <div class="step">
-          <strong>Открой подсказку</strong>
-          <span>Нажми F9 или кнопку в меню программы.</span>
+          <strong>Нажать F9</strong>
+          <span>Подсказка откроется поверх игры и будет готова к использованию.</span>
         </div>
 
         <div class="step">
-          <strong>Работай быстрее</strong>
-          <span>Используй подсказку во время спорных ситуаций.</span>
+          <strong>Работать быстрее</strong>
+          <span>Используй подсказку для быстрого поиска нужного пункта.</span>
         </div>
       </div>
     </section>
 
-    <section class="section">
-      <div class="contacts">
-        <div class="contacts-text">
-          <strong>Связь и обновления</strong>
-          <span>
-            Следи за новостями программы, обновлениями и важной информацией
-            в Telegram-канале.
-          </span>
-        </div>
+    <section class="cta">
+      <div>
+        <h2>Нужна версия под ваш проект?</h2>
+        <p>
+          Admin Helper можно адаптировать под другой CRMP/RP-проект:
+          заменить оформление, добавить ваш регламент, подготовить отдельную сборку
+          и сделать страницу загрузки.
+        </p>
+      </div>
 
-        <div class="contact-links">
-          <a class="btn btn-primary" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">
-            Telegram-канал
-          </a>
+      <div class="cta-actions">
+        <a class="btn btn-primary" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">
+          Связаться в Telegram
+        </a>
 
-          <a class="btn btn-secondary" href="https://github.com/ArtemAlmazov/AdminHelper" target="_blank" rel="noopener">
-            GitHub
-          </a>
-        </div>
+        <a class="btn btn-secondary" href="https://github.com/ArtemAlmazov/AdminHelper/releases/latest" target="_blank" rel="noopener">
+          Открыть релиз
+        </a>
       </div>
     </section>
 
     <footer class="footer">
-      Admin Helper v1.0.0 • Сделал A.Almazov • Для администрации CRASH CRMP
+      <span>Admin Helper v1.0.0 • Product by A.Almazov</span>
+      <span>
+        <a href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Telegram</a>
+        ·
+        <a href="https://github.com/ArtemAlmazov/AdminHelper" target="_blank" rel="noopener">GitHub</a>
+      </span>
     </footer>
   </main>
 </body>
