@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Helper — premium launcher для администрации CRMP/RP</title>
+  <title>Admin Helper — премиум-лаунчер для администрации CRMP/RP</title>
 
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="apple-touch-icon" href="favicon.png" />
 
   <meta name="description" content="Admin Helper — инструмент/лаунчер для администрации CRMP/RP-проектов. Open Beta Launcher Edition v1.1.0." />
   <meta name="theme-color" content="#070d1a" />
-  <meta name="author" content="Artem Almazov" />
+  <meta name="author" content="A.Almazov / Artem Almazov" />
 
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Admin Helper v1.1.0" />
@@ -233,6 +233,7 @@
       filter: blur(12px);
     }
     .visual img {
+      display: block;
       width: min(440px, 96%);
       border-radius: 22px;
       border: 1px solid rgba(255,255,255,.24);
@@ -350,6 +351,14 @@
       gap: 12px;
       align-items: center;
     }
+    .cta h2 {
+      margin: 0 0 8px;
+      font-size: clamp(24px, 3.4vw, 36px);
+      letter-spacing: -0.6px;
+    }
+    .cta .actions {
+      margin-bottom: 0;
+    }
 
     footer {
       margin-top: 18px;
@@ -396,6 +405,7 @@
         <a href="#features">Возможности</a>
         <a href="#beta">ОБТ</a>
         <a href="#projects">Для проектов</a>
+        <a href="#howto">Инструкция</a>
         <a href="#contact">Связь</a>
       </nav>
     </header>
@@ -423,7 +433,7 @@
       <div class="visual" aria-hidden="true">
         <img src="favicon.png" alt="Admin Helper preview" />
         <div class="chip">
-          <span>Admin Helper • CRMP/RP admin launcher</span>
+          <span>Admin Helper • лаунчер для администрации CRMP/RP</span>
           <span>Автор: Artem Almazov • Discord: artemiiooo</span>
         </div>
       </div>
