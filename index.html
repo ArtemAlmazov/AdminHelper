@@ -4,17 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Admin Helper — инструмент для администрации CRMP-проектов</title>
+  <title>Admin Helper — premium-лаунчер для администрации CRMP/RP-проектов</title>
 
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="apple-touch-icon" href="favicon.png" />
 
-  <meta name="description" content="Admin Helper — удобный инструмент для администрации CRMP/RP-проектов. Быстрый доступ к подсказке, регламенту и обновлениям." />
+  <meta name="description" content="Admin Helper — premium-лаунчер-помощник для администрации CRMP/RP-проектов. Подсказка по F9, регламент, команды, обновления и удобное меню." />
   <meta name="theme-color" content="#050914" />
+  <meta name="author" content="A.Almazov" />
 
-  <meta property="og:title" content="Admin Helper by A.Almazov" />
-  <meta property="og:description" content="Инструмент для администрации CRMP-проектов. Первая версия создана для CRASH CRMP." />
-  <meta property="og:image" content="favicon.png" />
+  <meta property="og:title" content="Admin Helper v1.1.0 — Open Beta Launcher Edition" />
+  <meta property="og:description" content="Premium-инструмент для администрации CRMP/RP-проектов. Первая версия создана для CRASH CRMP." />
+  <meta property="og:image" content="https://artemalmazov.github.io/AdminHelper/favicon.png" />
+  <meta property="og:url" content="https://artemalmazov.github.io/AdminHelper/" />
   <meta property="og:type" content="website" />
 
   <style>
@@ -23,7 +25,7 @@
       --bg-2: #07101d;
       --card: rgba(10, 16, 28, 0.78);
       --card-strong: rgba(13, 21, 35, 0.92);
-      --line: rgba(120, 170, 215, 0.28);
+      --line: rgba(120, 170, 215, 0.26);
       --line-soft: rgba(255, 255, 255, 0.08);
 
       --text: #f4f7ff;
@@ -34,7 +36,7 @@
       --orange: #ff8f1f;
       --blue: #2aa8ff;
       --green: #66ff9a;
-      --danger: #ff6b6b;
+      --red: #ff6b6b;
 
       --shadow: rgba(0, 0, 0, 0.46);
       --radius-xl: 34px;
@@ -57,8 +59,8 @@
       font-family: "Segoe UI", Arial, sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at 80% 10%, rgba(42, 168, 255, 0.18), transparent 30%),
-        radial-gradient(circle at 12% 92%, rgba(255, 184, 43, 0.14), transparent 30%),
+        radial-gradient(circle at 82% 8%, rgba(42, 168, 255, 0.18), transparent 30%),
+        radial-gradient(circle at 10% 92%, rgba(255, 184, 43, 0.14), transparent 31%),
         linear-gradient(135deg, #030610 0%, #07101d 48%, #091929 100%);
       overflow-x: hidden;
     }
@@ -73,7 +75,7 @@
         linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
       background-size: 48px 48px;
-      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0.28));
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.92), rgba(0,0,0,0.18));
     }
 
     body::after {
@@ -83,8 +85,8 @@
       z-index: -1;
       pointer-events: none;
       background:
-        linear-gradient(90deg, rgba(0, 0, 0, 0.55), transparent 40%, rgba(0,0,0,0.35)),
-        radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.36) 100%);
+        linear-gradient(90deg, rgba(0, 0, 0, 0.58), transparent 42%, rgba(0,0,0,0.38)),
+        radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.38) 100%);
     }
 
     a {
@@ -92,7 +94,7 @@
     }
 
     .page {
-      width: min(1180px, calc(100% - 36px));
+      width: min(1200px, calc(100% - 36px));
       margin: 0 auto;
       padding: 26px 0 46px;
     }
@@ -108,7 +110,7 @@
       padding: 14px 16px;
       border: 1px solid var(--line-soft);
       border-radius: 24px;
-      background: rgba(6, 11, 20, 0.74);
+      background: rgba(6, 11, 20, 0.76);
       backdrop-filter: blur(18px);
       box-shadow: 0 18px 60px rgba(0,0,0,0.34);
     }
@@ -130,7 +132,7 @@
       background: #07101d;
       box-shadow:
         0 0 0 4px rgba(255,184,43,0.08),
-        0 0 30px rgba(42,168,255,0.20);
+        0 0 34px rgba(42,168,255,0.22);
     }
 
     .brand-title {
@@ -189,14 +191,15 @@
       grid-template-columns: 1.06fr 0.94fr;
       gap: 30px;
       margin-top: 30px;
-      min-height: 650px;
-      padding: 42px;
+      min-height: 670px;
+      padding: 44px;
       overflow: hidden;
       border-radius: var(--radius-xl);
       border: 1px solid var(--line);
       background:
-        linear-gradient(135deg, rgba(10, 17, 29, 0.96), rgba(7, 13, 24, 0.76)),
-        radial-gradient(circle at 78% 38%, rgba(42,168,255,0.17), transparent 34%);
+        linear-gradient(135deg, rgba(10, 17, 29, 0.96), rgba(7, 13, 24, 0.78)),
+        radial-gradient(circle at 76% 34%, rgba(42,168,255,0.18), transparent 34%),
+        radial-gradient(circle at 92% 66%, rgba(255,145,31,0.12), transparent 30%);
       box-shadow:
         0 34px 100px rgba(0,0,0,0.55),
         inset 0 0 0 1px rgba(255,255,255,0.045);
@@ -211,11 +214,25 @@
       pointer-events: none;
     }
 
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 520px;
+      height: 520px;
+      right: -170px;
+      top: -170px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle, rgba(42,168,255,0.20), transparent 66%);
+      pointer-events: none;
+      filter: blur(4px);
+    }
+
     .hero-content {
       position: relative;
       z-index: 3;
-      max-width: 650px;
-      padding-top: 22px;
+      max-width: 670px;
+      padding-top: 20px;
     }
 
     .kicker {
@@ -243,7 +260,7 @@
     }
 
     h1 {
-      max-width: 720px;
+      max-width: 760px;
       margin-bottom: 20px;
       font-size: clamp(48px, 6.5vw, 84px);
       line-height: 0.96;
@@ -257,10 +274,10 @@
     }
 
     .lead {
-      max-width: 620px;
+      max-width: 640px;
       margin-bottom: 30px;
       color: #dce6f7;
-      font-size: clamp(18px, 2vw, 23px);
+      font-size: clamp(18px, 2vw, 22px);
       line-height: 1.55;
     }
 
@@ -291,6 +308,7 @@
       cursor: pointer;
       user-select: none;
       transition: 0.22s ease;
+      white-space: nowrap;
     }
 
     .btn-primary {
@@ -338,7 +356,7 @@
 
     .hero-note {
       margin-top: 26px;
-      max-width: 600px;
+      max-width: 610px;
       padding: 18px 20px;
       border-radius: 20px;
       border: 1px solid rgba(42,168,255,0.22);
@@ -354,71 +372,75 @@
 
     .hero-visual {
       position: relative;
-      z-index: 2;
+      z-index: 3;
       display: flex;
       align-items: flex-end;
       justify-content: center;
-      min-height: 540px;
+      min-height: 560px;
     }
 
     .person-glow {
       position: absolute;
-      width: 440px;
-      height: 440px;
-      bottom: 70px;
-      right: 32px;
+      width: 460px;
+      height: 460px;
+      bottom: 78px;
+      right: 28px;
       border-radius: 50%;
       background:
-        radial-gradient(circle, rgba(42,168,255,0.32), transparent 62%),
-        radial-gradient(circle at 72% 34%, rgba(255,184,43,0.20), transparent 50%);
-      filter: blur(12px);
-      opacity: 0.95;
+        radial-gradient(circle, rgba(42,168,255,0.34), transparent 62%),
+        radial-gradient(circle at 72% 34%, rgba(255,184,43,0.22), transparent 50%);
+      filter: blur(14px);
+      opacity: 0.96;
     }
 
-    .person-frame {
+    .person-ring {
+      position: absolute;
+      width: 440px;
+      height: 440px;
+      bottom: 64px;
+      right: 20px;
+      border-radius: 50%;
+      border: 1px solid rgba(42,168,255,0.30);
+      box-shadow:
+        0 0 46px rgba(42,168,255,0.18),
+        inset 0 0 38px rgba(255,184,43,0.08);
+      opacity: 0.82;
+    }
+
+    .person-ring::before {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,184,43,0.24);
+      box-shadow: 0 0 42px rgba(255,145,31,0.14);
+    }
+
+    .person-image-wrap {
       position: relative;
-      width: min(430px, 100%);
-      min-height: 535px;
+      width: min(500px, 100%);
+      min-height: 560px;
       display: flex;
       align-items: flex-end;
       justify-content: center;
-      overflow: hidden;
-      border-radius: 32px;
-      border: 1px solid rgba(42,168,255,0.23);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015)),
-        radial-gradient(circle at 50% 54%, rgba(42,168,255,0.14), transparent 56%);
-      box-shadow:
-        inset 0 0 70px rgba(42,168,255,0.05),
-        0 26px 80px rgba(0,0,0,0.38);
-    }
-
-    .person-frame::before {
-      content: "";
-      position: absolute;
-      inset: 22px;
-      border-radius: 25px;
-      border: 1px solid rgba(255,184,43,0.16);
-      pointer-events: none;
-      z-index: 1;
     }
 
     .person-image {
       position: relative;
       z-index: 2;
-      width: 100%;
-      max-width: 430px;
+      width: min(500px, 100%);
       height: auto;
       object-fit: contain;
       filter:
-        drop-shadow(0 0 24px rgba(42,168,255,0.28))
-        drop-shadow(0 0 18px rgba(255,145,31,0.14));
+        drop-shadow(0 0 28px rgba(42,168,255,0.28))
+        drop-shadow(0 0 18px rgba(255,145,31,0.16))
+        drop-shadow(0 28px 36px rgba(0,0,0,0.46));
     }
 
     .visual-caption {
       position: absolute;
-      left: 26px;
-      right: 26px;
+      left: 30px;
+      right: 30px;
       bottom: 24px;
       z-index: 4;
       display: flex;
@@ -464,7 +486,7 @@
     }
 
     .section-title {
-      max-width: 650px;
+      max-width: 720px;
     }
 
     .section-title small {
@@ -510,6 +532,12 @@
       gap: 16px;
     }
 
+    .cards-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
     .card {
       position: relative;
       min-height: 190px;
@@ -541,15 +569,15 @@
     }
 
     .card-mark {
-      width: 46px;
+      width: 52px;
       height: 46px;
       display: grid;
       place-items: center;
       margin-bottom: 17px;
       border-radius: 15px;
       color: var(--gold);
-      font-size: 20px;
-      font-weight: 900;
+      font-size: 14px;
+      font-weight: 950;
       background: rgba(255,184,43,0.10);
       border: 1px solid rgba(255,184,43,0.24);
     }
@@ -567,6 +595,94 @@
       color: var(--muted);
       line-height: 1.58;
       font-size: 14px;
+    }
+
+    .feature-mini {
+      min-height: 150px;
+      padding: 20px;
+    }
+
+    .feature-mini .card-mark {
+      width: 42px;
+      height: 38px;
+      font-size: 13px;
+      margin-bottom: 14px;
+    }
+
+    .feature-mini h3 {
+      font-size: 16px;
+    }
+
+    .feature-mini p {
+      font-size: 13px;
+    }
+
+    .beta {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .beta-panel {
+      padding: 28px;
+      border-radius: 26px;
+      border: 1px solid rgba(102,255,154,0.22);
+      background:
+        radial-gradient(circle at 20% 20%, rgba(102,255,154,0.10), transparent 34%),
+        rgba(9, 15, 26, 0.86);
+    }
+
+    .beta-panel h3 {
+      font-size: 26px;
+      margin-bottom: 12px;
+      letter-spacing: -0.4px;
+    }
+
+    .beta-panel p {
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+
+    .report-box {
+      padding: 28px;
+      border-radius: 26px;
+      border: 1px solid rgba(42,168,255,0.20);
+      background:
+        radial-gradient(circle at 84% 24%, rgba(42,168,255,0.12), transparent 32%),
+        rgba(9, 15, 26, 0.74);
+    }
+
+    .report-box h3 {
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+
+    .mini-list {
+      display: grid;
+      gap: 10px;
+      list-style: none;
+    }
+
+    .mini-list li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      color: #d9e4f5;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .mini-list li::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      flex: 0 0 auto;
+      margin-top: 7px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 14px rgba(255,184,43,0.65);
     }
 
     .split {
@@ -597,32 +713,6 @@
       margin-bottom: 18px;
     }
 
-    .mini-list {
-      display: grid;
-      gap: 10px;
-      list-style: none;
-    }
-
-    .mini-list li {
-      display: flex;
-      gap: 10px;
-      align-items: flex-start;
-      color: #d9e4f5;
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    .mini-list li::before {
-      content: "";
-      width: 8px;
-      height: 8px;
-      flex: 0 0 auto;
-      margin-top: 7px;
-      border-radius: 50%;
-      background: var(--gold);
-      box-shadow: 0 0 14px rgba(255,184,43,0.65);
-    }
-
     .adapt-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -634,6 +724,13 @@
       border-radius: 22px;
       background: rgba(255,255,255,0.045);
       border: 1px solid rgba(255,255,255,0.08);
+      transition: 0.22s ease;
+    }
+
+    .adapt-item:hover {
+      transform: translateY(-3px);
+      border-color: rgba(42,168,255,0.32);
+      background: rgba(42,168,255,0.055);
     }
 
     .adapt-item strong {
@@ -694,6 +791,7 @@
     }
 
     .cta {
+      margin-top: 30px;
       display: grid;
       grid-template-columns: 1fr auto;
       gap: 22px;
@@ -717,7 +815,7 @@
     .cta p {
       color: var(--muted);
       line-height: 1.55;
-      max-width: 680px;
+      max-width: 720px;
     }
 
     .cta-actions {
@@ -748,7 +846,7 @@
       color: var(--gold);
     }
 
-    @media (max-width: 980px) {
+    @media (max-width: 1040px) {
       .topbar {
         align-items: flex-start;
         flex-direction: column;
@@ -768,16 +866,33 @@
       }
 
       .hero-visual {
-        min-height: 430px;
+        min-height: 500px;
       }
 
-      .person-frame {
-        min-height: 430px;
+      .person-image-wrap {
+        min-height: 500px;
+      }
+
+      .person-ring {
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+      }
+
+      .person-glow {
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
       }
 
       .cards-3,
-      .split {
+      .split,
+      .beta {
         grid-template-columns: 1fr;
+      }
+
+      .cards-4 {
+        grid-template-columns: repeat(2, 1fr);
       }
 
       .steps {
@@ -829,7 +944,7 @@
       }
 
       h1 {
-        font-size: 46px;
+        font-size: 45px;
         letter-spacing: -1px;
       }
 
@@ -847,18 +962,33 @@
       }
 
       .hero-visual {
-        min-height: 350px;
+        min-height: 390px;
       }
 
-      .person-frame {
-        min-height: 350px;
-        border-radius: 24px;
+      .person-image-wrap {
+        min-height: 390px;
+      }
+
+      .person-image {
+        width: min(390px, 112%);
+      }
+
+      .person-ring {
+        width: 320px;
+        height: 320px;
+        bottom: 48px;
+      }
+
+      .person-glow {
+        width: 330px;
+        height: 330px;
+        bottom: 58px;
       }
 
       .visual-caption {
-        left: 16px;
-        right: 16px;
-        bottom: 16px;
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
         flex-direction: column;
         align-items: flex-start;
       }
@@ -874,6 +1004,7 @@
         flex-direction: column;
       }
 
+      .cards-4,
       .adapt-grid,
       .steps {
         grid-template-columns: 1fr;
@@ -889,32 +1020,32 @@
         <img class="brand-logo" src="favicon.png" alt="Admin Helper" />
         <div class="brand-title">
           <strong>Admin Helper by A.Almazov</strong>
-          <span>Инструмент для администрации CRMP/RP-проектов</span>
+          <span>Premium-инструмент для администрации CRMP/RP-проектов</span>
         </div>
       </div>
 
       <nav class="nav">
         <a href="#download">Скачать</a>
         <a href="#features">Возможности</a>
+        <a href="#beta">ОБТ</a>
         <a href="#projects">Для проектов</a>
-        <a href="#install">Инструкция</a>
-        <a href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Telegram</a>
+        <a href="#contact">Связь</a>
       </nav>
     </header>
 
     <section class="hero" id="download">
       <div class="hero-content">
-        <div class="kicker">Первая версия подготовлена для CRASH CRMP</div>
+        <div class="kicker">Открытый бета-тест для CRASH CRMP запущен</div>
 
         <h1>
           Admin Helper
-          <span>для админов</span>
+          <span>Launcher Edition</span>
         </h1>
 
         <p class="lead">
-          Солидный инструмент для администрации: быстрый доступ к подсказке,
-          регламенту и важной информации прямо во время игры.
-          Открытие по <b>F9</b>, отдельная программа, сайт загрузки и проверка версии.
+          Премиальный лаунчер-помощник для администрации CRMP/RP-проектов:
+          подсказка по <b>F9</b>, регламент, команды, автообновления и удобное меню
+          в одном аккуратном инструменте.
         </p>
 
         <div class="actions">
@@ -928,28 +1059,31 @@
         </div>
 
         <div class="status-row">
-          <span>Версия: <b>v1.0.0</b></span>
+          <span>Версия: <b>v1.1.0</b></span>
+          <span>Издание: <b>Launcher Edition</b></span>
           <span>Клавиша: <b>F9</b></span>
-          <span>Статус: <b>готово</b></span>
+          <span>Статус: <b>ОБТ запущен</b></span>
         </div>
 
         <div class="hero-note">
-          <strong>Admin Helper</strong> — не просто подсказка, а заготовка полноценного
-          инструмента под CRMP/RP-проекты. Решение можно адаптировать под правила,
-          стиль и задачи конкретного сервера.
+          <strong>Admin Helper</strong> — это не просто подсказка, а заготовка
+          полноценного premium-решения под CRMP/RP-проекты. Первое издание создано
+          для администрации <strong>CRASH CRMP</strong>, а систему можно адаптировать
+          под другой сервер.
         </div>
       </div>
 
       <div class="hero-visual" aria-hidden="true">
         <div class="person-glow"></div>
+        <div class="person-ring"></div>
 
-        <div class="person-frame">
-          <img class="person-image" src="favicon.png" alt="" />
+        <div class="person-image-wrap">
+          <img class="person-image" src="./AH%20Almazov.png" alt="A.Almazov Admin Helper" onerror="this.src='favicon.png'" />
 
           <div class="visual-caption">
             <div>
               <strong>CRASH CRMP</strong><br />
-              <span>первая версия продукта</span>
+              <span>Open Beta Launcher Edition</span>
             </div>
             <div>
               <strong>A.Almazov</strong><br />
@@ -966,12 +1100,12 @@
           <small>Возможности</small>
           <h2>Минимум лишнего. Максимум пользы.</h2>
           <p>
-            Программа создана для ситуаций, где администратору нужно быстро
-            открыть нужную информацию и не тратить время на поиск пунктов.
+            Admin Helper создан для ситуаций, где администратору нужно быстро
+            открыть нужную информацию, не выходя из рабочего процесса.
           </p>
         </div>
 
-        <div class="pill">Актуальная версия: 1.0.0</div>
+        <div class="pill">Актуальная версия: v1.1.0</div>
       </div>
 
       <div class="cards-3">
@@ -985,22 +1119,124 @@
         </article>
 
         <article class="card">
-          <div class="card-mark">R</div>
+          <div class="card-mark">RULES</div>
           <h3>Регламент под рукой</h3>
           <p>
-            Вся нужная информация находится в одном месте. Администратор быстрее
-            ориентируется в наказаниях и правилах.
+            Правила, наказания, команды и важные инструкции собраны в одном месте,
+            чтобы администратор быстрее принимал правильное решение.
           </p>
         </article>
 
         <article class="card">
-          <div class="card-mark">U</div>
-          <h3>Проверка версии</h3>
+          <div class="card-mark">UPD</div>
+          <h3>Система обновлений</h3>
           <p>
-            Встроенная проверка обновлений помогает держать у администрации
-            актуальную версию программы.
+            Проверка новой версии и установка обновления помогают держать у
+            администрации актуальную сборку программы.
           </p>
         </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div class="section-title">
+          <small>Внутри лаунчера</small>
+          <h2>Admin Helper уже выглядит как отдельный продукт.</h2>
+          <p>
+            В версии v1.1.0 программа получила полноценный лаунчер, разделы,
+            меню, подсказку, обновления и базовую защиту работы.
+          </p>
+        </div>
+      </div>
+
+      <div class="cards-4">
+        <article class="card feature-mini">
+          <div class="card-mark">01</div>
+          <h3>Главная</h3>
+          <p>Стартовый экран лаунчера с общей информацией о программе.</p>
+        </article>
+
+        <article class="card feature-mini">
+          <div class="card-mark">02</div>
+          <h3>Правила</h3>
+          <p>Раздел для регламента, правил и важных пунктов администрации.</p>
+        </article>
+
+        <article class="card feature-mini">
+          <div class="card-mark">03</div>
+          <h3>Команды</h3>
+          <p>Быстрый доступ к административным командам и подсказкам.</p>
+        </article>
+
+        <article class="card feature-mini">
+          <div class="card-mark">04</div>
+          <h3>Подсказка</h3>
+          <p>Полноэкранная подсказка, которая открывается по клавише F9.</p>
+        </article>
+
+        <article class="card feature-mini">
+          <div class="card-mark">05</div>
+          <h3>Обновления</h3>
+          <p>Проверка новой сборки и окно установки с прогрессом.</p>
+        </article>
+
+        <article class="card feature-mini">
+          <div class="card-mark">06</div>
+          <h3>Настройки</h3>
+          <p>Базовые параметры программы и рабочие элементы управления.</p>
+        </article>
+
+        <article class="card feature-mini">
+          <div class="card-mark">07</div>
+          <h3>О программе</h3>
+          <p>Информация о версии, авторе, Telegram-канале и проекте.</p>
+        </article>
+
+        <article class="card feature-mini">
+          <div class="card-mark">08</div>
+          <h3>Стабильность</h3>
+          <p>Защита от второго запуска, безопасный выход и лог ошибок.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="beta">
+      <div class="section-head">
+        <div class="section-title">
+          <small>Open Beta</small>
+          <h2>Открытый бета-тест Admin Helper v1.1.0.</h2>
+          <p>
+            Версия подготовлена для тестирования среди администрации CRASH CRMP.
+            Цель ОБТ — проверить стабильность, удобство и поведение программы в реальной работе.
+          </p>
+        </div>
+      </div>
+
+      <div class="beta">
+        <div class="beta-panel">
+          <h3>Что добавлено в v1.1.0</h3>
+          <ul class="mini-list">
+            <li>полностью обновлённый лаунчер;</li>
+            <li>боковое меню с разделами;</li>
+            <li>подсказка по F9;</li>
+            <li>раздел команд и правил;</li>
+            <li>переход на сайт и Telegram-канал;</li>
+            <li>система автообновления;</li>
+            <li>окно установки обновлений с прогрессом;</li>
+            <li>улучшенный внешний вид программы.</li>
+          </ul>
+        </div>
+
+        <div class="report-box">
+          <h3>Если обнаружена ошибка</h3>
+          <ul class="mini-list">
+            <li>сделайте скриншот или видео проблемы;</li>
+            <li>коротко опишите, что произошло;</li>
+            <li>приложите файл adminhelper_error.log, если он появился рядом с программой;</li>
+            <li>отправьте информацию через Telegram-канал или лично автору.</li>
+          </ul>
+        </div>
       </div>
     </section>
 
@@ -1010,8 +1246,8 @@
           <small>Для проектов</small>
           <h2>Можно адаптировать под другой сервер.</h2>
           <p>
-            Первая версия сделана для CRASH CRMP, но сама идея подходит для других
-            CRMP/RP-проектов: свой стиль, свои правила, свой сайт и своя сборка.
+            Первая версия создана для CRASH CRMP, но сама система подходит для других
+            CRMP/RP-проектов: свой стиль, свои правила, свой сайт загрузки и отдельная сборка.
           </p>
         </div>
       </div>
@@ -1020,13 +1256,14 @@
         <div class="product-panel">
           <h3>Admin Helper как продукт</h3>
           <p>
-            Это решение можно использовать как основу для отдельного инструмента
+            Это не просто файл с подсказкой. Это основа для отдельного инструмента
             под администрацию конкретного проекта.
           </p>
 
           <ul class="mini-list">
             <li>отдельная программа под стиль проекта;</li>
             <li>собственная подсказка с правилами и регламентом;</li>
+            <li>раздел команд, инструкций и частых ситуаций;</li>
             <li>сайт загрузки актуальной версии;</li>
             <li>Telegram-канал для новостей и обновлений;</li>
             <li>возможность расширения функционала в будущем.</li>
@@ -1045,13 +1282,13 @@
           </div>
 
           <div class="adapt-item">
-            <strong>Своя версия</strong>
-            <span>Для каждого проекта можно сделать отдельную сборку с нужным названием и файлами.</span>
+            <strong>Своя сборка</strong>
+            <span>Для каждого проекта можно подготовить отдельную версию с нужным названием и файлами.</span>
           </div>
 
           <div class="adapt-item">
-            <strong>Развитие</strong>
-            <span>В будущем можно добавить доступы, роли, уведомления, обновления и расширенную панель.</span>
+            <strong>Свои обновления</strong>
+            <span>Можно настроить отдельную систему загрузки и обновлений под конкретный сервер.</span>
           </div>
         </div>
       </div>
@@ -1071,12 +1308,12 @@
       <div class="steps">
         <div class="step">
           <strong>Скачать файл</strong>
-          <span>Нажми кнопку скачивания и получи AdminHelper.exe.</span>
+          <span>Нажмите кнопку скачивания и получите AdminHelper.exe.</span>
         </div>
 
         <div class="step">
           <strong>Запустить программу</strong>
-          <span>При необходимости запускай от имени администратора.</span>
+          <span>При необходимости запускайте файл от имени администратора.</span>
         </div>
 
         <div class="step">
@@ -1086,18 +1323,17 @@
 
         <div class="step">
           <strong>Работать быстрее</strong>
-          <span>Используй подсказку для быстрого поиска нужного пункта.</span>
+          <span>Используйте подсказку для быстрого поиска нужного пункта.</span>
         </div>
       </div>
     </section>
 
-    <section class="cta">
+    <section class="cta" id="contact">
       <div>
         <h2>Нужна версия под ваш проект?</h2>
         <p>
-          Admin Helper можно адаптировать под другой CRMP/RP-проект:
-          заменить оформление, добавить ваш регламент, подготовить отдельную сборку
-          и сделать страницу загрузки.
+          Admin Helper можно адаптировать под ваш сервер: добавить ваш регламент,
+          оформление, название, сайт загрузки и систему обновлений.
         </p>
       </div>
 
@@ -1107,17 +1343,17 @@
         </a>
 
         <a class="btn btn-secondary" href="https://github.com/ArtemAlmazov/AdminHelper/releases/latest" target="_blank" rel="noopener">
-          Открыть релиз
+          Страница загрузки
         </a>
       </div>
     </section>
 
     <footer class="footer">
-      <span>Admin Helper v1.0.0 • Product by A.Almazov</span>
+      <span>Admin Helper v1.1.0 • Open Beta Launcher Edition • Product by A.Almazov</span>
       <span>
         <a href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Telegram</a>
         ·
-        <a href="https://github.com/ArtemAlmazov/AdminHelper" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://github.com/ArtemAlmazov/AdminHelper" target="_blank" rel="noopener">Страница проекта</a>
       </span>
     </footer>
   </main>
