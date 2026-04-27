@@ -4,17 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Admin Helper — premium-лаунчер для администрации CRMP/RP-проектов</title>
+  <title>Admin Helper — инструмент для администрации CRMP-проектов</title>
 
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="apple-touch-icon" href="favicon.png" />
 
-  <meta name="description" content="Admin Helper — premium-лаунчер-помощник для администрации CRMP/RP-проектов. Подсказка по F9, регламент, команды, обновления и удобное меню." />
+  <meta name="description" content="Admin Helper — удобный инструмент для администрации CRMP/RP-проектов. Подсказка по F9, регламент, команды, обновления и удобное меню." />
   <meta name="theme-color" content="#050914" />
   <meta name="author" content="A.Almazov" />
 
-  <meta property="og:title" content="Admin Helper v1.1.0 — Open Beta Launcher Edition" />
-  <meta property="og:description" content="Premium-инструмент для администрации CRMP/RP-проектов. Первая версия создана для CRASH CRMP." />
+  <meta property="og:title" content="Admin Helper by A.Almazov" />
+  <meta property="og:description" content="Инструмент для администрации CRMP-проектов. Первая версия создана для CRASH CRMP." />
   <meta property="og:image" content="https://artemalmazov.github.io/AdminHelper/favicon.png" />
   <meta property="og:url" content="https://artemalmazov.github.io/AdminHelper/" />
   <meta property="og:type" content="website" />
@@ -36,9 +36,7 @@
       --orange: #ff8f1f;
       --blue: #2aa8ff;
       --green: #66ff9a;
-      --red: #ff6b6b;
 
-      --shadow: rgba(0, 0, 0, 0.46);
       --radius-xl: 34px;
       --radius-lg: 26px;
       --radius-md: 18px;
@@ -129,7 +127,7 @@
       border-radius: 50%;
       object-fit: cover;
       border: 2px solid rgba(255, 184, 43, 0.9);
-      background: #07101d;
+      background: transparent;
       box-shadow:
         0 0 0 4px rgba(255,184,43,0.08),
         0 0 34px rgba(42,168,255,0.22);
@@ -217,15 +215,15 @@
     .hero::after {
       content: "";
       position: absolute;
-      width: 520px;
-      height: 520px;
-      right: -170px;
+      width: 620px;
+      height: 620px;
+      right: -230px;
       top: -170px;
       border-radius: 50%;
       background:
-        radial-gradient(circle, rgba(42,168,255,0.20), transparent 66%);
+        radial-gradient(circle, rgba(42,168,255,0.18), transparent 66%);
       pointer-events: none;
-      filter: blur(4px);
+      filter: blur(6px);
     }
 
     .hero-content {
@@ -377,34 +375,35 @@
       align-items: flex-end;
       justify-content: center;
       min-height: 560px;
+      overflow: visible;
     }
 
     .person-glow {
       position: absolute;
-      width: 460px;
-      height: 460px;
-      bottom: 78px;
-      right: 28px;
+      width: 470px;
+      height: 470px;
+      bottom: 86px;
+      right: 10px;
       border-radius: 50%;
       background:
-        radial-gradient(circle, rgba(42,168,255,0.34), transparent 62%),
-        radial-gradient(circle at 72% 34%, rgba(255,184,43,0.22), transparent 50%);
-      filter: blur(14px);
-      opacity: 0.96;
+        radial-gradient(circle, rgba(42,168,255,0.35), transparent 62%),
+        radial-gradient(circle at 72% 34%, rgba(255,184,43,0.24), transparent 50%);
+      filter: blur(18px);
+      opacity: 0.95;
     }
 
     .person-ring {
       position: absolute;
-      width: 440px;
-      height: 440px;
-      bottom: 64px;
-      right: 20px;
+      width: 470px;
+      height: 470px;
+      bottom: 78px;
+      right: 0;
       border-radius: 50%;
-      border: 1px solid rgba(42,168,255,0.30);
+      border: 1px solid rgba(42,168,255,0.32);
       box-shadow:
-        0 0 46px rgba(42,168,255,0.18),
-        inset 0 0 38px rgba(255,184,43,0.08);
-      opacity: 0.82;
+        0 0 46px rgba(42,168,255,0.16),
+        inset 0 0 38px rgba(255,184,43,0.07);
+      opacity: 0.75;
     }
 
     .person-ring::before {
@@ -412,36 +411,59 @@
       position: absolute;
       inset: 18px;
       border-radius: 50%;
-      border: 1px solid rgba(255,184,43,0.24);
-      box-shadow: 0 0 42px rgba(255,145,31,0.14);
+      border: 1px solid rgba(255,184,43,0.22);
+      box-shadow: 0 0 42px rgba(255,145,31,0.12);
+    }
+
+    .person-ring::after {
+      content: "AH";
+      position: absolute;
+      right: 18px;
+      top: 168px;
+      padding: 14px 22px;
+      border-radius: 18px;
+      color: var(--gold);
+      font-size: 32px;
+      font-weight: 950;
+      letter-spacing: -1px;
+      background: rgba(5, 10, 18, 0.70);
+      border: 1px solid rgba(255,184,43,0.26);
+      box-shadow: 0 18px 45px rgba(0,0,0,0.28);
     }
 
     .person-image-wrap {
       position: relative;
-      width: min(500px, 100%);
+      width: min(540px, 100%);
       min-height: 560px;
       display: flex;
       align-items: flex-end;
       justify-content: center;
+      overflow: visible;
+      background: transparent;
+      border: 0;
+      box-shadow: none;
     }
 
     .person-image {
       position: relative;
       z-index: 2;
-      width: min(500px, 100%);
+      width: min(540px, 112%);
       height: auto;
       object-fit: contain;
+      background: transparent;
+      border: 0;
+      box-shadow: none;
       filter:
         drop-shadow(0 0 28px rgba(42,168,255,0.28))
         drop-shadow(0 0 18px rgba(255,145,31,0.16))
-        drop-shadow(0 28px 36px rgba(0,0,0,0.46));
+        drop-shadow(0 32px 42px rgba(0,0,0,0.54));
     }
 
     .visual-caption {
       position: absolute;
-      left: 30px;
-      right: 30px;
-      bottom: 24px;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
       z-index: 4;
       display: flex;
       align-items: center;
@@ -449,8 +471,8 @@
       gap: 14px;
       padding: 14px 16px;
       border-radius: 18px;
-      background: rgba(5, 10, 18, 0.74);
-      border: 1px solid rgba(255,184,43,0.30);
+      background: rgba(5, 10, 18, 0.68);
+      border: 1px solid rgba(255,184,43,0.26);
       backdrop-filter: blur(14px);
       box-shadow: 0 16px 44px rgba(0,0,0,0.32);
     }
@@ -873,12 +895,7 @@
         min-height: 500px;
       }
 
-      .person-ring {
-        left: 50%;
-        right: auto;
-        transform: translateX(-50%);
-      }
-
+      .person-ring,
       .person-glow {
         left: 50%;
         right: auto;
@@ -970,13 +987,17 @@
       }
 
       .person-image {
-        width: min(390px, 112%);
+        width: min(420px, 118%);
       }
 
       .person-ring {
         width: 320px;
         height: 320px;
         bottom: 48px;
+      }
+
+      .person-ring::after {
+        display: none;
       }
 
       .person-glow {
@@ -1020,7 +1041,7 @@
         <img class="brand-logo" src="favicon.png" alt="Admin Helper" />
         <div class="brand-title">
           <strong>Admin Helper by A.Almazov</strong>
-          <span>Premium-инструмент для администрации CRMP/RP-проектов</span>
+          <span>Инструмент для администрации CRMP/RP-проектов</span>
         </div>
       </div>
 
@@ -1039,13 +1060,13 @@
 
         <h1>
           Admin Helper
-          <span>Launcher Edition</span>
+          <span>для админов</span>
         </h1>
 
         <p class="lead">
-          Премиальный лаунчер-помощник для администрации CRMP/RP-проектов:
-          подсказка по <b>F9</b>, регламент, команды, автообновления и удобное меню
-          в одном аккуратном инструменте.
+          Солидный инструмент для администрации: быстрый доступ к подсказке,
+          регламенту, командам и важной информации прямо во время игры.
+          Открытие по <b>F9</b>, отдельная программа, сайт загрузки и проверка версии.
         </p>
 
         <div class="actions">
@@ -1060,16 +1081,15 @@
 
         <div class="status-row">
           <span>Версия: <b>v1.1.0</b></span>
-          <span>Издание: <b>Launcher Edition</b></span>
+          <span>Издание: <b>Open Beta</b></span>
           <span>Клавиша: <b>F9</b></span>
           <span>Статус: <b>ОБТ запущен</b></span>
         </div>
 
         <div class="hero-note">
-          <strong>Admin Helper</strong> — это не просто подсказка, а заготовка
-          полноценного premium-решения под CRMP/RP-проекты. Первое издание создано
-          для администрации <strong>CRASH CRMP</strong>, а систему можно адаптировать
-          под другой сервер.
+          <strong>Admin Helper</strong> — не просто подсказка, а заготовка полноценного
+          инструмента под CRMP/RP-проекты. Решение можно адаптировать под правила,
+          стиль и задачи конкретного сервера.
         </div>
       </div>
 
@@ -1078,7 +1098,7 @@
         <div class="person-ring"></div>
 
         <div class="person-image-wrap">
-          <img class="person-image" src="./AH%20Almazov.png" alt="A.Almazov Admin Helper" onerror="this.src='favicon.png'" />
+          <img class="person-image" src="./AH%20Almazov.png" alt="A.Almazov Admin Helper" />
 
           <div class="visual-caption">
             <div>
@@ -1101,7 +1121,7 @@
           <h2>Минимум лишнего. Максимум пользы.</h2>
           <p>
             Admin Helper создан для ситуаций, где администратору нужно быстро
-            открыть нужную информацию, не выходя из рабочего процесса.
+            открыть нужную информацию и не тратить время на поиск нужного пункта.
           </p>
         </div>
 
