@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>AdminHelper</AssemblyName>
+    <ApplicationIcon>images/app.ico</ApplicationIcon>
+    <Version>1.1.0</Version>
+    <FileVersion>1.1.0.0</FileVersion>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <Product>Admin Helper Launcher Edition</Product>
+    <Description>Лаунчер-помощник для администрации CRASH CRMP</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="images/app.ico" LogicalName="app.ico" />
+    <EmbeddedResource Include="images/avatar.png" LogicalName="avatar.png" />
+    <EmbeddedResource Include="images/logo.png" LogicalName="logo.png" />
+    <EmbeddedResource Include="images/reglament.png" LogicalName="reglament.png" />
+  </ItemGroup>
+
+</Project>
