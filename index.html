@@ -15,7 +15,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Admin Helper v1.1.0" />
   <meta property="og:description" content="Инструмент для администрации CRMP/RP-проектов. Первая версия создана для CRASH CRMP." />
-  <meta property="og:image" content="favicon.png" />
+  <meta property="og:image" content="https://artemalmazov.github.io/AdminHelper/favicon.png" />
   <meta property="og:url" content="https://artemalmazov.github.io/AdminHelper/" />
 
   <style>
@@ -41,7 +41,7 @@
     body {
       margin: 0;
       color: var(--text);
-      font-family: Inter, Segoe UI, Arial, sans-serif;
+      font-family: "Segoe UI", Arial, sans-serif;
       background:
         radial-gradient(circle at 12% 0%, rgba(46,149,255,0.18), transparent 32%),
         radial-gradient(circle at 88% 16%, rgba(255,184,77,0.13), transparent 28%),
@@ -116,8 +116,8 @@
     .hero {
       margin-top: 24px;
       display: grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap: 24px;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
       padding: 34px;
       border-radius: 28px;
       border: 1px solid rgba(112, 164, 230, 0.22);
@@ -173,7 +173,7 @@
       background: linear-gradient(135deg, #ffc868, #ff9f2a);
       box-shadow: 0 14px 35px rgba(255, 159, 42, 0.3);
     }
-    .btn-main:hover { transform: translateY(-2px); }
+    .btn-main:hover { transform: translateY(-2px); box-shadow: 0 18px 45px rgba(255, 159, 42, 0.38); }
     .btn-ghost {
       color: var(--text);
       border-color: var(--line);
@@ -192,22 +192,51 @@
     }
     .badges b { color: #fff; }
 
+    .hero-note {
+      margin-top: 14px;
+      max-width: 62ch;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(46,149,255,.2);
+      background: linear-gradient(145deg, rgba(46,149,255,.08), rgba(255,184,77,.06));
+    }
+
+    .desc {
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
     .visual {
       position: relative;
-      border-radius: 24px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: linear-gradient(150deg, rgba(46,149,255,.2), rgba(255,184,77,.2));
-      padding: 14px;
-      min-height: 390px;
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,.15);
+      background:
+        radial-gradient(circle at 14% 18%, rgba(46,149,255,.22), transparent 45%),
+        radial-gradient(circle at 88% 80%, rgba(255,184,77,.2), transparent 46%),
+        linear-gradient(160deg, rgba(13,23,42,.95), rgba(8,15,29,.8));
+      padding: 10px;
+      min-height: 360px;
       display: grid;
       place-items: center;
-      box-shadow: var(--shadow);
+      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.45), 0 0 50px rgba(46,149,255,.2), 0 0 40px rgba(255,184,77,.15);
+    }
+    .visual::before {
+      content: "";
+      position: absolute;
+      inset: -10px;
+      border-radius: 32px;
+      background: radial-gradient(circle at 20% 30%, rgba(46,149,255,.25), transparent 52%), radial-gradient(circle at 75% 70%, rgba(255,184,77,.2), transparent 50%);
+      z-index: -1;
+      filter: blur(12px);
     }
     .visual img {
-      width: min(360px, 82%);
-      border-radius: 24px;
-      border: 1px solid rgba(255,255,255,.2);
-      box-shadow: 0 0 45px rgba(46,149,255,.25), 0 0 35px rgba(255,184,77,.2);
+      width: min(440px, 96%);
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,.24);
+      box-shadow: 0 0 52px rgba(46,149,255,.32), 0 0 38px rgba(255,184,77,.28);
       object-fit: cover;
     }
     .chip {
@@ -218,7 +247,7 @@
       display: flex;
       justify-content: space-between;
       gap: 10px;
-      padding: 10px 12px;
+      padding: 11px 12px;
       border-radius: 12px;
       border: 1px solid rgba(255,184,77,.3);
       background: rgba(6,12,22,.75);
@@ -239,7 +268,7 @@
       font-size: clamp(24px, 3.6vw, 36px);
       letter-spacing: -.6px;
     }
-    .section p.desc { margin: 0 0 14px; color: var(--muted); line-height: 1.6; }
+    .section p.desc { margin: 0 0 14px; }
 
     .grid-3, .grid-4 { display: grid; gap: 12px; }
     .grid-3 { grid-template-columns: repeat(3, 1fr); }
@@ -250,11 +279,37 @@
       border-radius: 16px;
       border: 1px solid var(--line-soft);
       background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      transition: .2s ease;
+      position: relative;
+      overflow: hidden;
+      transition: .28s ease;
     }
-    .card:hover { transform: translateY(-3px); border-color: rgba(255,184,77,.4); }
+    .card::after {
+      content: "";
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      right: -70px;
+      top: -70px;
+      background: radial-gradient(circle, rgba(46,149,255,.24), rgba(46,149,255,0));
+      pointer-events: none;
+    }
+    .card:hover { transform: translateY(-4px); border-color: rgba(255,184,77,.4); box-shadow: 0 16px 35px rgba(0,0,0,.24); }
     .card strong { display: block; margin-bottom: 7px; }
     .card p { margin: 0; color: var(--muted); line-height: 1.5; font-size: 14px; }
+
+    .feature-tag {
+      display: inline-flex;
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,184,77,.35);
+      background: linear-gradient(120deg, rgba(255,184,77,.18), rgba(46,149,255,.14));
+      color: #f5d39f;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .4px;
+      margin-bottom: 8px;
+    }
 
     .split { display: grid; grid-template-columns: .96fr 1.04fr; gap: 12px; }
     .list { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
@@ -309,17 +364,20 @@
       .grid-3 { grid-template-columns: 1fr; }
       .grid-4 { grid-template-columns: repeat(2, 1fr); }
       .steps { grid-template-columns: repeat(2, 1fr); }
-      .visual { min-height: 320px; }
+      .visual { min-height: 300px; }
+      .visual img { width: min(400px, 90%); }
     }
 
     @media (max-width: 640px) {
       .container { width: min(100% - 18px, 1180px); padding-top: 12px; }
       .hero, .section, .cta { padding: 18px; border-radius: 18px; }
-      h1 { letter-spacing: -1px; }
+      h1 { letter-spacing: -1px; font-size: clamp(32px, 10vw, 44px); }
       .actions .btn { width: 100%; }
       .grid-4, .steps { grid-template-columns: 1fr; }
       .menu a { font-size: 12px; }
       .chip { flex-direction: column; align-items: flex-start; }
+      .visual { min-height: 260px; padding: 10px; }
+      .visual img { width: min(300px, 86%); }
     }
   </style>
 </head>
@@ -359,6 +417,7 @@
           <span>Клавиша: <b>F9</b></span>
           <span>Статус: <b>ОБТ запущен</b></span>
         </div>
+        <p class="hero-note">Admin Helper — не просто подсказка, а заготовка полноценного инструмента под CRMP/RP-проекты. Решение можно адаптировать под правила, стиль и задачи конкретного сервера.</p>
       </div>
 
       <div class="visual" aria-hidden="true">
@@ -374,9 +433,9 @@
       <h2>Возможности</h2>
       <p class="desc">Premium-подача без перегруза: только нужные инструменты для быстрой и уверенной работы администрации.</p>
       <div class="grid-3">
-        <article class="card"><strong>Быстрая подсказка по F9</strong><p>Открытие ключевой информации во время игры одним нажатием.</p></article>
-        <article class="card"><strong>Регламент под рукой</strong><p>Правила, действия и структура наказаний всегда доступны в одном месте.</p></article>
-        <article class="card"><strong>Система обновлений</strong><p>Актуальная версия лаунчера без ручной рутины для администрации.</p></article>
+        <article class="card"><span class="feature-tag">F9</span><strong>Быстрая подсказка по F9</strong><p>Открытие ключевой информации во время игры одним нажатием.</p></article>
+        <article class="card"><span class="feature-tag">RULES</span><strong>Регламент под рукой</strong><p>Правила, действия и структура наказаний всегда доступны в одном месте.</p></article>
+        <article class="card"><span class="feature-tag">UPD</span><strong>Система обновлений</strong><p>Актуальная версия лаунчера без ручной рутины для администрации.</p></article>
       </div>
     </section>
 
