@@ -1,6 +1,6 @@
-
 using System.Diagnostics;
 using System.Drawing.Drawing2D;
+using System.Net.Http;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text.Json;
@@ -38,6 +38,16 @@ internal static class Program
                     CrashLogger.Show(ex);
             };
 
+            // RemoteAccess: remote access / status check before launcher startup.
+            AccessCheckResult startupAccess = AppStatusGate.CheckStartupAccessAsync().GetAwaiter().GetResult();
+
+            if (!startupAccess.Allowed)
+            {
+                using var blocked = AccessStatusForm.Create(startupAccess.Title, startupAccess.Message, startupAccess.TelegramUrl);
+                Application.Run(blocked);
+                return;
+            }
+
             Application.Run(new LauncherForm());
         }
         catch (Exception ex)
@@ -67,11 +77,11 @@ public sealed class LauncherForm : Form
     private const string GitHubRepo = "AdminHelper";
     private const string ReleaseAssetName = "AdminHelper.exe";
     private const string SiteUrl = "https://artemalmazov.github.io/AdminHelper/";
-    private const string TelegramUrl = "https://t.me/ahelperAlmazov";
 
     private readonly Panel _content = new();
     private readonly List<NavButton> _navButtons = new();
     private readonly LowLevelKeyboardProc _keyboardProc;
+    private readonly System.Windows.Forms.Timer _accessCheckTimer = new();
 
     private IntPtr _keyboardHook = IntPtr.Zero;
     private OverlayForm? _overlay;
@@ -80,6 +90,8 @@ public sealed class LauncherForm : Form
     private bool _overlayVisible;
     private bool _f9Down;
     private bool _isClosing;
+    private bool _isAccessCheckRunning;
+    private bool _accessLockShown;
 
     [DllImport("user32.dll")]
     private static extern IntPtr SetWindowsHookEx(int idHook, LowLevelKeyboardProc lpfn, IntPtr hMod, uint dwThreadId);
@@ -126,6 +138,8 @@ public sealed class LauncherForm : Form
 
         _keyboardProc = KeyboardHookCallback;
         MouseDown += DragWindow;
+        _accessCheckTimer.Interval = (int)TimeSpan.FromMinutes(3).TotalMilliseconds;
+        _accessCheckTimer.Tick += async (_, _) => await PeriodicAccessCheckAsync();
 
         BuildWindowChrome();
         BuildSidebar();
@@ -322,7 +336,7 @@ public sealed class LauncherForm : Form
         var site = MakeActionButton("Сайт программы", 520, 136, 138, 40, false);
         site.Click += (_, _) => OpenUrl(SiteUrl);
         var tg = MakeActionButton("Telegram-канал", 672, 136, 138, 40, false);
-        tg.Click += (_, _) => OpenUrl(TelegramUrl);
+        tg.Click += (_, _) => OpenUrl(AppLinks.TelegramUrl);
 
         hero.Controls.Add(openHint);
         hero.Controls.Add(updates);
@@ -579,7 +593,7 @@ public sealed class LauncherForm : Form
         site.Click += (_, _) => OpenUrl(SiteUrl);
 
         var tg = MakeActionButton("Telegram", 232, 282, 160, 44, false);
-        tg.Click += (_, _) => OpenUrl(TelegramUrl);
+        tg.Click += (_, _) => OpenUrl(AppLinks.TelegramUrl);
 
         box.Controls.Add(site);
         box.Controls.Add(tg);
@@ -869,6 +883,7 @@ public sealed class LauncherForm : Form
         PrepareOverlay();
         InstallKeyboardHook();
         SetStatus($"Установлена актуальная версия: {StableVersionText}", Ui.Green);
+        _accessCheckTimer.Start();
 
         // Тихая проверка обновлений после запуска.
         // Если на GitHub есть версия выше текущей — появится окно установки.
@@ -1051,6 +1066,41 @@ public sealed class LauncherForm : Form
         }
     }
 
+    private async Task PeriodicAccessCheckAsync()
+    {
+        if (_isClosing || _accessLockShown || _isAccessCheckRunning)
+            return;
+
+        _isAccessCheckRunning = true;
+
+        try
+        {
+            AccessRuntimeCheckResult result = await AppStatusGate.CheckRuntimeAccessAsync();
+
+            if (result.IsDisabled && !_accessLockShown && !_isClosing)
+            {
+                _accessLockShown = true;
+                HideOverlay();
+
+                using var form = AccessStatusForm.Create(
+                    result.Title,
+                    result.Message,
+                    result.TelegramUrl);
+                form.ShowDialog(this);
+
+                SafeExit();
+            }
+        }
+        catch (Exception ex)
+        {
+            CrashLogger.Write(ex);
+        }
+        finally
+        {
+            _isAccessCheckRunning = false;
+        }
+    }
+
     private void CreateTrayIcon()
     {
         _tray = new NotifyIcon
@@ -1070,7 +1120,7 @@ public sealed class LauncherForm : Form
 
         menu.Items.Add("Показать / скрыть подсказку", null, (_, _) => ToggleOverlay());
         menu.Items.Add("Сайт", null, (_, _) => OpenUrl(SiteUrl));
-        menu.Items.Add("Telegram", null, (_, _) => OpenUrl(TelegramUrl));
+        menu.Items.Add("Telegram", null, (_, _) => OpenUrl(AppLinks.TelegramUrl));
         menu.Items.Add("Выход", null, (_, _) => SafeExit());
 
         _tray.ContextMenuStrip = menu;
@@ -1091,6 +1141,8 @@ public sealed class LauncherForm : Form
 
         try
         {
+            _accessCheckTimer.Stop();
+
             if (_keyboardHook != IntPtr.Zero)
             {
                 UnhookWindowsHookEx(_keyboardHook);
@@ -1132,6 +1184,9 @@ public sealed class LauncherForm : Form
 
         try
         {
+            _accessCheckTimer.Stop();
+            _accessCheckTimer.Dispose();
+
             if (_keyboardHook != IntPtr.Zero)
             {
                 UnhookWindowsHookEx(_keyboardHook);
@@ -1191,6 +1246,245 @@ public sealed class LauncherForm : Form
 
         _bottomStatus.Text = text;
         _bottomStatus.ForeColor = color;
+    }
+
+    private static void OpenUrl(string url)
+    {
+        try
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = url,
+                UseShellExecute = true
+            });
+        }
+        catch (Exception ex)
+        {
+            CrashLogger.Write(ex);
+        }
+    }
+}
+
+public static class AppLinks
+{
+    public const string TelegramUrl = "https://t.me/ahelperAlmazov";
+    public const string AppStatusUrl = "https://artemalmazov.github.io/AdminHelper/app-status.json";
+}
+
+public sealed record AccessCheckResult(bool Allowed, string Title, string Message, string TelegramUrl);
+
+public sealed record AccessRuntimeCheckResult(bool IsDisabled, string Title, string Message, string TelegramUrl);
+
+public static class AppStatusGate
+{
+    private const string RemoteAccessStatusTag = "adminhelper_status";
+    private const string DefaultBlockedTitle = "Доступ временно закрыт автором";
+    private const string DefaultBlockedText = "Сервер проверки Admin Helper сообщает, что доступ временно закрыт автором. Следите за новостями в Telegram-канале.";
+    private const string HardModeTitle = "Не удалось проверить доступ";
+    private const string HardModeText = "Admin Helper не смог подключиться к серверу проверки. Проверьте интернет-соединение или следите за новостями в Telegram-канале.";
+    private const string DefaultTelegram = AppLinks.TelegramUrl;
+
+    public static async Task<AccessCheckResult> CheckStartupAccessAsync()
+    {
+        try
+        {
+            AppStatusDto status = await LoadStatusAsync();
+            if (status.Enabled)
+                return new AccessCheckResult(true, "", "", DefaultTelegram);
+
+            string title = string.IsNullOrWhiteSpace(status.Title) ? DefaultBlockedTitle : status.Title.Trim();
+            string message = string.IsNullOrWhiteSpace(status.Text) ? DefaultBlockedText : status.Text.Trim();
+            string telegram = string.IsNullOrWhiteSpace(status.Telegram) ? DefaultTelegram : status.Telegram.Trim();
+
+            return new AccessCheckResult(false, title, message, telegram);
+        }
+        catch (Exception ex)
+        {
+            CrashLogger.Write(ex);
+            return new AccessCheckResult(false, HardModeTitle, HardModeText, DefaultTelegram);
+        }
+    }
+
+    public static async Task<AccessRuntimeCheckResult> CheckRuntimeAccessAsync()
+    {
+        try
+        {
+            AppStatusDto status = await LoadStatusAsync();
+            if (status.Enabled)
+                return new AccessRuntimeCheckResult(false, "", "", DefaultTelegram);
+
+            string title = string.IsNullOrWhiteSpace(status.Title) ? DefaultBlockedTitle : status.Title.Trim();
+            string message = string.IsNullOrWhiteSpace(status.Text) ? DefaultBlockedText : status.Text.Trim();
+            string telegram = string.IsNullOrWhiteSpace(status.Telegram) ? DefaultTelegram : status.Telegram.Trim();
+            return new AccessRuntimeCheckResult(true, title, message, telegram);
+        }
+        catch (Exception ex)
+        {
+            CrashLogger.Write(ex);
+            return new AccessRuntimeCheckResult(false, "", "", DefaultTelegram);
+        }
+    }
+
+    private static async Task<AppStatusDto> LoadStatusAsync()
+    {
+        long stamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+        string url = $"{AppLinks.AppStatusUrl}?t={stamp}";
+
+        using HttpClient client = new();
+        client.Timeout = TimeSpan.FromSeconds(10);
+        client.DefaultRequestHeaders.UserAgent.ParseAdd($"AdminHelperStatusGate/1.1.0 ({RemoteAccessStatusTag})");
+
+        string json = await client.GetStringAsync(url);
+        AppStatusPayload? payload = JsonSerializer.Deserialize<AppStatusPayload>(json, new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        });
+
+        if (payload == null)
+            throw new InvalidOperationException("Сервер проверки Admin Helper вернул пустой ответ.");
+
+        if (payload.Enabled == null)
+            throw new InvalidOperationException("app-status.json не содержит обязательное поле enabled.");
+
+        return new AppStatusDto(
+            payload.Enabled.Value,
+            payload.Title ?? payload.MessageTitle,
+            payload.Text ?? payload.Message,
+            payload.Telegram);
+    }
+
+    private sealed record AppStatusDto(bool Enabled, string? Title, string? Text, string? Telegram);
+
+    private sealed class AppStatusPayload
+    {
+        [JsonPropertyName("enabled")]
+        public bool? Enabled { get; set; }
+
+        [JsonPropertyName("title")]
+        public string? Title { get; set; }
+
+        [JsonPropertyName("text")]
+        public string? Text { get; set; }
+
+        [JsonPropertyName("messageTitle")]
+        public string? MessageTitle { get; set; }
+
+        [JsonPropertyName("message")]
+        public string? Message { get; set; }
+
+        [JsonPropertyName("telegram")]
+        public string? Telegram { get; set; }
+    }
+}
+
+public sealed class AccessStatusForm : Form
+{
+    private readonly string _titleText;
+    private readonly string _bodyText;
+    private readonly string _telegramUrl;
+
+    private AccessStatusForm(string titleText, string bodyText, string telegramUrl)
+    {
+        _titleText = titleText;
+        _bodyText = bodyText;
+        _telegramUrl = telegramUrl;
+
+        Text = "Admin Helper";
+        Size = new Size(700, 390);
+        MinimumSize = new Size(700, 390);
+        MaximumSize = new Size(700, 390);
+        StartPosition = FormStartPosition.CenterScreen;
+        FormBorderStyle = FormBorderStyle.None;
+        BackColor = Ui.Bg;
+        ForeColor = Color.White;
+        DoubleBuffered = true;
+        Icon = ResourceLoader.LoadIcon("app.ico");
+
+        var card = new RoundedPanel
+        {
+            Location = new Point(30, 30),
+            Size = new Size(640, 260),
+            BackColor = Color.FromArgb(14, 20, 31),
+            BorderColor = Ui.Gold,
+            BorderRadius = 26
+        };
+
+        card.Controls.Add(MakeStaticLabel(_titleText, 34, 28, 572, 40, 22F, FontStyle.Bold, Color.White));
+        card.Controls.Add(MakeStaticLabel(_bodyText, 36, 82, 568, 142, 10.5F, FontStyle.Regular, Ui.Muted));
+
+        var telegram = new Button
+        {
+            Text = "Открыть Telegram",
+            Location = new Point(30, 314),
+            Size = new Size(230, 44),
+            BackColor = Ui.Gold,
+            ForeColor = Color.FromArgb(5, 7, 10),
+            FlatStyle = FlatStyle.Flat,
+            Font = new Font("Segoe UI", 10F, FontStyle.Bold),
+            Cursor = Cursors.Hand
+        };
+        telegram.FlatAppearance.BorderSize = 0;
+        telegram.Click += (_, _) => OpenUrl(_telegramUrl);
+
+        var close = new Button
+        {
+            Text = "Закрыть",
+            Location = new Point(522, 314),
+            Size = new Size(148, 44),
+            BackColor = Color.FromArgb(31, 39, 54),
+            ForeColor = Color.White,
+            FlatStyle = FlatStyle.Flat,
+            Font = new Font("Segoe UI", 10F, FontStyle.Bold),
+            DialogResult = DialogResult.OK,
+            Cursor = Cursors.Hand
+        };
+        close.FlatAppearance.BorderSize = 1;
+        close.FlatAppearance.BorderColor = Color.FromArgb(90, 112, 145);
+
+        Controls.Add(card);
+        Controls.Add(telegram);
+        Controls.Add(close);
+        CancelButton = close;
+        AcceptButton = close;
+    }
+
+    public static AccessStatusForm Create(string title, string body, string telegramUrl) => new(title, body, telegramUrl);
+
+    protected override void OnPaint(PaintEventArgs e)
+    {
+        base.OnPaint(e);
+
+        if (ClientSize.Width <= 0 || ClientSize.Height <= 0)
+            return;
+
+        e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
+        Rectangle paintRect = ClientRectangle;
+        if (paintRect.Width <= 0 || paintRect.Height <= 0)
+            return;
+
+        using var bg = new LinearGradientBrush(paintRect, Color.FromArgb(5, 8, 14), Color.FromArgb(14, 22, 36), 110f);
+        e.Graphics.FillRectangle(bg, ClientRectangle);
+
+        using var top = new SolidBrush(Ui.Gold);
+        e.Graphics.FillRectangle(top, 0, 0, Width, 3);
+
+        using var border = new Pen(Color.FromArgb(90, Ui.Gold), 1);
+        e.Graphics.DrawRectangle(border, 0, 0, Width - 1, Height - 1);
+    }
+
+    private static Label MakeStaticLabel(string text, int x, int y, int w, int h, float size, FontStyle style, Color color, ContentAlignment align = ContentAlignment.MiddleLeft)
+    {
+        return new Label
+        {
+            Text = text,
+            Location = new Point(x, y),
+            Size = new Size(w, h),
+            ForeColor = color,
+            BackColor = Color.Transparent,
+            Font = new Font("Segoe UI", size, style),
+            TextAlign = align
+        };
     }
 
     private static void OpenUrl(string url)
