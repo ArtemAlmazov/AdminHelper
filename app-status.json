@@ -1,5 +1,5 @@
 {
-  "enabled": true,
+  "enabled": false,
   "status": "online",
   "title": "Admin Helper доступен",
   "message": "Программа работает в обычном режиме.",
