@@ -1,0 +1,8 @@
+{
+  "enabled": true,
+  "status": "online",
+  "title": "Admin Helper доступен",
+  "message": "Программа работает в обычном режиме.",
+  "telegram": "https://t.me/ahelperAlmazov",
+  "minSupportedVersion": "1.1.0"
+}
