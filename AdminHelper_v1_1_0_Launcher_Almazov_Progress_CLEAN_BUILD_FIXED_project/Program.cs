@@ -1378,7 +1378,7 @@ public static class AppStatusGate
 }
 
 public sealed class AccessStatusForm : Form
-public sealed class AccessStatusForm : Form
+
 {
     private readonly string _titleText;
     private readonly string _bodyText;
