@@ -25,8 +25,8 @@
 
   <style>
     :root {
-      --text: #123028;
-      --muted: #2d6656;
+      --text: #0c2b22;
+      --muted: #245748;
       --line: rgba(26, 133, 95, 0.26);
 
       --lime-100: #eaffd8;
@@ -47,9 +47,9 @@
       --radius-md: 18px;
       --radius-sm: 14px;
 
-      --shadow-lg: 0 30px 72px rgba(22, 130, 88, 0.22);
-      --shadow-md: 0 18px 42px rgba(24, 124, 91, 0.16);
-      --shadow-sm: 0 12px 30px rgba(26, 116, 88, 0.14);
+      --shadow-lg: 0 30px 72px rgba(12, 74, 50, 0.24);
+      --shadow-md: 0 18px 42px rgba(16, 93, 66, 0.2);
+      --shadow-sm: 0 12px 30px rgba(13, 86, 61, 0.16);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -63,7 +63,7 @@
         radial-gradient(circle at 88% 16%, rgba(255, 241, 118, 0.42), transparent 32%),
         radial-gradient(circle at 82% 86%, rgba(36, 199, 163, 0.35), transparent 38%),
         radial-gradient(circle at 12% 92%, rgba(94, 219, 140, 0.38), transparent 36%),
-        linear-gradient(160deg, #eaffd8 0%, #dcffb8 24%, #cffff0 53%, #e6ffc7 100%);
+        linear-gradient(160deg, #eaffd8 0%, #d6ffae 23%, #c2f7df 52%, #f2ffba 100%);
       min-height: 100vh;
       overflow-x: hidden;
     }
@@ -133,7 +133,7 @@
       padding: 14px 16px;
       border-radius: 999px;
       border: 1px solid rgba(18, 168, 125, 0.4);
-      background: rgba(214, 255, 185, 0.58);
+      background: rgba(189, 243, 152, 0.58);
       backdrop-filter: blur(14px);
       box-shadow: var(--shadow-sm);
     }
@@ -145,7 +145,7 @@
       min-width: 0;
       font-weight: 800;
       letter-spacing: 0.2px;
-      color: #0f4f3d;
+      color: #0d3f31;
     }
 
     .logo-mark {
@@ -178,7 +178,7 @@
       font-weight: 700;
       padding: 9px 13px;
       border-radius: 999px;
-      color: #1e644f;
+      color: #195441;
       transition: 0.22s ease;
     }
 
@@ -191,10 +191,10 @@
     .btn-download {
       padding: 10px 18px;
       border-radius: 999px;
-      background: linear-gradient(120deg, #26caa2, #5edb8c);
+      background: linear-gradient(120deg, #12b78e, #5dd967);
       color: #ffffff;
       font-weight: 800;
-      box-shadow: 0 14px 24px rgba(33, 157, 114, 0.34);
+      box-shadow: 0 16px 28px rgba(19, 124, 89, 0.36);
       transition: 0.22s ease;
       white-space: nowrap;
     }
@@ -209,7 +209,7 @@
       background:
         radial-gradient(circle at 86% 14%, rgba(255, 241, 118, 0.4), transparent 30%),
         radial-gradient(circle at 14% 92%, rgba(200,245,111,0.34), transparent 36%),
-        linear-gradient(145deg, rgba(213, 255, 180, 0.72), rgba(196, 255, 236, 0.66));
+        linear-gradient(145deg, rgba(204, 248, 163, 0.74), rgba(170, 236, 213, 0.66));
       box-shadow: var(--shadow-lg);
       display: grid;
       grid-template-columns: 1.05fr 0.95fr;
@@ -224,18 +224,18 @@
       line-height: 1.02;
       letter-spacing: -0.02em;
       margin-bottom: 16px;
-      color: #124633;
+      color: #0d3a2e;
     }
 
     .hero-subtitle {
       font-size: clamp(1rem, 2vw, 1.35rem);
-      color: #1f6d56;
+      color: #155842;
       margin-bottom: 14px;
       font-weight: 600;
     }
 
     .hero-desc {
-      color: #2f6f5b;
+      color: #235745;
       line-height: 1.65;
       font-size: 1.03rem;
       max-width: 580px;
@@ -262,17 +262,20 @@
 
     .button.primary {
       color: #fff;
-      background: linear-gradient(120deg, #1fcda5, #6de06c);
-      box-shadow: 0 14px 24px rgba(45, 166, 112, 0.34);
+      background: linear-gradient(125deg, #10b98f, #24c7a3 42%, #7ade5a);
+      box-shadow: 0 16px 28px rgba(23, 133, 95, 0.38);
     }
 
     .button.secondary {
-      color: #1f6b55;
-      background: linear-gradient(120deg, rgba(234, 255, 216, 0.9), rgba(255, 241, 118, 0.72));
-      border: 1px solid rgba(38, 167, 116, 0.3);
+      color: #165745;
+      background: linear-gradient(120deg, rgba(242, 255, 228, 0.9), rgba(253, 255, 194, 0.8));
+      border: 1px solid rgba(24, 144, 102, 0.38);
     }
 
-    .button:hover { transform: translateY(-2px); }
+    .button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 26px rgba(14, 100, 72, 0.22);
+    }
 
     .badges {
       margin-top: 20px;
@@ -285,9 +288,9 @@
       font-size: 0.82rem;
       padding: 8px 11px;
       border-radius: 999px;
-      background: rgba(222, 255, 184, 0.7);
+      background: rgba(214, 248, 165, 0.7);
       border: 1px solid rgba(36, 165, 119, 0.3);
-      color: #20614d;
+      color: #164d3c;
       font-weight: 700;
     }
 
@@ -421,7 +424,7 @@
       font-size: clamp(1.45rem, 2.8vw, 2.2rem);
       letter-spacing: -0.02em;
       margin-bottom: 12px;
-      color: #154d3a;
+      color: #103d2f;
     }
 
     .lead { color: #2f6a58; line-height: 1.7; }
@@ -458,7 +461,7 @@
       border: 1px solid rgba(30, 164, 115, 0.28);
       background: rgba(230, 255, 205, 0.58);
       padding: 14px;
-      color: #205745;
+      color: #1a4c3c;
       box-shadow: 0 10px 20px rgba(34, 137, 99, 0.12);
     }
 
@@ -467,7 +470,7 @@
     .beta-item strong {
       display: block;
       margin-bottom: 6px;
-      color: #164734;
+      color: #0e3a2b;
     }
 
     .steps {
@@ -512,9 +515,9 @@
       padding: 24px 28px;
       border-radius: var(--radius-lg);
       border: 1px solid rgba(30, 160, 113, 0.34);
-      background: rgba(218, 255, 187, 0.58);
+      background: rgba(199, 243, 158, 0.56);
       box-shadow: var(--shadow-sm);
-      color: #255f4d;
+      color: #174334;
     }
 
     .footer-links {
@@ -522,7 +525,23 @@
       gap: 8px;
     }
 
-    .footer a { color: #147f5e; font-weight: 700; }
+    .footer a { color: #0f6f52; font-weight: 700; }
+
+    .footer-link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(24, 144, 102, 0.35);
+      background: rgba(233, 255, 210, 0.64);
+      transition: 0.2s ease;
+    }
+
+    .footer-link-btn:hover {
+      transform: translateY(-2px);
+      background: rgba(244, 255, 224, 0.85);
+    }
 
     @media (max-width: 1060px) {
       .hero { grid-template-columns: 1fr; }
@@ -576,7 +595,7 @@
         <a href="#contact">Связь</a>
       </nav>
 
-      <a class="btn-download" href="https://github.com/ArtemAlmazov/AdminHelper/releases/latest/download/AdminHelper.exe">Скачать</a>
+      <a class="btn-download" href="https://github.com/ArtemAlmazov/AdminHelper/releases/latest/download/AdminHelper.exe" target="_blank" rel="noopener">Скачать</a>
     </header>
 
     <section class="hero" id="top">
@@ -587,10 +606,13 @@
           Лаунчер, подсказка, команды, правила и обновления в одном аккуратном инструменте.
           Admin Helper можно адаптировать под стиль, регламент и задачи вашего сервера.
         </p>
+        <p class="hero-desc" style="margin-top:10px;font-weight:600;color:#124533;">
+          Готовая основа для собственного admin-helper решения под ваш сервер.
+        </p>
 
         <div class="hero-actions">
-          <a class="button primary" href="https://github.com/ArtemAlmazov/AdminHelper/releases/latest/download/AdminHelper.exe">⬇ Скачать AdminHelper.exe</a>
-          <a class="button secondary" href="https://t.me/ahelperAlmazov">✈ Связаться в Telegram</a>
+          <a class="button primary" href="https://github.com/ArtemAlmazov/AdminHelper/releases/latest/download/AdminHelper.exe" target="_blank" rel="noopener">⬇ Скачать AdminHelper.exe</a>
+          <a class="button secondary" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">✈ Связаться в Telegram</a>
         </div>
 
         <div class="badges">
@@ -712,21 +734,21 @@
           Можно подготовить отдельную версию Admin Helper под стиль, правила и задачи вашего сервера.
         </p>
         <div class="cta-actions">
-          <a class="button secondary" href="https://t.me/ahelperAlmazov">Связаться в Telegram</a>
-          <a class="button primary" href="https://github.com/ArtemAlmazov/AdminHelper/releases/latest/download/AdminHelper.exe">Скачать AdminHelper.exe</a>
+          <a class="button secondary" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Связаться в Telegram</a>
+          <a class="button primary" href="https://github.com/ArtemAlmazov/AdminHelper/releases/latest/download/AdminHelper.exe" target="_blank" rel="noopener">Скачать AdminHelper.exe</a>
         </div>
       </section>
     </main>
 
     <footer class="footer">
       <p>Admin Helper v1.1.0 • Product by A.Almazov / Artem Almazov</p>
-      <p style="margin-top:8px;">Telegram: <a href="https://t.me/ahelperAlmazov">https://t.me/ahelperAlmazov</a></p>
+      <p style="margin-top:8px;">Telegram: <a href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">@ahelperAlmazov</a></p>
       <p style="margin-top:6px;">Discord: artemiiooo</p>
 
       <div class="footer-links">
-        <p><strong>Скачать:</strong> <a href="https://github.com/ArtemAlmazov/AdminHelper/releases/latest/download/AdminHelper.exe">https://github.com/ArtemAlmazov/AdminHelper/releases/latest/download/AdminHelper.exe</a></p>
-        <p><strong>Telegram:</strong> <a href="https://t.me/ahelperAlmazov">https://t.me/ahelperAlmazov</a></p>
-        <p><strong>GitHub releases:</strong> <a href="https://github.com/ArtemAlmazov/AdminHelper/releases/latest">https://github.com/ArtemAlmazov/AdminHelper/releases/latest</a></p>
+        <p><a class="footer-link-btn" href="https://github.com/ArtemAlmazov/AdminHelper/releases/latest/download/AdminHelper.exe" target="_blank" rel="noopener">⬇ Скачать AdminHelper.exe</a></p>
+        <p><a class="footer-link-btn" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">✈ Telegram-канал</a></p>
+        <p><a class="footer-link-btn" href="https://github.com/ArtemAlmazov/AdminHelper/releases/latest" target="_blank" rel="noopener">🧩 Страница загрузки</a></p>
       </div>
     </footer>
   </div>
