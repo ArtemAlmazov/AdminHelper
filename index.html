@@ -13,6 +13,10 @@
   <meta property="og:description" content="Премиальный помощник для администрации SAMP / CRMP / MTA: команды, правила, F9-подсказка, регламент и обновления в одном лаунчере." />
   <meta property="og:url" content="https://artemalmazov.github.io/AdminHelper/" />
   <meta property="og:image" content="https://artemalmazov.github.io/AdminHelper/favicon.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Admin Helper — premium-лаунчер для администрации RP-проектов" />
+  <meta name="twitter:description" content="Команды, правила, F9-подсказка, регламент и обновления в одном премиальном лаунчере." />
+  <meta name="twitter:image" content="https://artemalmazov.github.io/AdminHelper/favicon.png" />
   <style>
     :root {
       --bg: #060a12;
@@ -513,6 +517,21 @@
     }
 
     .grid-5, .grid-4, .grid-3, .grid-2 { display: grid; gap: 12px; margin-top: 18px; }
+
+    .before-after {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: repeat(2,minmax(0,1fr));
+      gap: 12px;
+    }
+    .before-after .card ul { margin-left: 18px; color: var(--muted); line-height: 1.7; }
+    .before-after .before { background: rgba(8,14,24,.95); border-color: rgba(88,121,170,.3); }
+    .before-after .after {
+      border-color: rgba(243,187,109,.38);
+      background: radial-gradient(circle at 90% 10%, rgba(243,187,109,.16), transparent 34%), rgba(10,18,30,.94);
+      box-shadow: inset 0 0 0 1px rgba(99,182,255,.2), 0 0 22px rgba(99,182,255,.22);
+    }
+
     .grid-5 { grid-template-columns: repeat(5,minmax(0,1fr)); }
     .grid-4 { grid-template-columns: repeat(4,minmax(0,1fr)); }
     .grid-3 { grid-template-columns: repeat(3,minmax(0,1fr)); }
@@ -799,6 +818,7 @@
       .band, .cta-band { padding: 48px 0; }
       .hero-wordmark { opacity: .04; font-size: clamp(2.6rem, 17vw, 6.4rem); }
       .grid-4, .grid-3, .grid-2, .metrics, .faq-grid, .demo-grid { grid-template-columns: 1fr; }
+      .before-after { grid-template-columns: 1fr; }
       .hero-actions .btn { width: 100%; }
       nav { width: 100%; overflow-x: auto; justify-content: flex-start; padding-bottom: 4px; }
       nav a { flex: 0 0 auto; }
@@ -838,7 +858,7 @@
           <a href="#contact">Связь</a>
         </nav>
         <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;">
-          <button class="btn ghost" id="openClientModal" type="button">Кабинет клиентов</button>
+          <button class="btn ghost" id="openClientModal" type="button">Кабинет клиентов · soon</button>
           <a class="btn gold" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Заказать</a>
         </div>
       </header>
@@ -854,6 +874,7 @@
         <p>Команды, правила, F9-подсказки, регламент наказаний, внутренние инструменты и обновления — в едином лаунчере, который масштабируется под архитектуру и бренд вашего RP-проекта.</p>
         <p class="hero-note">Единый стандарт работы администрации — в одном лаунчере.</p>
         <p class="hero-micro">Создан для проектов, где важны порядок, скорость и единый стандарт администрации.</p>
+        <p class="hero-micro">Решение для владельцев, ГА, ЗГА и кураторов RP-проектов.</p>
         <div class="hero-badges">
           <span>Premium launcher</span>
           <span>SAMP / CRMP / MTA</span>
@@ -995,12 +1016,26 @@
 
   <section class="band soft reveal">
     <div class="container content">
-      <h2>Почему это удобно</h2>
-      <div class="grid-2">
-        <article class="card tilt"><h3>Меньше ошибок в наказаниях</h3><p>Регламент и правила всегда перед глазами в нужный момент.</p></article>
-        <article class="card tilt"><h3>Быстрее ответы игрокам</h3><p>Команды и подсказки открываются моментально, без переключения между окнами.</p></article>
-        <article class="card tilt"><h3>Единый инструмент для команды</h3><p>Одинаковый стандарт действий для всей администрации проекта.</p></article>
-        <article class="card tilt"><h3>Меньше хаоса, больше бренда</h3><p>Чистый интерфейс и брендированный софт усиливают доверие к проекту.</p></article>
+      <h2>До / После Admin Helper</h2>
+      <div class="before-after">
+        <article class="card before">
+          <h3>До Admin Helper</h3>
+          <ul>
+            <li>команды разбросаны по чатам;</li>
+            <li>регламент приходится искать вручную;</li>
+            <li>новички чаще ошибаются;</li>
+            <li>обновления теряются.</li>
+          </ul>
+        </article>
+        <article class="card after">
+          <h3>После Admin Helper</h3>
+          <ul>
+            <li>всё собрано в одном лаунчере;</li>
+            <li>регламент и команды открываются быстро;</li>
+            <li>администрация работает по единому стандарту;</li>
+            <li>обновления централизованы.</li>
+          </ul>
+        </article>
       </div>
     </div>
   </section>
@@ -1030,6 +1065,7 @@
             <li>База команд и правил</li>
             <li>Базовая поддержка запуска</li>
           </ul>
+          <p><strong>Подходит для:</strong> небольших команд и тестового запуска</p>
           <p><strong>Стоимость:</strong> обсуждается индивидуально</p>
           <a class="btn ghost" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Заказать Admin Helper</a>
         </article>
@@ -1043,6 +1079,7 @@
             <li>Индивидуальные разделы и регламент</li>
             <li>Рекомендуемый формат для RP-проектов</li>
           </ul>
+          <p><strong>Подходит для:</strong> полноценного RP-сервера</p>
           <p><strong>Стоимость:</strong> обсуждается индивидуально</p>
           <a class="btn primary" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Заказать Admin Helper</a>
         </article>
@@ -1055,9 +1092,22 @@
             <li>Приоритетная поддержка и апдейты</li>
             <li>Отдельная сборка под сервер</li>
           </ul>
+          <p><strong>Подходит для:</strong> проекта, которому нужен отдельный брендированный продукт</p>
           <p><strong>Стоимость:</strong> обсуждается индивидуально</p>
           <a class="btn gold" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Заказать Admin Helper</a>
         </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band clean reveal">
+    <div class="container content">
+      <h2>Почему можно доверять</h2>
+      <div class="grid-4">
+        <article class="card tilt"><h3>Прямая связь с автором</h3><p>Обсуждение проекта и правок напрямую без лишней цепочки.</p></article>
+        <article class="card tilt"><h3>Индивидуальная адаптация</h3><p>Структура, стиль и материалы подстраиваются под ваш сервер.</p></article>
+        <article class="card tilt"><h3>Поддержка после выдачи</h3><p>Можно дорабатывать разделы, обновлять материалы и улучшать продукт.</p></article>
+        <article class="card tilt"><h3>Коммерческий подход</h3><p>Admin Helper подаётся как полноценный premium-инструмент, а не как обычная страница с файлами.</p></article>
       </div>
     </div>
   </section>
@@ -1155,7 +1205,7 @@
       <h3 id="demoTitle">Демо-блок Admin Helper</h3>
       <p>Здесь размещается демонстрационный сценарий работы лаунчера: выбор раздела, подсказка F9, быстрый переход в регламент и применение команд по стандарту проекта.</p>
       <div class="demo-grid">
-        <div class="demo-box">1) Авторизация администратора и загрузка актуальной базы.</div>
+        <div class="demo-box">1) Запуск лаунчера и загрузка актуальной базы.</div>
         <div class="demo-box">2) Моментальный доступ к командам и правилам во время смены.</div>
         <div class="demo-box">3) Применение регламента и фиксированного workflow без хаоса.</div>
       </div>
