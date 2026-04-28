@@ -1,9 +1,9 @@
 {
-  "enabled": false,
-  "status": "disabled",
-  "title": "Admin Helper временно отключён",
-  "message": "Доступ к программе временно закрыт автором. Следите за новостями в Telegram-канале.",
-  "text": "Доступ к программе временно закрыт автором. Следите за новостями в Telegram-канале.",
+  "enabled": true,
+  "status": "online",
+  "title": "Admin Helper доступен",
+  "message": "Программа работает в обычном режиме.",
+  "text": "Программа работает в обычном режиме.",
   "telegram": "https://t.me/ahelperAlmazov",
   "minSupportedVersion": "1.1.0"
 }
