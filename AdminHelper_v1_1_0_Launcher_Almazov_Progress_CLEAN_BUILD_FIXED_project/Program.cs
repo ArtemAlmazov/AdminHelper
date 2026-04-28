@@ -1378,77 +1378,265 @@ public static class AppStatusGate
 }
 
 public sealed class AccessStatusForm : Form
+public sealed class AccessStatusForm : Form
 {
     private readonly string _titleText;
     private readonly string _bodyText;
     private readonly string _telegramUrl;
 
+    private Button? _closeButton;
+    private Button? _telegramButton;
+    private Button? _topCloseButton;
+
     private AccessStatusForm(string titleText, string bodyText, string telegramUrl)
     {
-        _titleText = titleText;
-        _bodyText = bodyText;
-        _telegramUrl = telegramUrl;
+        _titleText = string.IsNullOrWhiteSpace(titleText)
+            ? "Доступ временно закрыт"
+            : titleText;
+
+        _bodyText = string.IsNullOrWhiteSpace(bodyText)
+            ? "Сервер проверки Admin Helper сообщает, что доступ временно закрыт."
+            : bodyText;
+
+        _telegramUrl = string.IsNullOrWhiteSpace(telegramUrl)
+            ? AppLinks.TelegramUrl
+            : telegramUrl;
 
         Text = "Admin Helper";
-        Size = new Size(700, 390);
-        MinimumSize = new Size(700, 390);
-        MaximumSize = new Size(700, 390);
+        Size = new Size(760, 470);
+        MinimumSize = new Size(760, 470);
+        MaximumSize = new Size(760, 470);
         StartPosition = FormStartPosition.CenterScreen;
         FormBorderStyle = FormBorderStyle.None;
         BackColor = Ui.Bg;
         ForeColor = Color.White;
         DoubleBuffered = true;
         Icon = ResourceLoader.LoadIcon("app.ico");
+        KeyPreview = true;
 
-        var card = new RoundedPanel
+        BuildUi();
+
+        KeyDown += AccessStatusForm_KeyDown;
+    }
+
+    public static AccessStatusForm Create(string title, string body, string telegramUrl)
+        => new(title, body, telegramUrl);
+
+    private void BuildUi()
+    {
+        var topDrag = new Panel
         {
-            Location = new Point(30, 30),
-            Size = new Size(640, 260),
-            BackColor = Color.FromArgb(14, 20, 31),
-            BorderColor = Ui.Gold,
-            BorderRadius = 26
+            Location = new Point(0, 0),
+            Size = new Size(Width, 42),
+            Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right,
+            BackColor = Color.Transparent
+        };
+        topDrag.MouseDown += DragWindow;
+        Controls.Add(topDrag);
+
+        _topCloseButton = new Button
+        {
+            Text = "✕",
+            Location = new Point(706, 10),
+            Size = new Size(34, 26),
+            BackColor = Color.FromArgb(20, 26, 38),
+            ForeColor = Color.White,
+            FlatStyle = FlatStyle.Flat,
+            Cursor = Cursors.Hand,
+            Font = new Font("Segoe UI", 10F, FontStyle.Bold),
+            TabStop = false
+        };
+        _topCloseButton.FlatAppearance.BorderSize = 1;
+        _topCloseButton.FlatAppearance.BorderColor = Color.FromArgb(95, 120, 150);
+        _topCloseButton.FlatAppearance.MouseOverBackColor = Color.FromArgb(90, 35, 45);
+        _topCloseButton.FlatAppearance.MouseDownBackColor = Color.FromArgb(120, 40, 50);
+        _topCloseButton.Click += (_, _) => ForceClose();
+        Controls.Add(_topCloseButton);
+
+        var mainCard = new RoundedPanel
+        {
+            Location = new Point(28, 52),
+            Size = new Size(704, 332),
+            BackColor = Color.FromArgb(12, 18, 30),
+            BorderColor = Color.FromArgb(72, 98, 132),
+            BorderRadius = 28
         };
 
-        card.Controls.Add(MakeStaticLabel(_titleText, 34, 28, 572, 40, 22F, FontStyle.Bold, Color.White));
-        card.Controls.Add(MakeStaticLabel(_bodyText, 36, 82, 568, 142, 10.5F, FontStyle.Regular, Ui.Muted));
+        var iconWrap = new RoundedPanel
+        {
+            Location = new Point(28, 26),
+            Size = new Size(74, 74),
+            BackColor = Color.FromArgb(18, 24, 38),
+            BorderColor = Ui.Gold,
+            BorderRadius = 37
+        };
 
-        var telegram = new Button
+        var iconLabel = new Label
+        {
+            Text = "!",
+            Location = new Point(0, 0),
+            Size = new Size(74, 74),
+            TextAlign = ContentAlignment.MiddleCenter,
+            Font = new Font("Segoe UI", 28F, FontStyle.Bold),
+            ForeColor = Ui.Gold,
+            BackColor = Color.Transparent
+        };
+        iconWrap.Controls.Add(iconLabel);
+
+        var badge = new Label
+        {
+            Text = "ACCESS CONTROL",
+            Location = new Point(120, 28),
+            Size = new Size(180, 28),
+            TextAlign = ContentAlignment.MiddleCenter,
+            Font = new Font("Segoe UI", 8.8F, FontStyle.Bold),
+            ForeColor = Ui.Blue,
+            BackColor = Color.FromArgb(18, 24, 38)
+        };
+        badge.Paint += (_, e) =>
+        {
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            using var pen = new Pen(Color.FromArgb(90, Ui.Blue), 1);
+            e.Graphics.DrawRoundedRectangle(pen, new Rectangle(0, 0, badge.Width - 1, badge.Height - 1), 14);
+        };
+
+        var title = new Label
+        {
+            Text = _titleText,
+            Location = new Point(120, 68),
+            Size = new Size(540, 42),
+            Font = new Font("Segoe UI", 20F, FontStyle.Bold),
+            ForeColor = Color.White,
+            BackColor = Color.Transparent
+        };
+
+        var subtitle = new Label
+        {
+            Text = "Проверка удалённого доступа к Admin Helper",
+            Location = new Point(122, 112),
+            Size = new Size(420, 24),
+            Font = new Font("Segoe UI", 9.5F, FontStyle.Bold),
+            ForeColor = Ui.Muted,
+            BackColor = Color.Transparent
+        };
+
+        var infoBox = new RoundedPanel
+        {
+            Location = new Point(28, 152),
+            Size = new Size(648, 136),
+            BackColor = Color.FromArgb(8, 13, 22),
+            BorderColor = Color.FromArgb(58, 80, 112),
+            BorderRadius = 22
+        };
+
+        var infoTitle = new Label
+        {
+            Text = "Сообщение системы",
+            Location = new Point(22, 16),
+            Size = new Size(220, 24),
+            Font = new Font("Segoe UI", 10F, FontStyle.Bold),
+            ForeColor = Ui.Gold,
+            BackColor = Color.Transparent
+        };
+
+        var body = new Label
+        {
+            Text = _bodyText,
+            Location = new Point(22, 46),
+            Size = new Size(600, 72),
+            Font = new Font("Segoe UI", 10.4F, FontStyle.Regular),
+            ForeColor = Ui.Muted,
+            BackColor = Color.Transparent
+        };
+
+        infoBox.Controls.Add(infoTitle);
+        infoBox.Controls.Add(body);
+
+        mainCard.Controls.Add(iconWrap);
+        mainCard.Controls.Add(badge);
+        mainCard.Controls.Add(title);
+        mainCard.Controls.Add(subtitle);
+        mainCard.Controls.Add(infoBox);
+
+        Controls.Add(mainCard);
+
+        _telegramButton = new Button
         {
             Text = "Открыть Telegram",
-            Location = new Point(30, 314),
-            Size = new Size(230, 44),
+            Location = new Point(28, 402),
+            Size = new Size(220, 44),
             BackColor = Ui.Gold,
             ForeColor = Color.FromArgb(5, 7, 10),
             FlatStyle = FlatStyle.Flat,
-            Font = new Font("Segoe UI", 10F, FontStyle.Bold),
-            Cursor = Cursors.Hand
+            Cursor = Cursors.Hand,
+            Font = new Font("Segoe UI", 10F, FontStyle.Bold)
         };
-        telegram.FlatAppearance.BorderSize = 0;
-        telegram.Click += (_, _) => OpenUrl(_telegramUrl);
+        _telegramButton.FlatAppearance.BorderSize = 0;
+        _telegramButton.FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 202, 84);
+        _telegramButton.FlatAppearance.MouseDownBackColor = Color.FromArgb(232, 160, 22);
+        _telegramButton.Click += (_, _) => OpenUrl(_telegramUrl);
 
-        var close = new Button
+        _closeButton = new Button
         {
             Text = "Закрыть",
-            Location = new Point(522, 314),
-            Size = new Size(148, 44),
+            Location = new Point(574, 402),
+            Size = new Size(158, 44),
             BackColor = Color.FromArgb(31, 39, 54),
             ForeColor = Color.White,
             FlatStyle = FlatStyle.Flat,
-            Font = new Font("Segoe UI", 10F, FontStyle.Bold),
-            DialogResult = DialogResult.OK,
-            Cursor = Cursors.Hand
+            Cursor = Cursors.Hand,
+            Font = new Font("Segoe UI", 10F, FontStyle.Bold)
         };
-        close.FlatAppearance.BorderSize = 1;
-        close.FlatAppearance.BorderColor = Color.FromArgb(90, 112, 145);
+        _closeButton.FlatAppearance.BorderSize = 1;
+        _closeButton.FlatAppearance.BorderColor = Color.FromArgb(95, 120, 150);
+        _closeButton.FlatAppearance.MouseOverBackColor = Color.FromArgb(43, 53, 72);
+        _closeButton.FlatAppearance.MouseDownBackColor = Color.FromArgb(24, 30, 42);
+        _closeButton.Click += (_, _) => ForceClose();
 
-        Controls.Add(card);
-        Controls.Add(telegram);
-        Controls.Add(close);
-        CancelButton = close;
-        AcceptButton = close;
+        Controls.Add(_telegramButton);
+        Controls.Add(_closeButton);
     }
 
-    public static AccessStatusForm Create(string title, string body, string telegramUrl) => new(title, body, telegramUrl);
+    private void AccessStatusForm_KeyDown(object? sender, KeyEventArgs e)
+    {
+        if (e.KeyCode == Keys.Escape || e.KeyCode == Keys.Enter)
+        {
+            e.SuppressKeyPress = true;
+            ForceClose();
+        }
+    }
+
+    private void ForceClose()
+    {
+        try
+        {
+            DialogResult = DialogResult.OK;
+        }
+        catch
+        {
+            // ignore
+        }
+
+        Close();
+    }
+
+    [DllImport("user32.dll")]
+    private static extern bool ReleaseCapture();
+
+    [DllImport("user32.dll")]
+    private static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam);
+
+    private const int WM_NCLBUTTONDOWN = 0xA1;
+    private static readonly IntPtr HTCAPTION = new(2);
+
+    private void DragWindow(object? sender, MouseEventArgs e)
+    {
+        if (e.Button != MouseButtons.Left)
+            return;
+
+        ReleaseCapture();
+        SendMessage(Handle, WM_NCLBUTTONDOWN, HTCAPTION, IntPtr.Zero);
+    }
 
     protected override void OnPaint(PaintEventArgs e)
     {
@@ -1463,28 +1651,31 @@ public sealed class AccessStatusForm : Form
         if (paintRect.Width <= 0 || paintRect.Height <= 0)
             return;
 
-        using var bg = new LinearGradientBrush(paintRect, Color.FromArgb(5, 8, 14), Color.FromArgb(14, 22, 36), 110f);
+        using var bg = new LinearGradientBrush(
+            paintRect,
+            Color.FromArgb(4, 7, 13),
+            Color.FromArgb(11, 20, 34),
+            110f);
         e.Graphics.FillRectangle(bg, ClientRectangle);
 
-        using var top = new SolidBrush(Ui.Gold);
-        e.Graphics.FillRectangle(top, 0, 0, Width, 3);
+        using var topLine = new SolidBrush(Ui.Gold);
+        e.Graphics.FillRectangle(topLine, 0, 0, Width, 3);
 
         using var border = new Pen(Color.FromArgb(90, Ui.Gold), 1);
         e.Graphics.DrawRectangle(border, 0, 0, Width - 1, Height - 1);
-    }
 
-    private static Label MakeStaticLabel(string text, int x, int y, int w, int h, float size, FontStyle style, Color color, ContentAlignment align = ContentAlignment.MiddleLeft)
-    {
-        return new Label
-        {
-            Text = text,
-            Location = new Point(x, y),
-            Size = new Size(w, h),
-            ForeColor = color,
-            BackColor = Color.Transparent,
-            Font = new Font("Segoe UI", size, style),
-            TextAlign = align
-        };
+        using var blueGlow = new SolidBrush(Color.FromArgb(24, Ui.Blue));
+        e.Graphics.FillEllipse(blueGlow, Width - 290, -120, 320, 320);
+
+        using var goldGlow = new SolidBrush(Color.FromArgb(18, Ui.Gold));
+        e.Graphics.FillEllipse(goldGlow, -100, 280, 300, 300);
+
+        using var gridPen = new Pen(Color.FromArgb(8, 255, 255, 255), 1);
+        for (int x = 0; x < Width; x += 42)
+            e.Graphics.DrawLine(gridPen, x, 0, x, Height);
+
+        for (int y = 0; y < Height; y += 42)
+            e.Graphics.DrawLine(gridPen, 0, y, Width, y);
     }
 
     private static void OpenUrl(string url)
@@ -1503,7 +1694,6 @@ public sealed class AccessStatusForm : Form
         }
     }
 }
-
 public sealed class OverlayForm : Form
 {
     private readonly Image _image;
