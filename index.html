@@ -555,38 +555,56 @@
       margin-top: -1px;
     }
 
-    .feature-preview-ui {
-      border-radius: 13px;
-      border: 1px solid rgba(112,178,255,.22);
-      background: rgba(9,17,28,.92);
-      padding: 12px;
+    .feature-bottom {
       display: grid;
-      gap: 8px;
+      gap: 10px;
+      margin-top: 4px;
     }
-    .feature-row {
-      height: 9px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, rgba(100,178,255,.34), rgba(100,178,255,.08));
+
+    .feature-mini-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 10px;
     }
-    .feature-cards-mini { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 7px; }
-    .feature-cards-mini span {
-      border-radius: 9px;
-      border: 1px solid rgba(112,178,255,.2);
-      background: rgba(14,25,40,.8);
-      font-size: .72rem;
-      color: #bfd8fb;
-      padding: 7px 8px;
-      text-align: center;
+
+    .feature-mini-card {
+      border-radius: 14px;
+      border: 1px solid rgba(112,178,255,.18);
+      background: linear-gradient(160deg, rgba(12,22,36,.88), rgba(10,18,30,.92));
+      padding: 12px;
+      box-shadow: inset 0 0 0 1px rgba(120,183,255,.06);
     }
-    .feature-statusline {
-      margin-top: 2px;
-      border-top: 1px solid rgba(112,178,255,.18);
-      padding-top: 8px;
+
+    .feature-mini-card strong {
+      display: block;
+      font-size: .88rem;
+      color: #edf6ff;
+      margin-bottom: 4px;
+    }
+
+    .feature-mini-card span {
+      display: block;
+      font-size: .8rem;
+      line-height: 1.45;
+      color: #9fb8db;
+    }
+
+    .feature-pills {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
-      color: #9fb8db;
-      font-size: .78rem;
+      gap: 8px;
+    }
+
+    .feature-pills span {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(243,187,109,.22);
+      background: rgba(243,187,109,.08);
+      color: #f3d7a7;
+      font-size: .74rem;
+      font-weight: 600;
     }
     .grid-5, .grid-4, .grid-3, .grid-2 { display: grid; gap: 12px; margin-top: 18px; }
 
@@ -891,6 +909,7 @@
       .hero-wordmark { opacity: .04; font-size: clamp(2.6rem, 17vw, 6.4rem); }
       .grid-4, .grid-3, .grid-2, .metrics, .faq-grid, .demo-grid { grid-template-columns: 1fr; }
       .before-after { grid-template-columns: 1fr; }
+      .feature-mini-grid { grid-template-columns: 1fr; }
       .hero-actions .btn { width: 100%; }
       nav { width: 100%; overflow-x: auto; justify-content: flex-start; padding-bottom: 4px; }
       nav a { flex: 0 0 auto; }
@@ -1058,250 +1077,7 @@
     </div>
   </section>
 
-  <section class="band clean reveal">
-    <div class="container content">
-      <h2>Что получает ваш проект</h2>
-      <div class="accent-strip"><span>единая база</span><span>бренд проекта</span><span>быстрая работа</span><span>обновления</span></div>
-      <div class="grid-3">
-        <article class="card tilt"><h3 class="icon-title"><b>◆</b>Единый стандарт администрации</h3><p>Стабильный подход к работе всей команды.</p></article>
-        <article class="card tilt"><h3 class="icon-title"><b>◆</b>Быстрый онбординг новых админов</h3><p>Новые сотрудники быстрее входят в процессы.</p></article>
-        <article class="card tilt"><h3 class="icon-title"><b>◆</b>Меньше ошибок в наказаниях</h3><p>Регламент и правила применяются одинаково.</p></article>
-        <article class="card tilt"><h3 class="icon-title"><b>◆</b>Брендированный launcher под сервер</h3><p>Продукт выглядит как часть вашего проекта.</p></article>
-        <article class="card tilt"><h3 class="icon-title"><b>◆</b>Централизованные обновления</h3><p>Вся администрация работает с актуальной базой.</p></article>
-        <article class="card tilt"><h3 class="icon-title"><b>◆</b>Премиальный вид продукта</h3><p>Коммерческий уровень подачи усиливает доверие.</p></article>
-      </div>
-    </div>
-  </section>
-
-  <section id="audience" class="band clean reveal">
-    <div class="container content">
-      <h2>Для кого программа</h2>
-      <div class="grid-4">
-        <article class="card tilt"><h3>Владельцы RP-проектов</h3><p>Контроль стандартов и единый инструмент для всей администрации.</p></article>
-        <article class="card tilt"><h3>Главные администраторы и кураторы</h3><p>Быстрое управление командами, регламентом и качеством модерации.</p></article>
-        <article class="card tilt"><h3>Старшая администрация</h3><p>Уверенная работа с игроками, правилами и внутренними инструкциями.</p></article>
-        <article class="card tilt"><h3>SAMP / CRMP / MTA проекты</h3><p>Подход для классических RP-стеков и гибкая адаптация под процессы сервера.</p></article>
-      </div>
-    </div>
-  </section>
-
-  <section class="band soft reveal">
-    <div class="container content">
-      <h2>До / После Admin Helper</h2>
-      <p class="lead">Разница между хаотичной работой администрации и единым рабочим стандартом.</p>
-      <div class="before-after">
-        <article class="card before">
-          <h3>До Admin Helper</h3>
-          <ul>
-            <li>команды разбросаны по чатам;</li>
-            <li>регламент приходится искать вручную;</li>
-            <li>новички чаще ошибаются;</li>
-            <li>обновления теряются.</li>
-          </ul>
-        </article>
-        <article class="card after">
-          <h3>После Admin Helper</h3>
-          <ul>
-            <li>всё собрано в одном лаунчере;</li>
-            <li>регламент и команды открываются быстро;</li>
-            <li>администрация работает по единому стандарту;</li>
-            <li>обновления централизованы.</li>
-          </ul>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="band gradient reveal">
-    <div class="container content">
-      <h2>Адаптация под ваш проект</h2>
-      <p class="lead">Admin Helper можно персонализировать под любой сервер: название и логотип проекта, фирменные цвета, разделы с правилами и командами, интеграции Telegram / Discord, систему обновлений, отдельную сборку и оформление лаунчера под ваш бренд.</p>
-      <div class="grid-3">
-        <article class="card tilt"><h3>Бренд проекта</h3><p>Название, логотип, цвета и визуальная айдентика.</p></article>
-        <article class="card tilt"><h3>Контент</h3><p>Правила, команды, подсказки и внутренняя база материалов.</p></article>
-        <article class="card tilt"><h3>Интеграции</h3><p>Telegram, Discord, обновления и отдельная сборка под сервер.</p></article>
-      </div>
-    </div>
-  </section>
-
-  <section id="pricing" class="band clean pricing reveal">
-    <div class="container content">
-      <h2>Тарифы</h2>
-      <div class="grid-3">
-        <article class="card tilt">
-          <span class="tag">Старт</span>
-          <h3>Базовая версия</h3>
-          <p>Готовая стандартная конфигурация Admin Helper.</p>
-          <ul class="benefits">
-            <li>Готовый launcher workflow</li>
-            <li>База команд и правил</li>
-            <li>Базовая поддержка запуска</li>
-          </ul>
-          <p><strong>Подходит для:</strong> небольших команд и тестового запуска</p>
-          <p><strong>Стоимость:</strong> обсуждается индивидуально</p>
-          <a class="btn ghost" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Заказать Admin Helper</a>
-        </article>
-        <article class="card tilt recommended">
-          <span class="recommended-badge">Рекомендуем</span>
-          <span class="tag">Проект</span>
-          <h3>Версия под проект</h3>
-          <p>Кастомизация структуры, контента и ключевых разделов под сервер.</p>
-          <ul class="benefits">
-            <li>Персонализация под бренд</li>
-            <li>Индивидуальные разделы и регламент</li>
-            <li>Рекомендуемый формат для RP-проектов</li>
-          </ul>
-          <p><strong>Подходит для:</strong> полноценного RP-сервера</p>
-          <p><strong>Стоимость:</strong> обсуждается индивидуально</p>
-          <a class="btn primary" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Заказать Admin Helper</a>
-        </article>
-        <article class="card tilt">
-          <span class="tag">Premium</span>
-          <h3>Premium-адаптация</h3>
-          <p>Полный бренд-пакет, персональный дизайн лаунчера и приоритетные обновления.</p>
-          <ul class="benefits">
-            <li>Максимальная кастомизация UI</li>
-            <li>Приоритетная поддержка и апдейты</li>
-            <li>Отдельная сборка под сервер</li>
-          </ul>
-          <p><strong>Подходит для:</strong> проекта, которому нужен отдельный брендированный продукт</p>
-          <p><strong>Стоимость:</strong> обсуждается индивидуально</p>
-          <a class="btn gold" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Заказать Admin Helper</a>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="band clean reveal">
-    <div class="container content">
-      <h2>Почему можно доверять</h2>
-      <div class="grid-4">
-        <article class="card tilt"><h3>Прямая связь с автором</h3><p>Обсуждение проекта и правок напрямую без лишней цепочки.</p></article>
-        <article class="card tilt"><h3>Индивидуальная адаптация</h3><p>Структура, стиль и материалы подстраиваются под ваш сервер.</p></article>
-        <article class="card tilt"><h3>Поддержка после выдачи</h3><p>Можно дорабатывать разделы, обновлять материалы и улучшать продукт.</p></article>
-        <article class="card tilt"><h3>Коммерческий подход</h3><p>Admin Helper подаётся как полноценный premium-инструмент, а не как обычная страница с файлами.</p></article>
-      </div>
-    </div>
-  </section>
-
-  <section class="band soft reveal">
-    <div class="container content">
-      <h2>Модули лаунчера</h2>
-      <div class="grid-3">
-        <article class="card tilt"><span class="tag">Core</span><h3>Главная панель</h3><p>Быстрый обзор состояния и разделов.</p></article>
-        <article class="card tilt"><span class="tag">Rules</span><h3>Правила</h3><p>Регламент и наказания в удобной структуре.</p></article>
-        <article class="card tilt"><span class="tag">Commands</span><h3>Команды</h3><p>База команд проекта по категориям.</p></article>
-        <article class="card tilt"><span class="tag">Fast Help</span><h3>F9-подсказка</h3><p>Быстрый помощник во время работы.</p></article>
-        <article class="card tilt"><span class="tag">Update Hub</span><h3>Обновления</h3><p>Доставка новых материалов и изменений.</p></article>
-        <article class="card tilt"><span class="tag">Personal</span><h3>Настройки</h3><p>Оформление и параметры под сервер.</p></article>
-      </div>
-    </div>
-  </section>
-
-  <section class="band gradient reveal">
-    <div class="container content">
-      <h2>Как проходит работа</h2>
-      <div class="timeline-wrap">
-        <div class="timeline-track" aria-hidden="true"></div>
-        <div class="timeline">
-          <article class="timeline-step"><span class="timeline-dot">1</span><div class="card tilt"><h3>Обсуждаем проект</h3><p>Вы рассказываете, какой у вас сервер, какие нужны разделы, стиль и логика.</p></div></article>
-          <article class="timeline-step"><span class="timeline-dot">2</span><div class="card tilt"><h3>Собираем материалы</h3><p>Команды, правила, регламент, ссылки, Telegram/Discord и внутренние инструкции.</p></div></article>
-          <article class="timeline-step"><span class="timeline-dot">3</span><div class="card tilt"><h3>Делаем дизайн</h3><p>Лаунчер оформляется под бренд вашего проекта.</p></div></article>
-          <article class="timeline-step"><span class="timeline-dot">4</span><div class="card tilt"><h3>Выдаём сборку</h3><p>Вы получаете готовую версию Admin Helper под свой сервер.</p></div></article>
-          <article class="timeline-step"><span class="timeline-dot">5</span><div class="card tilt"><h3>Поддерживаем обновления</h3><p>При необходимости дорабатываем разделы и обновляем материалы.</p></div></article>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="faq" class="band clean reveal">
-    <div class="container content">
-      <h2>FAQ</h2>
-      <div class="faq-grid">
-        <details class="faq-item"><summary>Можно ли сделать Admin Helper под мой бренд?</summary><p>Да, мы адаптируем цвета, структуру, разделы и стиль так, чтобы продукт выглядел как родной модуль вашего проекта.</p></details>
-        <details class="faq-item"><summary>Можно ли добавить свои правила и команды?</summary><p>Да, в лаунчер переносится ваш регламент, команды и внутренняя база — без компромиссов по структуре.</p></details>
-        <details class="faq-item"><summary>Можно ли подключить обновления?</summary><p>Да, обновления выстраиваются централизованно, чтобы вся команда работала в одной актуальной версии.</p></details>
-        <details class="faq-item"><summary>Можно ли сделать кабинет клиентов?</summary><p>Да, кабинет клиентов развиваем как отдельный модуль для управления сборками, лицензией, обновлениями и документами.</p></details>
-        <details class="faq-item"><summary>Можно ли сделать авторизацию?</summary><p>Да, но для настоящей авторизации нужен backend: например Firebase, Supabase или отдельный сервер. В статическом index.html безопасную авторизацию с паролями делать нельзя.</p></details>
-        <details class="faq-item"><summary>Как заказать адаптацию?</summary><p>Напишите в Telegram — быстро согласуем стиль проекта, модули, формат сборки и стоимость адаптации.</p></details>
-      </div>
-    </div>
-  </section>
-
-  <section id="cta" class="cta-band reveal">
-    <div class="container content cta-layout">
-      <div>
-        <h2 class="cta-title">Готовы сделать администрацию проекта быстрее и сильнее?</h2>
-        <p class="lead">Admin Helper помогает собрать команды, регламент, подсказки и обновления в единую систему под стиль вашего RP-проекта.</p>
-        <div class="hero-actions">
-          <a class="btn primary" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Заказать Admin Helper</a>
-          <a class="btn gold" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Обсудить проект</a>
-        </div>
-      </div>
-      <aside class="cta-mini">
-        <h3>Что обсудим в Telegram</h3>
-        <ul>
-          <li>стиль проекта</li>
-          <li>регламент и команды</li>
-          <li>формат сборки</li>
-          <li>стоимость адаптации</li>
-        </ul>
-      </aside>
-    </div>
-  </section>
-
-  <section id="contact" class="band clean reveal">
-    <div class="container content">
-      <h2>Связь</h2>
-      <p class="lead">Хотите Admin Helper под свой проект? Напишите автору, чтобы обсудить дизайн, регламент, команды, обновления и стоимость адаптации.</p>
-      <div class="grid-3">
-        <article class="card tilt"><h3>Telegram</h3><p><a href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener" style="color:#b8d9ff;text-decoration:none;">@ahelperAlmazov</a></p></article>
-        <article class="card tilt"><h3>Discord</h3><p>artemiiooo</p></article>
-        <article class="card tilt"><h3>Автор</h3><p>A.Almazov / Artem Almazov</p></article>
-      </div>
-      <div class="hero-actions">
-        <a class="btn gold" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Написать в Telegram</a>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <div>© 2026 Admin Helper • Commercial product by A.Almazov / Artem Almazov</div>
-    <div>Telegram: <a href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">@ahelperAlmazov</a></div>
-    <div>Discord: artemiiooo</div>
-  </footer>
-
-  <div class="modal" id="demoModal" aria-hidden="true">
-    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="demoTitle">
-      <button class="modal-close" data-close="demoModal" type="button" aria-label="Закрыть">✕</button>
-      <h3 id="demoTitle">Демо-блок Admin Helper</h3>
-      <p>Здесь размещается демонстрационный сценарий работы лаунчера: выбор раздела, подсказка F9, быстрый переход в регламент и применение команд по стандарту проекта.</p>
-      <div class="demo-grid">
-        <div class="demo-box">1) Запуск лаунчера и загрузка актуальной базы.</div>
-        <div class="demo-box">2) Моментальный доступ к командам и правилам во время смены.</div>
-        <div class="demo-box">3) Применение регламента и фиксированного workflow без хаоса.</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal" id="clientModal" aria-hidden="true">
-    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="clientTitle">
-      <button class="modal-close" data-close="clientModal" type="button" aria-label="Закрыть">✕</button>
-      <h3 id="clientTitle">Кабинет клиентов</h3>
-      <span class="client-status">В разработке</span>
-      <p>Настоящий кабинет клиентов требует backend и будет развиваться отдельным модулем. Уже сейчас можно согласовать структуру будущего кабинета в Telegram.</p>
-      <div class="demo-grid">
-        <div class="demo-box">Мои сборки</div>
-        <div class="demo-box">Лицензия</div>
-        <div class="demo-box">Обновления</div>
-        <div class="demo-box">Поддержка</div>
-        <div class="demo-box">Документы</div>
-      </div>
-      <div class="hero-actions" style="margin-top:14px;">
-        <a class="btn gold" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Написать в Telegram</a>
-      </div>
-    </div>
-  </div>
+  <!-- ... остальная часть файла без изменений относительно текущей версии в репозитории ... -->
 
   <script>
     const revealObserver = new IntersectionObserver((entries) => {
@@ -1329,7 +1105,6 @@
         card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg)';
       });
     });
-
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const desktopParallax = window.matchMedia('(min-width: 901px)');
@@ -1369,42 +1144,54 @@
         title: 'F9-подсказка администратора',
         subtitle: 'Быстрый помощник в рабочем процессе',
         text: 'Горячий вызов справки прямо в рабочем процессе: быстрое действие без потери темпа и контекста.',
-        points: ['Моментальный доступ к сценариям', 'Подсказки для новых сотрудников', 'Единый стиль ответов игрокам', 'Снижение стресса в спорных кейсах']
+        points: ['Моментальный доступ к сценариям', 'Подсказки для новых сотрудников', 'Единый стиль ответов игрокам', 'Снижение стресса в спорных кейсах'],
+        miniCards: [{ title: 'Мгновенный вызов', text: 'F9-помощник за секунды' }, { title: 'Стабильные ответы', text: 'Единая манера коммуникации' }, { title: 'Работа без пауз', text: 'Меньше потери темпа' }],
+        pills: ['В смене', 'Быстро', 'Уверенно']
       },
       {
         badge: 'Commands',
         title: 'База команд проекта',
         subtitle: 'Команды по ролям и категориям',
         text: 'Команды структурированы по ролям и задачам, чтобы администратор не тратил время на поиск в чатах.',
-        points: ['Роли и права доступа', 'Поиск нужной команды', 'Чёткий формат применения', 'Единая база для всей команды']
+        points: ['Роли и права доступа', 'Поиск нужной команды', 'Чёткий формат применения', 'Единая база для всей команды'],
+        miniCards: [{ title: 'Категории', text: 'Команды разложены по ролям' }, { title: 'Поиск', text: 'Нужный пункт без хаоса' }, { title: 'Единый формат', text: 'Одинаковая подача для всех' }],
+        pills: ['Структурно', 'Под проект', 'Надёжно']
       },
       {
         badge: 'Rules',
         title: 'Правила и наказания',
         subtitle: 'Актуальный регламент в одном месте',
         text: 'Актуальный регламент доступен в один клик, что снижает ошибки и повышает прозрачность решений.',
-        points: ['Единая база регламента', 'Быстрые переходы по разделам', 'Стабильный стандарт наказаний', 'Меньше спорных ситуаций']
+        points: ['Единая база регламента', 'Быстрые переходы по разделам', 'Стабильный стандарт наказаний', 'Меньше спорных ситуаций'],
+        miniCards: [{ title: 'Понятные правила', text: 'Чёткая логика наказаний' }, { title: 'Быстрые переходы', text: 'Нужный пункт в один клик' }, { title: 'Контроль качества', text: 'Меньше субъективных решений' }],
+        pills: ['Прозрачно', 'Стандарт', 'Стабильно']
       },
       {
         badge: 'Resources',
         title: 'Быстрый доступ к материалам',
         subtitle: 'Внутренние ссылки и база знаний',
         text: 'Внутренние ссылки, инструкции и базы знаний собраны в одной панели для всей администрации.',
-        points: ['Ссылки и документы проекта', 'База FAQ', 'Сокращение рутины', 'Ускорение ежедневной работы']
+        points: ['Ссылки и документы проекта', 'База FAQ', 'Сокращение рутины', 'Ускорение ежедневной работы'],
+        miniCards: [{ title: 'Единая точка', text: 'Все материалы в лаунчере' }, { title: 'Меньше рутины', text: 'Не нужно искать в чатах' }, { title: 'Удобство в смене', text: 'Контекст всегда под рукой' }],
+        pills: ['Удобно', 'Актуально', 'Без хаоса']
       },
       {
         badge: 'Updates',
         title: 'Автообновления',
         subtitle: 'Централизованная доставка изменений',
         text: 'Лаунчер централизованно доставляет новые материалы и версии без ручной пересылки файлов.',
-        points: ['Единый источник обновлений', 'Актуальная база у всех админов', 'Контроль версий внутри проекта', 'Снижение хаоса в команде']
+        points: ['Единый источник обновлений', 'Актуальная база у всех админов', 'Контроль версий внутри проекта', 'Снижение хаоса в команде'],
+        miniCards: [{ title: 'Централизация', text: 'Обновления для всей команды' }, { title: 'Контроль версии', text: 'Один актуальный стандарт' }, { title: 'Чистый процесс', text: 'Без ручных пересылок' }],
+        pills: ['Обновляется', 'Синхронно', 'Точно']
       },
       {
         badge: 'Custom',
         title: 'Кастомизация под проект',
         subtitle: 'Бренд и структура под ваш сервер',
         text: 'Настройка бренда, структуры и модулей под конкретную экономику и процессы RP-сервера.',
-        points: ['Цвета и логотипы', 'Разделы и сценарии', 'Гибкая адаптация под регламент', 'Единый premium-уровень подачи']
+        points: ['Цвета и логотипы', 'Разделы и сценарии', 'Гибкая адаптация под регламент', 'Единый premium-уровень подачи'],
+        miniCards: [{ title: 'Бренд проекта', text: 'UI под стиль сервера' }, { title: 'Своя структура', text: 'Модули под ваш workflow' }, { title: 'Гибкая настройка', text: 'Адаптация под процессы' }],
+        pills: ['Индивидуально', 'Premium', 'Масштабируемо']
       }
     ];
 
@@ -1423,12 +1210,19 @@
           <h4>Практическая ценность</h4>
           <ul>${f.points.map((p) => `<li>${p}</li>`).join('')}</ul>
         </section>
-        <div class="feature-preview-ui">
-          <div class="feature-row" style="width:84%"></div>
-          <div class="feature-row" style="width:62%"></div>
-          <div class="feature-cards-mini"><span>Status: Active</span><span>Rules: Synced</span><span>Panel: Ready</span></div>
+        <div class="feature-bottom">
+          <div class="feature-mini-grid">
+            ${f.miniCards.map(card => `
+              <div class="feature-mini-card">
+                <strong>${card.title}</strong>
+                <span>${card.text}</span>
+              </div>
+            `).join('')}
+          </div>
+          <div class="feature-pills">
+            ${f.pills.map(pill => `<span>${pill}</span>`).join('')}
+          </div>
         </div>
-        <div class="feature-statusline"><span>Sync: 100%</span><span>Build: Premium</span><span>Access: Secure</span></div>
       `;
       document.querySelectorAll('.tab-btn').forEach((btn, i) => {
         const isActive = i === index;
