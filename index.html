@@ -7,6 +7,8 @@
   <meta name="description" content="Admin Helper — коммерческий premium-лаунчер для администрации SAMP / CRMP / MTA: команды, правила, подсказки, регламент и обновления в одном инструменте." />
   <meta name="theme-color" content="#070b12" />
   <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="apple-touch-icon" href="favicon.png" />
+  <meta property="og:image" content="https://artemalmazov.github.io/AdminHelper/favicon.png" />
   <style>
     :root {
       --bg: #070b12;
@@ -161,6 +163,16 @@
     .hero p { color: var(--muted); line-height: 1.6; max-width: 620px; }
     .hero-sub { font-size: clamp(1rem, 2.1vw, 1.35rem); color: #d5e5ff; margin-bottom: 10px; font-weight: 600; }
     .hero-actions { margin-top: 26px; display: flex; gap: 12px; flex-wrap: wrap; }
+    .hero-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
+    .hero-badges span {
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(126,191,255,0.26);
+      background: rgba(19, 30, 46, 0.78);
+      color: #c6dcff;
+      font-size: .78rem;
+      font-weight: 620;
+    }
 
     .widget-cloud { position: relative; min-height: 460px; }
     .launcher {
@@ -291,7 +303,8 @@
     .reveal { opacity: 0; transform: translateY(25px); transition: all .7s cubic-bezier(.2,.7,.2,1); }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    footer { color: #8098bf; font-size: .9rem; padding: 24px 0 34px; text-align: center; }
+    footer { color: #9bb2d6; font-size: .9rem; padding: 24px 0 34px; text-align: center; line-height: 1.65; }
+    footer a { color: #b6d7ff; text-decoration: none; }
 
     @media (max-width: 1040px) {
       .hero { grid-template-columns: 1fr; padding: 30px; }
@@ -328,7 +341,7 @@
         <a href="#pricing">Тарифы</a>
         <a href="#faq">FAQ</a>
       </nav>
-      <a class="btn gold" href="#pricing">Заказать</a>
+      <a class="btn gold" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Заказать</a>
     </header>
 
     <section class="hero reveal" id="top">
@@ -336,10 +349,16 @@
         <h1>Admin Helper</h1>
         <p class="hero-sub">Премиальный помощник для администрации SAMP / CRMP / MTA проектов.</p>
         <p>Команды, правила, F9-подсказки, регламент наказаний, внутренние инструменты и обновления — в едином лаунчере, который масштабируется под архитектуру и бренд вашего RP-проекта.</p>
+        <div class="hero-badges">
+          <span>Premium launcher</span>
+          <span>SAMP / CRMP / MTA</span>
+          <span>Под проект</span>
+          <span>Product by A.Almazov</span>
+        </div>
         <div class="hero-actions">
-          <a class="btn primary" href="#pricing">Купить доступ</a>
+          <a class="btn primary" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Купить доступ</a>
           <a class="btn ghost" href="#features">Посмотреть возможности</a>
-          <a class="btn ghost" href="#contact">Связаться</a>
+          <a class="btn ghost" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Связаться</a>
         </div>
       </div>
 
@@ -417,9 +436,9 @@
       <section id="pricing" class="pricing reveal">
         <h2>Тарифы и покупка</h2>
         <div class="grid-3">
-          <article class="card tilt"><span class="tag">Старт</span><h3>Базовая версия</h3><p>Готовая стандартная конфигурация Admin Helper.</p><p><strong>Цена:</strong> по договорённости</p><a class="btn ghost" href="#contact">Заказать Admin Helper</a></article>
-          <article class="card tilt"><span class="tag">Проект</span><h3>Версия под проект</h3><p>Кастомизация структуры, контента и ключевых разделов под сервер.</p><p><strong>Цена:</strong> индивидуально</p><a class="btn primary" href="#contact">Заказать Admin Helper</a></article>
-          <article class="card tilt"><span class="tag">Premium</span><h3>Premium-адаптация</h3><p>Полный бренд-пакет, персональный дизайн лаунчера и приоритетные обновления.</p><p><strong>Цена:</strong> индивидуально</p><a class="btn gold" href="#contact">Заказать Admin Helper</a></article>
+          <article class="card tilt"><span class="tag">Старт</span><h3>Базовая версия</h3><p>Готовая стандартная конфигурация Admin Helper.</p><p><strong>Цена:</strong> по договорённости</p><a class="btn ghost" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Заказать Admin Helper</a></article>
+          <article class="card tilt"><span class="tag">Проект</span><h3>Версия под проект</h3><p>Кастомизация структуры, контента и ключевых разделов под сервер.</p><p><strong>Цена:</strong> индивидуально</p><a class="btn primary" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Заказать Admin Helper</a></article>
+          <article class="card tilt"><span class="tag">Premium</span><h3>Premium-адаптация</h3><p>Полный бренд-пакет, персональный дизайн лаунчера и приоритетные обновления.</p><p><strong>Цена:</strong> индивидуально</p><a class="btn gold" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Заказать Admin Helper</a></article>
         </div>
       </section>
 
@@ -449,13 +468,30 @@
         <h2>Готов усилить администрацию своего проекта?</h2>
         <p class="lead">Запустите Admin Helper как профессиональный стандарт для вашей команды: быстрее процессы, меньше ошибок, сильнее бренд.</p>
         <div class="hero-actions">
-          <a class="btn primary" href="#pricing">Купить Admin Helper</a>
+          <a class="btn primary" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Купить Admin Helper</a>
           <a class="btn gold" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Связаться в Telegram</a>
+        </div>
+      </section>
+
+      <section class="reveal">
+        <h2>Связь</h2>
+        <p class="lead">Хотите Admin Helper под свой проект? Напишите автору, чтобы обсудить дизайн, регламент, команды, обновления и стоимость адаптации.</p>
+        <div class="grid-3">
+          <article class="card tilt"><h3>Telegram</h3><p>@ahelperAlmazov</p></article>
+          <article class="card tilt"><h3>Discord</h3><p>artemiiooo</p></article>
+          <article class="card tilt"><h3>Автор</h3><p>A.Almazov / Artem Almazov</p></article>
+        </div>
+        <div class="hero-actions">
+          <a class="btn gold" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Написать в Telegram</a>
         </div>
       </section>
     </main>
 
-    <footer>© 2026 Admin Helper. Премиальный инструмент для администрации RP-проектов.</footer>
+    <footer>
+      <div>© 2026 Admin Helper • Commercial product by A.Almazov / Artem Almazov</div>
+      <div>Telegram: <a href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">@ahelperAlmazov</a></div>
+      <div>Discord: artemiiooo</div>
+    </footer>
   </div>
 
   <script>
