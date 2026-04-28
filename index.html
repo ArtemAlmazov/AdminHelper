@@ -17,20 +17,18 @@
     :root {
       --bg: #070b12;
       --bg-soft: #0e1523;
-      --surface: rgba(16, 24, 38, 0.7);
-      --surface-strong: rgba(14, 22, 34, 0.88);
-      --line: rgba(74, 112, 183, 0.28);
-      --text: #e9f0ff;
-      --muted: #9fb2d4;
-      --neon: #5ea9ff;
-      --neon-strong: #7fc2ff;
-      --gold: #f3b562;
-      --gold-soft: #ffcb83;
-      --success: #71daff;
-      --radius-lg: 24px;
-      --radius-md: 18px;
-      --radius-sm: 14px;
-      --shadow: 0 20px 65px rgba(0, 8, 20, 0.56);
+      --bg-mid: #0a111e;
+      --surface: rgba(16, 24, 38, 0.72);
+      --surface-strong: rgba(12, 20, 31, 0.86);
+      --line: rgba(88, 132, 214, 0.25);
+      --text: #e8f0ff;
+      --muted: #9fb4d9;
+      --neon: #5faeff;
+      --gold: #f3ba69;
+      --radius-xl: 30px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --shadow: 0 20px 60px rgba(0, 7, 18, 0.5);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -39,9 +37,9 @@
       font-family: Inter, Segoe UI, SF Pro Display, Arial, sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at 90% -10%, rgba(94,169,255,0.18), transparent 32%),
-        radial-gradient(circle at 12% 4%, rgba(243,181,98,0.11), transparent 28%),
-        linear-gradient(170deg, #04070d, #0a111d 40%, #060b12 100%);
+        radial-gradient(circle at 92% -10%, rgba(95,174,255,0.14), transparent 38%),
+        radial-gradient(circle at 8% 2%, rgba(243,186,105,0.08), transparent 28%),
+        linear-gradient(175deg, #04070d, #0a111d 45%, #070d16 100%);
       overflow-x: hidden;
     }
 
@@ -50,228 +48,267 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
+      z-index: -1;
       background-image:
-        linear-gradient(rgba(80, 113, 170, 0.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(80, 113, 170, 0.08) 1px, transparent 1px);
-      background-size: 38px 38px;
-      mask-image: radial-gradient(circle at center, black 34%, transparent 85%);
-      z-index: -1;
-    }
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      pointer-events: none;
-      background:
-        radial-gradient(circle at 20% 30%, rgba(94,169,255,.12), transparent 40%),
-        radial-gradient(circle at 80% 70%, rgba(243,181,98,.08), transparent 36%);
-      filter: blur(28px);
+        linear-gradient(rgba(90, 122, 185, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(90, 122, 185, 0.07) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: radial-gradient(circle at center, black 32%, transparent 86%);
     }
 
     .city-glow {
       position: fixed;
       inset: auto 0 0;
-      height: 33vh;
+      height: 34vh;
       z-index: -1;
+      opacity: .64;
       background:
-        linear-gradient(to top, rgba(0, 0, 0, 0.88), transparent),
-        repeating-linear-gradient(90deg, rgba(23,31,44,0.55) 0 22px, rgba(10,16,27,0.95) 22px 34px),
-        radial-gradient(circle at 50% 0%, rgba(94,169,255,0.12), transparent 58%);
-      opacity: 0.65;
+        linear-gradient(to top, rgba(0,0,0,.92), transparent),
+        repeating-linear-gradient(90deg, rgba(20,29,43,.65) 0 24px, rgba(9,15,25,.95) 24px 35px),
+        radial-gradient(circle at 45% -10%, rgba(95,174,255,.16), transparent 58%);
     }
 
-    .container { width: min(1180px, calc(100% - 36px)); margin: 0 auto; }
+    .container {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
 
-    header {
+    .site-header-wrap {
       position: sticky;
       top: 14px;
-      z-index: 10;
-      margin: 18px auto 0;
-      padding: 12px 14px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      backdrop-filter: blur(12px);
-      background: rgba(9, 14, 23, 0.75);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+      z-index: 20;
+      margin-top: 16px;
     }
 
-    .brand { display: flex; align-items: center; gap: 12px; font-weight: 800; letter-spacing: .3px; }
+    header {
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(8, 14, 24, 0.76);
+      backdrop-filter: blur(10px);
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.35);
+    }
+
+    .brand { display: flex; align-items: center; gap: 11px; font-weight: 800; }
     .brand-mark {
-      width: 30px; height: 30px; border-radius: 10px;
-      background: linear-gradient(140deg, var(--neon), var(--gold));
-      box-shadow: 0 0 28px rgba(94,169,255,.45);
+      width: 30px;
+      height: 30px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--neon), var(--gold));
+      box-shadow: 0 0 24px rgba(95, 174, 255, .38);
       position: relative;
     }
-    .brand-mark::after { content:""; position:absolute; inset:6px; border-radius:7px; background:#081121; }
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      inset: 6px;
+      border-radius: 6px;
+      background: #081120;
+    }
 
     nav { display: flex; gap: 7px; flex-wrap: wrap; justify-content: center; }
     nav a {
-      padding: 8px 12px; border-radius: 999px; color: var(--muted); font-weight: 600; font-size: .9rem;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .9rem;
+      font-weight: 600;
+      padding: 8px 12px;
+      border-radius: 999px;
       transition: .2s ease;
     }
-    nav a:hover { color: var(--text); background: rgba(94,169,255,0.12); }
+    nav a:hover { background: rgba(95,174,255,0.12); color: var(--text); }
 
     .btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      border-radius: 12px; border: 1px solid transparent;
-      padding: 12px 18px; font-weight: 700; color: #fff; text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 1px solid transparent;
+      border-radius: 12px;
+      padding: 12px 18px;
+      text-decoration: none;
+      font-weight: 700;
+      color: #fff;
       transition: .25s ease;
+      white-space: nowrap;
     }
     .btn.primary {
-      background: linear-gradient(130deg, #2f86ea, #63b6ff);
-      box-shadow: 0 0 0 1px rgba(126,191,255,0.4), 0 14px 40px rgba(44,124,217,0.45);
+      background: linear-gradient(130deg, #2d86ec, #62b7ff);
+      box-shadow: 0 0 0 1px rgba(119,189,255,0.35), 0 16px 38px rgba(45,122,211,0.42);
     }
-    .btn.primary:hover { transform: translateY(-2px); box-shadow: 0 0 18px rgba(94,169,255,0.55), 0 18px 45px rgba(44,124,217,0.45); }
     .btn.gold {
-      color: #1d1204; background: linear-gradient(130deg, var(--gold), #ffd08f);
-      box-shadow: 0 12px 35px rgba(179, 117, 43, 0.4);
+      color: #1f1202;
+      background: linear-gradient(130deg, var(--gold), #ffd59c);
+      box-shadow: 0 12px 32px rgba(179,117,45,.35);
     }
     .btn.ghost {
-      color: var(--text); border-color: rgba(94,169,255,0.35); background: rgba(24,37,57,0.5);
+      background: rgba(18, 30, 47, 0.55);
+      border-color: rgba(95,174,255,.34);
+      color: var(--text);
     }
-    .btn.ghost:hover { border-color: rgba(126,191,255,0.75); box-shadow: 0 0 14px rgba(94,169,255,0.3); }
+    .btn:hover { transform: translateY(-2px); }
 
-    .hero {
-      margin-top: 26px;
-      padding: 48px;
-      border-radius: 30px;
-      border: 1px solid var(--line);
-      background: linear-gradient(160deg, rgba(13,21,34,.95), rgba(10,17,29,.7));
-      box-shadow: var(--shadow);
-      display: grid;
-      grid-template-columns: 1.08fr 0.92fr;
-      gap: 28px;
-      align-items: center;
-      overflow: hidden;
+    .hero-band {
+      width: 100%;
+      margin-top: 18px;
+      padding: 62px 0 66px;
+      background:
+        radial-gradient(circle at 85% 10%, rgba(95,174,255,.22), transparent 32%),
+        radial-gradient(circle at 10% 90%, rgba(243,186,105,.16), transparent 36%),
+        linear-gradient(180deg, rgba(11,18,29,.92), rgba(8,14,24,.86));
+      border-top: 1px solid rgba(92, 126, 189, 0.22);
+      border-bottom: 1px solid rgba(92, 126, 189, 0.22);
       position: relative;
+      overflow: hidden;
     }
 
-    .hero::after {
+    .hero-band::after {
       content: "";
       position: absolute;
-      width: 420px;
-      height: 420px;
-      right: -140px;
-      top: -160px;
+      width: 520px;
+      height: 520px;
+      right: -180px;
+      top: -220px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(94,169,255,0.32), transparent 70%);
+      background: radial-gradient(circle, rgba(95,174,255,.2), transparent 70%);
       pointer-events: none;
     }
 
-    h1 { font-size: clamp(2.3rem, 7vw, 4.8rem); line-height: .98; letter-spacing: -.03em; margin-bottom: 16px; }
-    .hero p { color: var(--muted); line-height: 1.6; max-width: 620px; }
-    .hero-sub { font-size: clamp(1rem, 2.1vw, 1.35rem); color: #d5e5ff; margin-bottom: 10px; font-weight: 600; }
-    .hero-actions { margin-top: 26px; display: flex; gap: 12px; flex-wrap: wrap; }
-    .hero-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
-    .hero-badges span {
-      padding: 7px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(126,191,255,0.26);
-      background: rgba(19, 30, 46, 0.78);
-      color: #c6dcff;
-      font-size: .78rem;
-      font-weight: 620;
+    .hero {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 34px;
+      align-items: center;
     }
 
-    .widget-cloud { position: relative; min-height: 460px; }
+    h1 {
+      font-size: clamp(2.5rem, 6.8vw, 5rem);
+      line-height: .96;
+      margin-bottom: 16px;
+      letter-spacing: -.03em;
+    }
+
+    .hero p { color: var(--muted); line-height: 1.65; max-width: 680px; }
+    .hero-sub { font-size: clamp(1.03rem, 2.1vw, 1.36rem); color: #d8e8ff; margin-bottom: 10px; font-weight: 620; }
+
+    .hero-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .hero-badges span {
+      font-size: .78rem;
+      font-weight: 650;
+      color: #cde2ff;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(120, 185, 255, 0.28);
+      background: rgba(16, 28, 43, 0.68);
+    }
+
+    .hero-actions { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; }
+
+    .widget-cloud { position: relative; min-height: 470px; }
     .launcher {
-      position: relative;
-      border-radius: 22px;
-      background: linear-gradient(150deg, rgba(18,28,43,.9), rgba(8,14,24,.85));
-      border: 1px solid rgba(113, 163, 243, 0.36);
-      box-shadow: 0 20px 45px rgba(0, 7, 16, 0.7);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(120,185,255,.35);
+      background: linear-gradient(145deg, rgba(16,27,42,.93), rgba(8,14,23,.9));
+      box-shadow: var(--shadow);
       padding: 14px;
-      transform: perspective(900px) rotateY(-12deg) rotateX(5deg);
+      transform: perspective(940px) rotateY(-10deg) rotateX(4deg);
       transform-style: preserve-3d;
     }
+
     .launcher-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
     .dots { display: flex; gap: 6px; }
     .dots span { width: 8px; height: 8px; border-radius: 50%; }
-    .dots span:nth-child(1){ background: #f26e6e; }
-    .dots span:nth-child(2){ background: #f3b562; }
-    .dots span:nth-child(3){ background: #67d5ff; }
-    .launcher-title { font-size: .92rem; color: #d8e7ff; font-weight: 700; }
+    .dots span:nth-child(1) { background: #f36f6f; }
+    .dots span:nth-child(2) { background: #f3ba69; }
+    .dots span:nth-child(3) { background: #69d6ff; }
+    .launcher-title { font-size: .92rem; font-weight: 700; color: #dbe8ff; }
 
-    .launch-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
+    .launch-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; }
     .launch-tile {
-      min-height: 84px; border-radius: 14px; padding: 12px;
-      border: 1px solid rgba(99,164,255,.26);
-      background: linear-gradient(140deg, rgba(17,31,52,.9), rgba(13,22,35,.82));
-      display: flex; flex-direction: column; justify-content: space-between;
+      min-height: 86px;
+      border-radius: 14px;
+      border: 1px solid rgba(102, 164, 252, 0.25);
+      background: linear-gradient(145deg, rgba(15,29,47,.95), rgba(11,19,31,.9));
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
-    .launch-tile span { font-size: .8rem; color: #a6b9d9; }
-    .launch-tile strong { font-size: 1.02rem; color: #edf4ff; }
-    .launch-tile:nth-child(2n) { border-color: rgba(243,181,98,.28); }
+    .launch-tile span { font-size: .8rem; color: #9eb8de; }
+    .launch-tile strong { color: #edf5ff; font-size: 1.02rem; }
+    .launch-tile:nth-child(2n) { border-color: rgba(243,186,105,0.28); }
 
     .float-card {
       position: absolute;
-      padding: 10px 12px;
       border-radius: 13px;
-      border: 1px solid rgba(126,191,255,0.3);
-      background: rgba(14,24,37,.75);
-      color: #d7e7ff;
+      border: 1px solid rgba(124, 189, 255, 0.28);
+      background: rgba(14, 23, 36, 0.78);
+      color: #d4e7ff;
       font-size: .82rem;
-      box-shadow: 0 12px 28px rgba(0,0,0,.35);
+      padding: 10px 12px;
+      backdrop-filter: blur(7px);
+      box-shadow: 0 10px 24px rgba(0,0,0,.35);
       animation: levitate 7s ease-in-out infinite;
-      backdrop-filter: blur(8px);
     }
     .f1 { top: -8px; left: -10px; }
-    .f2 { right: -8px; top: 110px; animation-delay: 1.2s; }
+    .f2 { right: -8px; top: 108px; animation-delay: 1.2s; }
     .f3 { left: 30px; bottom: 86px; animation-delay: 2.1s; }
     .f4 { right: 20px; bottom: 48px; animation-delay: 3s; }
     .f5 { right: -6px; bottom: -6px; animation-delay: 3.8s; }
 
     @keyframes levitate { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
 
-    main section {
-      margin-top: 18px;
-      padding: 34px;
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--line);
-      background: var(--surface);
-      box-shadow: var(--shadow);
+    .band { padding: 62px 0; }
+    .band.soft { background: linear-gradient(180deg, rgba(9,15,25,0.68), rgba(8,13,22,0.52)); }
+    .band.clean { background: transparent; }
+    .band.gradient {
+      background:
+        radial-gradient(circle at 90% 12%, rgba(95,174,255,.16), transparent 34%),
+        radial-gradient(circle at 15% 88%, rgba(243,186,105,.12), transparent 36%),
+        linear-gradient(160deg, rgba(11,18,30,.82), rgba(10,17,28,.56));
+      border-top: 1px solid rgba(92,126,189,.16);
+      border-bottom: 1px solid rgba(92,126,189,.16);
     }
 
-    h2 { font-size: clamp(1.5rem, 3vw, 2.45rem); margin-bottom: 10px; letter-spacing: -.02em; }
-    .lead { color: var(--muted); line-height: 1.7; max-width: 880px; }
+    h2 { font-size: clamp(1.55rem, 3.1vw, 2.5rem); margin-bottom: 12px; letter-spacing: -.02em; }
+    .lead { color: var(--muted); line-height: 1.75; max-width: 900px; }
 
-    .grid-3, .grid-4, .grid-2 { display: grid; gap: 12px; margin-top: 18px; }
-    .grid-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    .grid-4, .grid-3, .grid-2 { display: grid; gap: 12px; margin-top: 18px; }
     .grid-4 { grid-template-columns: repeat(4, minmax(0,1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
     .grid-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
 
     .card {
-      background: var(--surface-strong);
-      border: 1px solid rgba(107, 149, 224, 0.24);
       border-radius: var(--radius-md);
+      border: 1px solid rgba(102,154,235,.24);
+      background: var(--surface-strong);
       padding: 16px;
       transition: transform .28s ease, border-color .28s ease, box-shadow .28s ease;
       transform-style: preserve-3d;
     }
-
     .card:hover {
-      border-color: rgba(126,191,255,.65);
-      box-shadow: 0 12px 28px rgba(31,93,177,.25), inset 0 0 0 1px rgba(94,169,255,.2);
+      border-color: rgba(126,193,255,.66);
+      box-shadow: 0 12px 28px rgba(30,90,176,.24), inset 0 0 0 1px rgba(95,174,255,.18);
     }
-
     .card h3 { font-size: 1rem; margin-bottom: 8px; color: #edf4ff; }
-    .card p, .card li { color: var(--muted); line-height: 1.55; font-size: .95rem; }
+    .card p { color: var(--muted); line-height: 1.55; font-size: .95rem; }
 
     .tag {
       display: inline-block;
-      margin-bottom: 9px;
-      padding: 5px 9px;
-      border-radius: 999px;
       font-size: .75rem;
       font-weight: 700;
-      background: rgba(94,169,255,0.14);
-      color: #95c7ff;
-      border: 1px solid rgba(126,191,255,0.22);
+      color: #9bcbff;
+      background: rgba(95,174,255,.14);
+      border: 1px solid rgba(124, 189, 255, 0.24);
+      border-radius: 999px;
+      padding: 5px 9px;
+      margin-bottom: 8px;
     }
 
     .pricing .card { position: relative; overflow: hidden; }
@@ -281,48 +318,59 @@
       width: 180px;
       height: 180px;
       border-radius: 50%;
-      right: -82px;
-      top: -82px;
-      background: radial-gradient(circle, rgba(94,169,255,0.28), transparent 70%);
+      right: -86px;
+      top: -86px;
+      background: radial-gradient(circle, rgba(95,174,255,.25), transparent 70%);
       pointer-events: none;
     }
 
-    .faq-item details {
-      background: var(--surface-strong);
-      border: 1px solid rgba(107, 149, 224, 0.24);
+    .faq-list details {
       border-radius: 14px;
+      border: 1px solid rgba(102,154,235,.24);
+      background: var(--surface-strong);
       padding: 12px 14px;
     }
-    .faq-item details + details { margin-top: 10px; }
-    .faq-item summary { cursor: pointer; font-weight: 650; color: #e5f0ff; }
-    .faq-item p { margin-top: 8px; color: var(--muted); }
+    .faq-list details + details { margin-top: 10px; }
+    .faq-list summary { cursor: pointer; font-weight: 650; color: #e5f0ff; }
+    .faq-list p { color: var(--muted); margin-top: 8px; }
 
-    .final-cta {
+    .cta-band {
+      width: 100%;
+      padding: 64px 0;
       background:
-        radial-gradient(circle at 90% 10%, rgba(243,181,98,.24), transparent 36%),
-        radial-gradient(circle at 15% 90%, rgba(94,169,255,.25), transparent 38%),
-        linear-gradient(150deg, rgba(14,24,37,.96), rgba(12,20,31,.86));
+        radial-gradient(circle at 88% 8%, rgba(243,186,105,.24), transparent 35%),
+        radial-gradient(circle at 8% 88%, rgba(95,174,255,.24), transparent 36%),
+        linear-gradient(165deg, rgba(14,24,38,.95), rgba(10,17,28,.85));
+      border-top: 1px solid rgba(92,126,189,.2);
+      border-bottom: 1px solid rgba(92,126,189,.2);
     }
 
-    .reveal { opacity: 0; transform: translateY(25px); transition: all .7s cubic-bezier(.2,.7,.2,1); }
+    footer {
+      text-align: center;
+      color: #9db5d9;
+      font-size: .9rem;
+      line-height: 1.65;
+      padding: 30px 0 40px;
+    }
+    footer a { color: #b8d9ff; text-decoration: none; }
+
+    .reveal { opacity: 0; transform: translateY(26px); transition: all .7s cubic-bezier(.2,.7,.2,1); }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    footer { color: #9bb2d6; font-size: .9rem; padding: 24px 0 34px; text-align: center; line-height: 1.65; }
-    footer a { color: #b6d7ff; text-decoration: none; }
-
-    @media (max-width: 1040px) {
-      .hero { grid-template-columns: 1fr; padding: 30px; }
-      .grid-4 { grid-template-columns: repeat(2,minmax(0,1fr)); }
-      .grid-3 { grid-template-columns: repeat(2,minmax(0,1fr)); }
+    @media (max-width: 1080px) {
+      .hero { grid-template-columns: 1fr; }
+      .grid-4 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .grid-3 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .widget-cloud { min-height: auto; }
     }
 
     @media (max-width: 780px) {
       .container { width: min(1180px, calc(100% - 20px)); }
-      header { position: static; border-radius: 18px; flex-direction: column; }
-      .hero, main section { padding: 22px; }
-      .grid-4, .grid-3, .grid-2, .launch-grid { grid-template-columns: 1fr; }
+      header { border-radius: 18px; flex-direction: column; }
+      .hero-band { padding: 40px 0 46px; }
+      .band, .cta-band { padding: 44px 0; }
+      .launch-grid, .grid-4, .grid-3, .grid-2 { grid-template-columns: 1fr; }
       .hero-actions .btn { width: 100%; }
-      .widget-cloud { min-height: auto; }
       .launcher { transform: none; }
       .float-card { display: none; }
     }
@@ -335,21 +383,25 @@
 <body>
   <div class="city-glow" aria-hidden="true"></div>
 
-  <div class="container">
-    <header>
-      <div class="brand"><span class="brand-mark" aria-hidden="true"></span>Admin Helper</div>
-      <nav>
-        <a href="#about">О продукте</a>
-        <a href="#features">Возможности</a>
-        <a href="#audience">Для кого</a>
-        <a href="#pricing">Тарифы</a>
-        <a href="#faq">FAQ</a>
-        <a href="#contact">Связь</a>
-      </nav>
-      <a class="btn gold" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Заказать</a>
-    </header>
+  <div class="site-header-wrap">
+    <div class="container">
+      <header>
+        <div class="brand"><span class="brand-mark" aria-hidden="true"></span>Admin Helper</div>
+        <nav>
+          <a href="#about">О продукте</a>
+          <a href="#features">Возможности</a>
+          <a href="#audience">Для кого</a>
+          <a href="#pricing">Тарифы</a>
+          <a href="#faq">FAQ</a>
+          <a href="#contact">Связь</a>
+        </nav>
+        <a class="btn gold" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Заказать</a>
+      </header>
+    </div>
+  </div>
 
-    <section class="hero reveal" id="top">
+  <section class="hero-band reveal" id="top">
+    <div class="container hero">
       <div>
         <h1>Admin Helper</h1>
         <p class="hero-sub">Премиальный помощник для администрации SAMP / CRMP / MTA проектов.</p>
@@ -363,7 +415,7 @@
         </div>
         <div class="hero-actions">
           <a class="btn primary" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Купить доступ</a>
-          <a class="btn ghost" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Посмотреть возможности</a>
+          <a class="btn ghost" href="#features">Посмотреть возможности</a>
           <a class="btn ghost" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Связаться</a>
         </div>
       </div>
@@ -387,118 +439,138 @@
         <div class="float-card f4">📑 Регламент</div>
         <div class="float-card f5">🔐 Лицензия</div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <main>
-      <section id="about" class="reveal">
-        <h2>Что такое Admin Helper</h2>
-        <p class="lead">Admin Helper — это коммерческое решение для администрации RP-серверов, которое сокращает рутину, ускоряет работу и стандартизирует действия команды. Администратор быстро открывает нужные команды и регламенты, не теряет контекст диалога с игроком и всегда работает на актуальной версии внутренних материалов.</p>
-      </section>
+  <section id="about" class="band clean reveal">
+    <div class="container">
+      <h2>Что такое Admin Helper</h2>
+      <p class="lead">Admin Helper — это коммерческое решение для администрации RP-серверов, которое сокращает рутину, ускоряет работу и стандартизирует действия команды. Администратор быстро открывает нужные команды и регламенты, не теряет контекст диалога с игроком и всегда работает на актуальной версии внутренних материалов.</p>
+    </div>
+  </section>
 
-      <section id="features" class="reveal">
-        <h2>Ключевые возможности</h2>
-        <div class="grid-4">
-          <article class="card tilt"><span class="tag">F9</span><h3>Подсказка по горячей клавише</h3><p>Моментальный доступ к справке в игровом процессе без потери темпа.</p></article>
-          <article class="card tilt"><span class="tag">База</span><h3>База команд проекта</h3><p>Структурированные команды с понятной навигацией и контекстом применения.</p></article>
-          <article class="card tilt"><span class="tag">Регламент</span><h3>Правила и наказания</h3><p>Единая зона ответственности: правила, регламент и санкции всегда под рукой.</p></article>
-          <article class="card tilt"><span class="tag">Доступ</span><h3>Быстрый доступ к материалам</h3><p>Ссылки, FAQ, внутренние инструкции и документация в одном интерфейсе.</p></article>
-          <article class="card tilt"><span class="tag">Update</span><h3>Автообновления</h3><p>Централизованная доставка новых регламентов и контента без хаоса в чатах.</p></article>
-          <article class="card tilt"><span class="tag">Custom</span><h3>Кастомизация под проект</h3><p>Гибкая адаптация структуры, контента, бренда и логики лаунчера под сервер.</p></article>
-          <article class="card tilt"><span class="tag">UX</span><h3>Удобный лаунчер</h3><p>Современный workflow для администратора: от старта до решения кейса за секунды.</p></article>
-          <article class="card tilt"><span class="tag">Premium</span><h3>Премиальный внешний вид</h3><p>Серьёзная коммерческая подача для укрепления имиджа проекта и команды.</p></article>
-        </div>
-      </section>
+  <section id="features" class="band soft reveal">
+    <div class="container">
+      <h2>Ключевые возможности</h2>
+      <div class="grid-4">
+        <article class="card tilt"><span class="tag">F9</span><h3>Подсказка по горячей клавише</h3><p>Моментальный доступ к справке в игровом процессе без потери темпа.</p></article>
+        <article class="card tilt"><span class="tag">База</span><h3>База команд проекта</h3><p>Структурированные команды с понятной навигацией и контекстом применения.</p></article>
+        <article class="card tilt"><span class="tag">Регламент</span><h3>Правила и наказания</h3><p>Единая зона ответственности: правила, регламент и санкции всегда под рукой.</p></article>
+        <article class="card tilt"><span class="tag">Доступ</span><h3>Быстрый доступ к материалам</h3><p>Ссылки, FAQ, внутренние инструкции и документация в одном интерфейсе.</p></article>
+        <article class="card tilt"><span class="tag">Update</span><h3>Автообновления</h3><p>Централизованная доставка новых регламентов и контента без хаоса в чатах.</p></article>
+        <article class="card tilt"><span class="tag">Custom</span><h3>Кастомизация под проект</h3><p>Гибкая адаптация структуры, контента, бренда и логики лаунчера под сервер.</p></article>
+        <article class="card tilt"><span class="tag">UX</span><h3>Удобный лаунчер</h3><p>Современный workflow для администратора: от старта до решения кейса за секунды.</p></article>
+        <article class="card tilt"><span class="tag">Premium</span><h3>Премиальный внешний вид</h3><p>Серьёзная коммерческая подача для укрепления имиджа проекта и команды.</p></article>
+      </div>
+    </div>
+  </section>
 
-      <section id="audience" class="reveal">
-        <h2>Для кого программа</h2>
-        <div class="grid-3">
-          <article class="card tilt"><h3>Владельцы RP-проектов</h3><p>Контроль стандартов и единый инструмент для всей администрации.</p></article>
-          <article class="card tilt"><h3>Главные администраторы и кураторы</h3><p>Быстрое управление командами, регламентом и качеством модерации.</p></article>
-          <article class="card tilt"><h3>Старшая и обычная администрация</h3><p>Быстрые ответы игрокам, меньше ошибок и уверенная работа в смене.</p></article>
-          <article class="card tilt"><h3>SAMP / CRMP / MTA</h3><p>Подход для классических RP-стеков и гибкая адаптация под процессы сервера.</p></article>
-        </div>
-      </section>
+  <section id="audience" class="band clean reveal">
+    <div class="container">
+      <h2>Для кого программа</h2>
+      <div class="grid-3">
+        <article class="card tilt"><h3>Владельцы RP-проектов</h3><p>Контроль стандартов и единый инструмент для всей администрации.</p></article>
+        <article class="card tilt"><h3>Главные администраторы и кураторы</h3><p>Быстрое управление командами, регламентом и качеством модерации.</p></article>
+        <article class="card tilt"><h3>Старшая и обычная администрация</h3><p>Быстрые ответы игрокам, меньше ошибок и уверенная работа в смене.</p></article>
+        <article class="card tilt"><h3>SAMP / CRMP / MTA</h3><p>Подход для классических RP-стеков и гибкая адаптация под процессы сервера.</p></article>
+      </div>
+    </div>
+  </section>
 
-      <section class="reveal">
-        <h2>Почему это удобно</h2>
-        <div class="grid-2">
-          <article class="card tilt"><h3>Меньше ошибок в наказаниях</h3><p>Регламент и правила всегда перед глазами в нужный момент.</p></article>
-          <article class="card tilt"><h3>Быстрее ответы игрокам</h3><p>Команды и подсказки открываются моментально, без переключения между окнами.</p></article>
-          <article class="card tilt"><h3>Единый инструмент для команды</h3><p>Одинаковый стандарт действий для всей администрации проекта.</p></article>
-          <article class="card tilt"><h3>Меньше хаоса, больше бренда</h3><p>Чистый интерфейс и брендированный софт усиливают доверие к проекту.</p></article>
-        </div>
-      </section>
+  <section class="band soft reveal">
+    <div class="container">
+      <h2>Почему это удобно</h2>
+      <div class="grid-2">
+        <article class="card tilt"><h3>Меньше ошибок в наказаниях</h3><p>Регламент и правила всегда перед глазами в нужный момент.</p></article>
+        <article class="card tilt"><h3>Быстрее ответы игрокам</h3><p>Команды и подсказки открываются моментально, без переключения между окнами.</p></article>
+        <article class="card tilt"><h3>Единый инструмент для команды</h3><p>Одинаковый стандарт действий для всей администрации проекта.</p></article>
+        <article class="card tilt"><h3>Меньше хаоса, больше бренда</h3><p>Чистый интерфейс и брендированный софт усиливают доверие к проекту.</p></article>
+      </div>
+    </div>
+  </section>
 
-      <section class="reveal">
-        <h2>Адаптация под ваш проект</h2>
-        <p class="lead">Admin Helper можно персонализировать под любой сервер: название и логотип проекта, фирменные цвета, разделы с правилами и командами, ссылки на Telegram / Discord, собственная схема обновлений и внешний вид лаунчера.</p>
-        <div class="grid-3">
-          <article class="card tilt"><h3>Бренд проекта</h3><p>Название, логотип, цвета и визуальная айдентика.</p></article>
-          <article class="card tilt"><h3>Контент</h3><p>Правила, команды, подсказки и ссылки на внутренние материалы.</p></article>
-          <article class="card tilt"><h3>Интеграции</h3><p>Telegram, Discord и индивидуальная модель обновлений.</p></article>
-        </div>
-      </section>
+  <section class="band gradient reveal">
+    <div class="container">
+      <h2>Адаптация под ваш проект</h2>
+      <p class="lead">Admin Helper можно персонализировать под любой сервер: название и логотип проекта, фирменные цвета, разделы с правилами и командами, ссылки на Telegram / Discord, собственная схема обновлений и внешний вид лаунчера.</p>
+      <div class="grid-3">
+        <article class="card tilt"><h3>Бренд проекта</h3><p>Название, логотип, цвета и визуальная айдентика.</p></article>
+        <article class="card tilt"><h3>Контент</h3><p>Правила, команды, подсказки и ссылки на внутренние материалы.</p></article>
+        <article class="card tilt"><h3>Интеграции</h3><p>Telegram, Discord и индивидуальная модель обновлений.</p></article>
+      </div>
+    </div>
+  </section>
 
-      <section id="pricing" class="pricing reveal">
-        <h2>Тарифы и покупка</h2>
-        <div class="grid-3">
-          <article class="card tilt"><span class="tag">Старт</span><h3>Базовая версия</h3><p>Готовая стандартная конфигурация Admin Helper.</p><p><strong>Стоимость:</strong> обсуждается индивидуально</p><a class="btn ghost" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Заказать Admin Helper</a></article>
-          <article class="card tilt"><span class="tag">Проект</span><h3>Версия под проект</h3><p>Кастомизация структуры, контента и ключевых разделов под сервер.</p><p><strong>Стоимость:</strong> обсуждается индивидуально</p><a class="btn primary" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Заказать Admin Helper</a></article>
-          <article class="card tilt"><span class="tag">Premium</span><h3>Premium-адаптация</h3><p>Полный бренд-пакет, персональный дизайн лаунчера и приоритетные обновления.</p><p><strong>Стоимость:</strong> обсуждается индивидуально</p><a class="btn gold" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Заказать Admin Helper</a></article>
-        </div>
-      </section>
+  <section id="pricing" class="band clean pricing reveal">
+    <div class="container">
+      <h2>Тарифы и покупка</h2>
+      <div class="grid-3">
+        <article class="card tilt"><span class="tag">Старт</span><h3>Базовая версия</h3><p>Готовая стандартная конфигурация Admin Helper.</p><p><strong>Стоимость:</strong> обсуждается индивидуально</p><a class="btn ghost" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Заказать Admin Helper</a></article>
+        <article class="card tilt"><span class="tag">Проект</span><h3>Версия под проект</h3><p>Кастомизация структуры, контента и ключевых разделов под сервер.</p><p><strong>Стоимость:</strong> обсуждается индивидуально</p><a class="btn primary" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Заказать Admin Helper</a></article>
+        <article class="card tilt"><span class="tag">Premium</span><h3>Premium-адаптация</h3><p>Полный бренд-пакет, персональный дизайн лаунчера и приоритетные обновления.</p><p><strong>Стоимость:</strong> обсуждается индивидуально</p><a class="btn gold" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Заказать Admin Helper</a></article>
+      </div>
+    </div>
+  </section>
 
-      <section class="reveal">
-        <h2>Как выглядит программа</h2>
-        <div class="grid-3">
-          <article class="card tilt"><h3>Главная</h3><p>Обзор разделов, быстрый старт и состояние версии.</p></article>
-          <article class="card tilt"><h3>Правила</h3><p>Регламенты проекта с чёткой структурой и поиском.</p></article>
-          <article class="card tilt"><h3>Команды</h3><p>Единая база команд для всех ролей администрации.</p></article>
-          <article class="card tilt"><h3>Подсказка</h3><p>Окно помощи для рабочих сценариев в смене.</p></article>
-          <article class="card tilt"><h3>Обновления</h3><p>История изменений и доставка новых данных в один клик.</p></article>
-          <article class="card tilt"><h3>Настройки</h3><p>Персонализация интерфейса и параметров под ваш сервер.</p></article>
-        </div>
-      </section>
+  <section class="band soft reveal">
+    <div class="container">
+      <h2>Как выглядит программа</h2>
+      <div class="grid-3">
+        <article class="card tilt"><h3>Главная</h3><p>Обзор разделов, быстрый старт и состояние версии.</p></article>
+        <article class="card tilt"><h3>Правила</h3><p>Регламенты проекта с чёткой структурой и поиском.</p></article>
+        <article class="card tilt"><h3>Команды</h3><p>Единая база команд для всех ролей администрации.</p></article>
+        <article class="card tilt"><h3>Подсказка</h3><p>Окно помощи для рабочих сценариев в смене.</p></article>
+        <article class="card tilt"><h3>Обновления</h3><p>История изменений и доставка новых данных в один клик.</p></article>
+        <article class="card tilt"><h3>Настройки</h3><p>Персонализация интерфейса и параметров под ваш сервер.</p></article>
+      </div>
+    </div>
+  </section>
 
-      <section id="faq" class="faq-item reveal">
-        <h2>FAQ</h2>
+  <section id="faq" class="band clean reveal">
+    <div class="container">
+      <h2>FAQ</h2>
+      <div class="faq-list">
         <details><summary>Подойдёт ли для моего проекта?</summary><p>Да, Admin Helper создавался как универсальная база для SAMP, CRMP и MTA серверов с возможностью адаптации.</p></details>
         <details><summary>Можно ли изменить дизайн?</summary><p>Да, доступна брендовая настройка: цвета, логотипы, структура экранов и визуальные акценты.</p></details>
         <details><summary>Можно ли добавить свои правила?</summary><p>Да, правила, команды, подсказки и ссылки настраиваются под регламент вашего проекта.</p></details>
         <details><summary>Как происходит обновление?</summary><p>Через встроенный механизм обновлений: новая версия и материалы доставляются централизованно.</p></details>
         <details><summary>Можно ли сделать под мой бренд?</summary><p>Да, в версиях под проект и Premium выполняется полноценная адаптация под ваш стиль.</p></details>
         <details><summary>Как купить доступ?</summary><p>Оставьте заявку через кнопку заказа и получите персональное коммерческое предложение.</p></details>
-      </section>
+      </div>
+    </div>
+  </section>
 
-      <section id="cta" class="final-cta reveal">
-        <h2>Готов усилить администрацию своего проекта?</h2>
-        <p class="lead">Запустите Admin Helper как профессиональный стандарт для вашей команды: быстрее процессы, меньше ошибок, сильнее бренд.</p>
-        <div class="hero-actions">
-          <a class="btn primary" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Купить Admin Helper</a>
-          <a class="btn gold" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Связаться в Telegram</a>
-        </div>
-      </section>
+  <section id="cta" class="cta-band reveal">
+    <div class="container">
+      <h2>Готов усилить администрацию своего проекта?</h2>
+      <p class="lead">Запустите Admin Helper как профессиональный стандарт для вашей команды: быстрее процессы, меньше ошибок, сильнее бренд.</p>
+      <div class="hero-actions">
+        <a class="btn primary" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Купить Admin Helper</a>
+        <a class="btn gold" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Связаться в Telegram</a>
+      </div>
+    </div>
+  </section>
 
-      <section id="contact" class="reveal">
-        <h2>Связь</h2>
-        <p class="lead">Хотите Admin Helper под свой проект? Напишите автору, чтобы обсудить дизайн, регламент, команды, обновления и стоимость адаптации.</p>
-        <div class="grid-3">
-          <article class="card tilt"><h3>Telegram</h3><p><a href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">@ahelperAlmazov</a></p></article>
-          <article class="card tilt"><h3>Discord</h3><p>artemiiooo</p></article>
-          <article class="card tilt"><h3>Автор</h3><p>A.Almazov / Artem Almazov</p></article>
-        </div>
-        <div class="hero-actions">
-          <a class="btn gold" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Написать в Telegram</a>
-        </div>
-      </section>
-    </main>
+  <section id="contact" class="band clean reveal">
+    <div class="container">
+      <h2>Связь</h2>
+      <p class="lead">Хотите Admin Helper под свой проект? Напишите автору, чтобы обсудить дизайн, регламент, команды, обновления и стоимость адаптации.</p>
+      <div class="grid-3">
+        <article class="card tilt"><h3>Telegram</h3><p><a href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener" style="color:#b8d9ff;text-decoration:none;">@ahelperAlmazov</a></p></article>
+        <article class="card tilt"><h3>Discord</h3><p>artemiiooo</p></article>
+        <article class="card tilt"><h3>Автор</h3><p>A.Almazov / Artem Almazov</p></article>
+      </div>
+      <div class="hero-actions">
+        <a class="btn gold" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Написать в Telegram</a>
+      </div>
+    </div>
+  </section>
 
-    <footer>
-      <div>© 2026 Admin Helper • Commercial product by A.Almazov / Artem Almazov</div>
-      <div>Telegram: <a href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">@ahelperAlmazov</a></div>
-      <div>Discord: artemiiooo</div>
-    </footer>
-  </div>
+  <footer>
+    <div>© 2026 Admin Helper • Commercial product by A.Almazov / Artem Almazov</div>
+    <div>Telegram: <a href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">@ahelperAlmazov</a></div>
+    <div>Discord: artemiiooo</div>
+  </footer>
 
   <script>
     const revealObserver = new IntersectionObserver((entries) => {
