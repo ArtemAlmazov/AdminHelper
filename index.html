@@ -102,7 +102,12 @@
       box-shadow: 0 14px 38px rgba(0, 0, 0, .35);
     }
 
-    .brand { display: flex; align-items: center; gap: 11px; font-weight: 800; color: var(--text); text-decoration: none; }
+    .brand { display: flex; align-items: center; gap: 11px; font-weight: 800; color: var(--text); text-decoration: none; transition: color .2s ease, text-shadow .2s ease; }
+    .brand:hover,
+    .brand:focus-visible {
+      color: #f0f7ff;
+      text-shadow: 0 0 16px rgba(99,182,255,.35);
+    }
     .brand-mark {
       width: 30px;
       height: 30px;
@@ -866,7 +871,7 @@
   </div>
 
   <section class="hero-band reveal" id="top">
-    <div class="hero-wordmark">ADMIN HELPER</div>
+    <div class="hero-wordmark" aria-hidden="true">ADMIN HELPER</div>
     <div class="container hero">
       <div>
         <h1>Admin Helper</h1>
@@ -927,12 +932,12 @@
             </div>
           </div>
         </div>
-        <div class="float-card f1">🧭 Команды</div>
-        <div class="float-card f2">📘 Правила</div>
-        <div class="float-card f3">⚡ F9</div>
-        <div class="float-card f4">📑 Регламент</div>
-        <div class="float-card f5">🔐 Лицензия</div>
-        <div class="float-card f6">⟳ Обновления</div>
+        <div class="float-card f1" aria-hidden="true">🧭 Команды</div>
+        <div class="float-card f2" aria-hidden="true">📘 Правила</div>
+        <div class="float-card f3" aria-hidden="true">⚡ F9</div>
+        <div class="float-card f4" aria-hidden="true">📑 Регламент</div>
+        <div class="float-card f5" aria-hidden="true">🔐 Лицензия</div>
+        <div class="float-card f6" aria-hidden="true">⟳ Обновления</div>
       </div>
     </div>
   </section>
@@ -978,9 +983,9 @@
       <h2>Возможности</h2>
       <p class="lead">Интерактивный блок ключевых модулей Admin Helper. Выберите пункт — справа появится краткое описание и практическая польза для администрации.</p>
       <div class="feature-tabs-wrap">
-        <div class="feature-tabs" id="featureTabs"></div>
+        <div class="feature-tabs" id="featureTabs" role="tablist" aria-label="Вкладки возможностей"></div>
         <div class="feature-panel">
-          <article class="feature-main" id="featureMain"></article>
+          <article class="feature-main" id="featureMain" role="tabpanel" aria-live="polite"></article>
           <article class="feature-side" id="featureSide"></article>
         </div>
       </div>
@@ -1017,6 +1022,7 @@
   <section class="band soft reveal">
     <div class="container content">
       <h2>До / После Admin Helper</h2>
+      <p class="lead">Разница между хаотичной работой администрации и единым рабочим стандартом.</p>
       <div class="before-after">
         <article class="card before">
           <h3>До Admin Helper</h3>
@@ -1260,18 +1266,34 @@
 
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const desktopParallax = window.matchMedia('(min-width: 901px)');
     const launcher = document.querySelector('.launcher');
+    const launcherDefaultTransform = 'perspective(1020px) rotateY(-9deg) rotateX(4deg)';
+
+    function resetLauncherTransform() {
+      if (launcher) launcher.style.transform = '';
+    }
+
+    function handleLauncherMove(e) {
+      if (!launcher || reduceMotion || !desktopParallax.matches) return;
+      const rect = launcher.getBoundingClientRect();
+      const px = (e.clientX - rect.left) / rect.width;
+      const py = (e.clientY - rect.top) / rect.height;
+      const rotateY = (px - 0.5) * 6;
+      const rotateX = (0.5 - py) * 5;
+      launcher.style.transform = `perspective(1020px) rotateY(${rotateY}deg) rotateX(${rotateX}deg)`;
+    }
+
+    function handleLauncherLeave() {
+      if (!launcher) return;
+      launcher.style.transform = desktopParallax.matches ? launcherDefaultTransform : '';
+    }
+
     if (launcher && !reduceMotion) {
-      launcher.addEventListener('mousemove', (e) => {
-        const rect = launcher.getBoundingClientRect();
-        const px = (e.clientX - rect.left) / rect.width;
-        const py = (e.clientY - rect.top) / rect.height;
-        const rotateY = (px - 0.5) * 6;
-        const rotateX = (0.5 - py) * 5;
-        launcher.style.transform = `perspective(1020px) rotateY(${rotateY}deg) rotateX(${rotateX}deg)`;
-      });
-      launcher.addEventListener('mouseleave', () => {
-        launcher.style.transform = 'perspective(1020px) rotateY(-9deg) rotateX(4deg)';
+      launcher.addEventListener('mousemove', handleLauncherMove);
+      launcher.addEventListener('mouseleave', handleLauncherLeave);
+      window.addEventListener('resize', () => {
+        if (!desktopParallax.matches) resetLauncherTransform();
       });
     }
 
@@ -1331,7 +1353,12 @@
           <div class="feature-cards-mini"><span>Status: Active</span><span>Rules: Synced</span><span>Panel: Ready</span></div>
         </div>`;
       side.innerHTML = `<p><strong style="color:#dff0ff;">Практическая ценность:</strong></p><ul>${f.points.map((p) => `<li>${p}</li>`).join('')}</ul>`;
-      document.querySelectorAll('.tab-btn').forEach((btn, i) => btn.classList.toggle('active', i === index));
+      document.querySelectorAll('.tab-btn').forEach((btn, i) => {
+        const isActive = i === index;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        btn.setAttribute('tabindex', isActive ? '0' : '-1');
+      });
     }
 
     features.forEach((f, i) => {
@@ -1339,47 +1366,75 @@
       btn.className = 'tab-btn' + (i === 0 ? ' active' : '');
       btn.type = 'button';
       btn.textContent = f.title;
+      btn.id = `feature-tab-${i}`;
+      btn.setAttribute('role', 'tab');
+      btn.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+      btn.setAttribute('tabindex', i === 0 ? '0' : '-1');
       btn.addEventListener('click', () => renderFeature(i));
+      btn.addEventListener('keydown', (e) => {
+        if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+        e.preventDefault();
+        const next = e.key === 'ArrowRight'
+          ? (i + 1) % features.length
+          : (i - 1 + features.length) % features.length;
+        renderFeature(next);
+        const target = document.getElementById(`feature-tab-${next}`);
+        if (target) target.focus();
+      });
       tabs.appendChild(btn);
     });
     renderFeature(0);
 
-    const modalStack = new Set();
+    const modalStack = [];
+    const modalTriggerMap = new WeakMap();
+
     const updateBodyScroll = () => {
-      document.body.style.overflow = modalStack.size > 0 ? 'hidden' : '';
+      document.body.style.overflow = modalStack.length > 0 ? 'hidden' : '';
     };
 
-    function setupModal(triggerId, modalId) {
+    function openModal(modal, trigger) {
+      if (!modal) return;
+      modal.classList.add('open', 'animating');
+      modal.setAttribute('aria-hidden', 'false');
+      modalStack.push(modal);
+      modalTriggerMap.set(modal, trigger || null);
+      updateBodyScroll();
+      const closeBtn = modal.querySelector('.modal-close');
+      if (closeBtn) closeBtn.focus();
+    }
+
+    function closeModal(modal) {
+      if (!modal) return;
+      modal.classList.remove('open', 'animating');
+      modal.setAttribute('aria-hidden', 'true');
+      const idx = modalStack.lastIndexOf(modal);
+      if (idx !== -1) modalStack.splice(idx, 1);
+      updateBodyScroll();
+      const trigger = modalTriggerMap.get(modal);
+      if (trigger && typeof trigger.focus === 'function') trigger.focus();
+    }
+
+    function bindModal(triggerId, modalId) {
       const trigger = document.getElementById(triggerId);
       const modal = document.getElementById(modalId);
-      const closeModal = () => {
-        modal.classList.remove('open');
-        modal.classList.remove('animating');
-        modal.setAttribute('aria-hidden', 'true');
-        modalStack.delete(modalId);
-        updateBodyScroll();
-      };
-      trigger.addEventListener('click', () => {
-        modal.classList.add('open');
-        modal.classList.add('animating');
-        modal.setAttribute('aria-hidden', 'false');
-        modalStack.add(modalId);
-        updateBodyScroll();
-      });
+      if (!trigger || !modal) return;
+
+      trigger.addEventListener('click', () => openModal(modal, trigger));
       modal.addEventListener('click', (e) => {
         if (e.target === modal || e.target.dataset.close === modalId) {
-          closeModal();
-        }
-      });
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal.classList.contains('open')) {
-          closeModal();
+          closeModal(modal);
         }
       });
     }
 
-    setupModal('openDemoModal', 'demoModal');
-    setupModal('openClientModal', 'clientModal');
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape' || modalStack.length === 0) return;
+      const topModal = modalStack[modalStack.length - 1];
+      closeModal(topModal);
+    });
+
+    bindModal('openDemoModal', 'demoModal');
+    bindModal('openClientModal', 'clientModal');
   </script>
 </body>
 </html>
