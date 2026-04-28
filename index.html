@@ -223,6 +223,7 @@
     }
 
     .hero-actions { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; }
+    .hero-note { margin-top: 10px; color: #cde1ff; font-weight: 600; }
 
     .widget-cloud { position: relative; min-height: 610px; }
     .orbit { position: absolute; border: 1px solid rgba(112,178,255,.16); border-radius: 999px; pointer-events: none; }
@@ -243,6 +244,7 @@
       padding: 16px;
       transform: perspective(1020px) rotateY(-9deg) rotateX(4deg);
       transform-style: preserve-3d;
+      overflow: hidden;
     }
 
     .launcher::before {
@@ -264,6 +266,46 @@
     .dots span:nth-child(3){ background:#69d6ff; }
     .launcher-title { color: #dceaff; font-size: .95rem; font-weight: 700; }
 
+    .launcher-layout { display: grid; grid-template-columns: 170px 1fr; gap: 12px; }
+    .launcher-menu {
+      border-radius: 14px;
+      border: 1px solid rgba(112,178,255,.24);
+      background: rgba(10,18,30,.86);
+      padding: 10px;
+      display: grid;
+      gap: 7px;
+    }
+    .launcher-menu div {
+      border-radius: 9px;
+      padding: 8px 9px;
+      font-size: .8rem;
+      color: #b9d4f7;
+      border: 1px solid transparent;
+      background: rgba(16,27,42,.75);
+    }
+    .launcher-menu .active {
+      color: #edf6ff;
+      border-color: rgba(132,194,255,.36);
+      background: rgba(99,182,255,.16);
+    }
+    .launcher-main {
+      border-radius: 14px;
+      border: 1px solid rgba(112,178,255,.24);
+      background: rgba(10,18,30,.82);
+      padding: 10px;
+      box-shadow: inset 0 0 0 1px rgba(130,193,255,.08);
+    }
+    .status-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+    .status-badges span {
+      font-size: .72rem;
+      border-radius: 999px;
+      padding: 5px 8px;
+      border: 1px solid rgba(128,191,255,.22);
+      color: #cbe3ff;
+      background: rgba(15,27,43,.75);
+    }
+    .status-badges span:nth-child(2){ border-color: rgba(243,187,109,.28); color: #ffdca8; }
+    .status-badges span:nth-child(3){ border-color: rgba(120,222,255,.3); color: #b9f1ff; }
     .launch-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
     .launch-tile {
       min-height: 96px;
@@ -277,6 +319,18 @@
     }
     .launch-tile span { color: #9eb8de; font-size: .8rem; }
     .launch-tile strong { color: #eff6ff; font-size: 1.03rem; }
+    .launcher-statusbar {
+      margin-top: 10px;
+      border-radius: 10px;
+      border: 1px solid rgba(112,178,255,.2);
+      background: rgba(8,14,24,.9);
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 7px 9px;
+      font-size: .74rem;
+      color: #a5bfde;
+    }
 
     .float-card {
       position: absolute;
@@ -290,16 +344,16 @@
       box-shadow: 0 10px 24px rgba(0,0,0,.35);
       animation: levitate 7s ease-in-out infinite;
     }
-    .f1 { top: 10px; left: 8px; }
-    .f2 { right: -10px; top: 108px; animation-delay: 1.2s; }
-    .f3 { left: 36px; bottom: 170px; animation-delay: 2.1s; }
-    .f4 { right: 28px; bottom: 128px; animation-delay: 3s; }
-    .f5 { right: -2px; bottom: 70px; animation-delay: 3.8s; }
-    .f6 { left: 84px; bottom: 64px; animation-delay: 4.5s; }
+    .f1 { top: 12px; left: 8px; }
+    .f2 { right: 6px; top: 92px; animation-delay: 1.2s; }
+    .f3 { left: 20px; bottom: 176px; animation-delay: 2.1s; }
+    .f4 { right: 32px; bottom: 138px; animation-delay: 3s; }
+    .f5 { right: 8px; bottom: 84px; animation-delay: 3.8s; }
+    .f6 { left: 88px; bottom: 74px; animation-delay: 4.5s; }
 
     @keyframes levitate { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
 
-    .band { padding: 72px 0; }
+    .band { padding: 72px 0; border-top: 1px solid rgba(96, 130, 188, .1); }
     .band.soft { background: linear-gradient(180deg, rgba(9,15,25,.72), rgba(8,13,22,.56)); }
     .band.clean { background: transparent; }
     .band.gradient {
@@ -381,7 +435,7 @@
     .tab-btn:hover {
       border-color: rgba(133,198,255,.5);
       background: rgba(99,182,255,.14);
-      box-shadow: 0 0 14px rgba(99,182,255,.18);
+      box-shadow: 0 0 18px rgba(99,182,255,.28), inset 0 0 0 1px rgba(152,214,255,.2);
     }
 
     .feature-panel {
@@ -403,6 +457,30 @@
     .feature-side p { color: var(--muted); line-height: 1.6; }
 
     .feature-side ul { margin-left: 18px; margin-top: 8px; color: var(--muted); line-height: 1.55; }
+    .feature-preview-ui {
+      margin-top: 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(112,178,255,.22);
+      background: rgba(10,18,30,.84);
+      padding: 10px;
+      display: grid;
+      gap: 7px;
+    }
+    .feature-row {
+      height: 9px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(100,178,255,.3), rgba(100,178,255,.1));
+    }
+    .feature-cards-mini { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 7px; }
+    .feature-cards-mini span {
+      border-radius: 9px;
+      border: 1px solid rgba(112,178,255,.2);
+      background: rgba(14,25,40,.8);
+      font-size: .72rem;
+      color: #bfd8fb;
+      padding: 7px 8px;
+      text-align: center;
+    }
 
     .grid-4, .grid-3, .grid-2 { display: grid; gap: 12px; margin-top: 18px; }
     .grid-4 { grid-template-columns: repeat(4,minmax(0,1fr)); }
@@ -437,6 +515,19 @@
     }
 
     .pricing .card { position: relative; overflow: hidden; }
+    .pricing .grid-3 { align-items: stretch; }
+    .pricing .card {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+    .pricing .card .benefits {
+      margin: 10px 0 14px 18px;
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: .9rem;
+    }
+    .pricing .card .btn { margin-top: auto; }
     .pricing .card::before {
       content: "";
       position: absolute;
@@ -451,7 +542,7 @@
 
     .pricing .card.recommended {
       border-color: rgba(243,187,109,.56);
-      box-shadow: 0 18px 40px rgba(181,124,52,.25), inset 0 0 0 1px rgba(243,187,109,.2);
+      box-shadow: 0 20px 44px rgba(181,124,52,.3), inset 0 0 0 1px rgba(243,187,109,.24), 0 0 20px rgba(243,187,109,.2);
     }
     .recommended-badge {
       display: inline-block;
@@ -529,6 +620,7 @@
       padding: 18px;
     }
     .modal.open { display: grid; }
+    .modal.animating .modal-card { animation: modalIn .26s ease both; }
 
     .modal-card {
       width: min(720px, 100%);
@@ -566,6 +658,10 @@
       color: #d7e9ff;
       cursor: pointer;
     }
+    @keyframes modalIn {
+      from { opacity: 0; transform: translateY(8px) scale(.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
 
     .demo-grid {
       margin-top: 14px;
@@ -598,7 +694,7 @@
 
     @media (max-width: 900px) {
       .container { width: min(1440px, calc(100% - 20px)); }
-      header { border-radius: 18px; flex-direction: column; }
+      header { border-radius: 16px; flex-direction: column; padding: 10px 12px; gap: 8px; }
       .hero-band { padding: 52px 0 52px; min-height: auto; }
       .hero { min-height: auto; }
       .band, .cta-band { padding: 48px 0; }
@@ -606,6 +702,7 @@
       .grid-4, .grid-3, .grid-2, .metrics, .faq-grid, .demo-grid { grid-template-columns: 1fr; }
       .hero-actions .btn { width: 100%; }
       .launcher { width: 100%; transform: none; }
+      .launcher-layout { grid-template-columns: 1fr; }
       .float-card, .orbit { display: none; }
     }
 
@@ -644,6 +741,7 @@
         <h1>Admin Helper</h1>
         <p class="hero-sub">Премиальный помощник для администрации SAMP / CRMP / MTA проектов</p>
         <p>Команды, правила, F9-подсказки, регламент наказаний, внутренние инструменты и обновления — в едином лаунчере, который масштабируется под архитектуру и бренд вашего RP-проекта.</p>
+        <p class="hero-note">Единый стандарт работы администрации — в одном лаунчере.</p>
         <div class="hero-badges">
           <span>Premium launcher</span>
           <span>SAMP / CRMP / MTA</span>
@@ -654,7 +752,7 @@
           <a class="btn primary" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Купить доступ</a>
           <a class="btn ghost" href="#features">Посмотреть возможности</a>
           <a class="btn ghost" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Связаться</a>
-          <button class="btn ghost" type="button" id="openDemoModal">Как работает</button>
+          <button class="btn ghost" type="button" id="openDemoModal">▶ Как работает</button>
         </div>
       </div>
 
@@ -667,11 +765,32 @@
             <div class="dots"><span></span><span></span><span></span></div>
             <div class="launcher-title">Admin Helper Launcher System</div>
           </div>
-          <div class="launch-grid">
-            <article class="launch-tile"><span>Раздел</span><strong>Команды</strong></article>
-            <article class="launch-tile"><span>Раздел</span><strong>Правила</strong></article>
-            <article class="launch-tile"><span>Подсказка</span><strong>F9 Helper</strong></article>
-            <article class="launch-tile"><span>Система</span><strong>Обновления</strong></article>
+          <div class="launcher-layout">
+            <aside class="launcher-menu">
+              <div class="active">Главная</div>
+              <div>Команды</div>
+              <div>Правила</div>
+              <div>Регламент</div>
+              <div>Обновления</div>
+            </aside>
+            <div class="launcher-main">
+              <div class="status-badges">
+                <span>License active</span>
+                <span>Project build</span>
+                <span>System online</span>
+              </div>
+              <div class="launch-grid">
+                <article class="launch-tile"><span>Раздел</span><strong>Команды</strong></article>
+                <article class="launch-tile"><span>Раздел</span><strong>Правила</strong></article>
+                <article class="launch-tile"><span>Подсказка</span><strong>F9 Helper</strong></article>
+                <article class="launch-tile"><span>Система</span><strong>Обновления</strong></article>
+              </div>
+              <div class="launcher-statusbar">
+                <span>Build: Project Ready</span>
+                <span>Sync: 100%</span>
+                <span>Status: Secure</span>
+              </div>
+            </div>
           </div>
         </div>
         <div class="float-card f1">🧭 Команды</div>
@@ -763,6 +882,11 @@
           <span class="tag">Старт</span>
           <h3>Базовая версия</h3>
           <p>Готовая стандартная конфигурация Admin Helper.</p>
+          <ul class="benefits">
+            <li>Готовый launcher workflow</li>
+            <li>База команд и правил</li>
+            <li>Базовая поддержка запуска</li>
+          </ul>
           <p><strong>Стоимость:</strong> обсуждается индивидуально</p>
           <a class="btn ghost" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Заказать Admin Helper</a>
         </article>
@@ -771,6 +895,11 @@
           <span class="tag">Проект</span>
           <h3>Версия под проект</h3>
           <p>Кастомизация структуры, контента и ключевых разделов под сервер.</p>
+          <ul class="benefits">
+            <li>Персонализация под бренд</li>
+            <li>Индивидуальные разделы и регламент</li>
+            <li>Рекомендуемый формат для RP-проектов</li>
+          </ul>
           <p><strong>Стоимость:</strong> обсуждается индивидуально</p>
           <a class="btn primary" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Заказать Admin Helper</a>
         </article>
@@ -778,6 +907,11 @@
           <span class="tag">Premium</span>
           <h3>Premium-адаптация</h3>
           <p>Полный бренд-пакет, персональный дизайн лаунчера и приоритетные обновления.</p>
+          <ul class="benefits">
+            <li>Максимальная кастомизация UI</li>
+            <li>Приоритетная поддержка и апдейты</li>
+            <li>Отдельная сборка под сервер</li>
+          </ul>
           <p><strong>Стоимость:</strong> обсуждается индивидуально</p>
           <a class="btn gold" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Заказать Admin Helper</a>
         </article>
@@ -861,8 +995,8 @@
   <div class="modal" id="clientModal" aria-hidden="true">
     <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="clientTitle">
       <button class="modal-close" data-close="clientModal" type="button" aria-label="Закрыть">✕</button>
-      <h3 id="clientTitle">Личный кабинет клиентов</h3>
-      <p>Личный кабинет клиентов находится в разработке. Для доступа и консультации напишите в Telegram.</p>
+      <h3 id="clientTitle">Кабинет клиентов</h3>
+      <p>Кабинет клиентов находится в разработке. Для доступа и консультации напишите в Telegram.</p>
       <div class="hero-actions" style="margin-top:14px;">
         <a class="btn gold" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Написать в Telegram</a>
       </div>
@@ -945,7 +1079,12 @@
 
     function renderFeature(index) {
       const f = features[index];
-      main.innerHTML = `<h3>${f.title}</h3><p>${f.text}</p>`;
+      main.innerHTML = `<h3>${f.title}</h3><p>${f.text}</p>
+        <div class="feature-preview-ui">
+          <div class="feature-row" style="width:84%"></div>
+          <div class="feature-row" style="width:62%"></div>
+          <div class="feature-cards-mini"><span>Status: Active</span><span>Rules: Synced</span><span>Panel: Ready</span></div>
+        </div>`;
       side.innerHTML = `<p><strong style="color:#dff0ff;">Практическая ценность:</strong></p><ul>${f.points.map((p) => `<li>${p}</li>`).join('')}</ul>`;
       document.querySelectorAll('.tab-btn').forEach((btn, i) => btn.classList.toggle('active', i === index));
     }
@@ -960,17 +1099,36 @@
     });
     renderFeature(0);
 
+    const modalStack = new Set();
+    const updateBodyScroll = () => {
+      document.body.style.overflow = modalStack.size > 0 ? 'hidden' : '';
+    };
+
     function setupModal(triggerId, modalId) {
       const trigger = document.getElementById(triggerId);
       const modal = document.getElementById(modalId);
+      const closeModal = () => {
+        modal.classList.remove('open');
+        modal.classList.remove('animating');
+        modal.setAttribute('aria-hidden', 'true');
+        modalStack.delete(modalId);
+        updateBodyScroll();
+      };
       trigger.addEventListener('click', () => {
         modal.classList.add('open');
+        modal.classList.add('animating');
         modal.setAttribute('aria-hidden', 'false');
+        modalStack.add(modalId);
+        updateBodyScroll();
       });
       modal.addEventListener('click', (e) => {
         if (e.target === modal || e.target.dataset.close === modalId) {
-          modal.classList.remove('open');
-          modal.setAttribute('aria-hidden', 'true');
+          closeModal();
+        }
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('open')) {
+          closeModal();
         }
       });
     }
