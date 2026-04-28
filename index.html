@@ -447,68 +447,126 @@
       margin-top: 18px;
       border-radius: var(--radius-lg);
       border: 1px solid rgba(108,161,241,.24);
-      background: rgba(10,18,30,.8);
-      padding: 16px;
+      background: linear-gradient(155deg, rgba(10,18,30,.92), rgba(8,14,24,.88));
+      padding: 18px;
+      box-shadow: inset 0 0 0 1px rgba(113,172,255,.12), 0 22px 40px rgba(0,9,22,.3);
+    }
+
+    .feature-layout {
+      display: grid;
+      grid-template-columns: minmax(280px, .92fr) minmax(0, 1.08fr);
+      gap: 14px;
+      align-items: stretch;
     }
 
     .feature-tabs {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding-bottom: 6px;
-      scrollbar-width: thin;
+      display: grid;
+      gap: 10px;
     }
+
     .tab-btn {
-      border: 1px solid rgba(113,172,255,.22);
-      background: rgba(14,25,40,.86);
+      text-align: left;
+      border: 1px solid rgba(113,172,255,.24);
+      background: linear-gradient(140deg, rgba(14,25,40,.92), rgba(10,18,30,.92));
       color: #cae0ff;
-      border-radius: 999px;
-      padding: 8px 12px;
-      font-size: .83rem;
-      font-weight: 620;
+      border-radius: 14px;
+      padding: 12px;
       cursor: pointer;
-      transition: .2s ease;
-      white-space: nowrap;
+      transition: .25s ease;
+      display: grid;
+      gap: 6px;
     }
-    .tab-btn.active,
-    .tab-btn:hover {
-      border-color: rgba(133,198,255,.5);
+    .tab-btn .tab-top {
+      display:flex;
+      align-items:center;
+      gap:8px;
+      font-size: .85rem;
+      font-weight: 700;
+      color: #e3f0ff;
+    }
+    .tab-btn .tab-badge {
+      border-radius: 999px;
+      padding: 3px 8px;
+      font-size: .68rem;
+      border: 1px solid rgba(113,172,255,.34);
       background: rgba(99,182,255,.14);
-      box-shadow: 0 0 18px rgba(99,182,255,.28), inset 0 0 0 1px rgba(152,214,255,.2);
+      color: #bfe0ff;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .tab-btn .tab-sub {
+      color: #9fb8db;
+      font-size: .82rem;
+      line-height: 1.45;
+    }
+    .tab-btn:hover {
+      border-color: rgba(133,198,255,.44);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(22,72,140,.22);
+    }
+    .tab-btn.active {
+      border-color: rgba(243,187,109,.45);
+      background: linear-gradient(140deg, rgba(20,33,52,.96), rgba(10,18,30,.95));
+      box-shadow: inset 0 0 0 1px rgba(243,187,109,.18), 0 14px 26px rgba(24,82,153,.28), 0 0 20px rgba(243,187,109,.12);
     }
 
-    .feature-panel {
-      margin-top: 14px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      align-items: stretch;
-    }
-    .feature-main,
-    .feature-side {
+    .feature-showcase {
       border-radius: var(--radius-md);
-      border: 1px solid rgba(109,163,241,.26);
-      background: rgba(10,18,30,.92);
-      padding: 16px;
-    }
-    .feature-main h3 { font-size: 1.18rem; margin-bottom: 8px; }
-    .feature-main p,
-    .feature-side p { color: var(--muted); line-height: 1.6; }
-
-    .feature-side ul { margin-left: 18px; margin-top: 8px; color: var(--muted); line-height: 1.55; }
-    .feature-preview-ui {
-      margin-top: 12px;
-      border-radius: 12px;
-      border: 1px solid rgba(112,178,255,.22);
-      background: rgba(10,18,30,.84);
-      padding: 10px;
+      border: 1px solid rgba(109,163,241,.27);
+      background: linear-gradient(155deg, rgba(10,18,30,.95), rgba(8,15,24,.96));
+      padding: 18px;
       display: grid;
-      gap: 7px;
+      gap: 12px;
+      box-shadow: inset 0 0 0 1px rgba(120,183,255,.1);
+    }
+    .showcase-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .72rem;
+      font-weight: 700;
+      padding: 5px 10px;
+      width: fit-content;
+      border-radius: 999px;
+      color: #e7c791;
+      border: 1px solid rgba(243,187,109,.38);
+      background: rgba(243,187,109,.12);
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .feature-showcase h3 { font-size: 1.55rem; margin-bottom: 6px; }
+    .feature-showcase p { color: var(--muted); line-height: 1.7; }
+
+    .feature-side {
+      border-radius: 14px;
+      border: 1px solid rgba(109,163,241,.24);
+      background: rgba(12,22,36,.72);
+      padding: 12px;
+      display: grid;
+      gap: 8px;
+    }
+    .feature-side h4 { font-size: .92rem; color: #dff0ff; }
+    .feature-side ul { margin-left: 0; list-style: none; display: grid; gap: 7px; }
+    .feature-side li { color: #bad1ee; font-size: .92rem; display: flex; gap: 8px; align-items: flex-start; }
+    .feature-side li::before {
+      content: "✓";
+      color: #ffd58f;
+      font-weight: 700;
+      margin-top: -1px;
+    }
+
+    .feature-preview-ui {
+      border-radius: 13px;
+      border: 1px solid rgba(112,178,255,.22);
+      background: rgba(9,17,28,.92);
+      padding: 12px;
+      display: grid;
+      gap: 8px;
     }
     .feature-row {
       height: 9px;
       border-radius: 999px;
-      background: linear-gradient(90deg, rgba(100,178,255,.3), rgba(100,178,255,.1));
+      background: linear-gradient(90deg, rgba(100,178,255,.34), rgba(100,178,255,.08));
     }
     .feature-cards-mini { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 7px; }
     .feature-cards-mini span {
@@ -520,7 +578,16 @@
       padding: 7px 8px;
       text-align: center;
     }
-
+    .feature-statusline {
+      margin-top: 2px;
+      border-top: 1px solid rgba(112,178,255,.18);
+      padding-top: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      color: #9fb8db;
+      font-size: .78rem;
+    }
     .grid-5, .grid-4, .grid-3, .grid-2 { display: grid; gap: 12px; margin-top: 18px; }
 
     .before-after {
@@ -807,7 +874,7 @@
     @media (max-width: 1200px) {
       .hero { grid-template-columns: 1fr; }
       .split-about { grid-template-columns: 1fr; }
-      .feature-panel { grid-template-columns: 1fr; }
+      .feature-layout { grid-template-columns: 1fr; }
       .grid-5 { grid-template-columns: 1fr; }
       .grid-4 { grid-template-columns: repeat(2,minmax(0,1fr)); }
       .grid-3 { grid-template-columns: repeat(2,minmax(0,1fr)); }
@@ -983,10 +1050,9 @@
       <h2>Возможности</h2>
       <p class="lead">Интерактивный блок ключевых модулей Admin Helper. Выберите пункт — справа появится краткое описание и практическая польза для администрации.</p>
       <div class="feature-tabs-wrap">
-        <div class="feature-tabs" id="featureTabs" role="tablist" aria-label="Вкладки возможностей"></div>
-        <div class="feature-panel">
-          <article class="feature-main" id="featureMain" role="tabpanel" aria-live="polite"></article>
-          <article class="feature-side" id="featureSide"></article>
+        <div class="feature-layout">
+          <div class="feature-tabs" id="featureTabs" role="tablist" aria-label="Вкладки возможностей"></div>
+          <article class="feature-showcase" id="featureMain" role="tabpanel" aria-live="polite"></article>
         </div>
       </div>
     </div>
@@ -1299,60 +1365,71 @@
 
     const features = [
       {
+        badge: 'Core',
         title: 'F9-подсказка администратора',
+        subtitle: 'Быстрый помощник в рабочем процессе',
         text: 'Горячий вызов справки прямо в рабочем процессе: быстрое действие без потери темпа и контекста.',
-        points: ['Моментальный доступ к сценариям', 'Подсказки для новых сотрудников', 'Единый стиль ответов игрокам']
+        points: ['Моментальный доступ к сценариям', 'Подсказки для новых сотрудников', 'Единый стиль ответов игрокам', 'Снижение стресса в спорных кейсах']
       },
       {
+        badge: 'Commands',
         title: 'База команд проекта',
+        subtitle: 'Команды по ролям и категориям',
         text: 'Команды структурированы по ролям и задачам, чтобы администратор не тратил время на поиск в чатах.',
-        points: ['Роли и права доступа', 'Поиск нужной команды', 'Чёткий формат применения']
+        points: ['Роли и права доступа', 'Поиск нужной команды', 'Чёткий формат применения', 'Единая база для всей команды']
       },
       {
+        badge: 'Rules',
         title: 'Правила и наказания',
+        subtitle: 'Актуальный регламент в одном месте',
         text: 'Актуальный регламент доступен в один клик, что снижает ошибки и повышает прозрачность решений.',
-        points: ['Единая база регламента', 'Быстрые переходы по разделам', 'Стабильный стандарт наказаний']
+        points: ['Единая база регламента', 'Быстрые переходы по разделам', 'Стабильный стандарт наказаний', 'Меньше спорных ситуаций']
       },
       {
+        badge: 'Resources',
         title: 'Быстрый доступ к материалам',
+        subtitle: 'Внутренние ссылки и база знаний',
         text: 'Внутренние ссылки, инструкции и базы знаний собраны в одной панели для всей администрации.',
-        points: ['Ссылки и документы проекта', 'База FAQ', 'Сокращение рутины']
+        points: ['Ссылки и документы проекта', 'База FAQ', 'Сокращение рутины', 'Ускорение ежедневной работы']
       },
       {
+        badge: 'Updates',
         title: 'Автообновления',
+        subtitle: 'Централизованная доставка изменений',
         text: 'Лаунчер централизованно доставляет новые материалы и версии без ручной пересылки файлов.',
-        points: ['Единый источник обновлений', 'Актуальная база у всех админов', 'Контроль версий внутри проекта']
+        points: ['Единый источник обновлений', 'Актуальная база у всех админов', 'Контроль версий внутри проекта', 'Снижение хаоса в команде']
       },
       {
+        badge: 'Custom',
         title: 'Кастомизация под проект',
+        subtitle: 'Бренд и структура под ваш сервер',
         text: 'Настройка бренда, структуры и модулей под конкретную экономику и процессы RP-сервера.',
-        points: ['Цвета и логотипы', 'Разделы и сценарии', 'Гибкая адаптация под регламент']
-      },
-      {
-        title: 'Удобный лаунчер',
-        text: 'Премиальный интерфейс с быстрым UX для ежедневной работы администрации и кураторов.',
-        points: ['Чистый workflow', 'Снижение перегрузки интерфейса', 'Фокус на скорости решения кейсов']
-      },
-      {
-        title: 'Premium UI',
-        text: 'Сильная визуальная подача усиливает доверие к администрации и подчёркивает уровень проекта.',
-        points: ['Коммерческий dark стиль', 'Неоновые акценты', 'Готовность к развитию клиентского кабинета']
+        points: ['Цвета и логотипы', 'Разделы и сценарии', 'Гибкая адаптация под регламент', 'Единый premium-уровень подачи']
       }
     ];
 
     const tabs = document.getElementById('featureTabs');
     const main = document.getElementById('featureMain');
-    const side = document.getElementById('featureSide');
 
     function renderFeature(index) {
       const f = features[index];
-      main.innerHTML = `<h3>${f.title}</h3><p>${f.text}</p>
+      main.innerHTML = `
+        <span class="showcase-label">${f.badge}</span>
+        <div>
+          <h3>${f.title}</h3>
+          <p>${f.text}</p>
+        </div>
+        <section class="feature-side">
+          <h4>Практическая ценность</h4>
+          <ul>${f.points.map((p) => `<li>${p}</li>`).join('')}</ul>
+        </section>
         <div class="feature-preview-ui">
           <div class="feature-row" style="width:84%"></div>
           <div class="feature-row" style="width:62%"></div>
           <div class="feature-cards-mini"><span>Status: Active</span><span>Rules: Synced</span><span>Panel: Ready</span></div>
-        </div>`;
-      side.innerHTML = `<p><strong style="color:#dff0ff;">Практическая ценность:</strong></p><ul>${f.points.map((p) => `<li>${p}</li>`).join('')}</ul>`;
+        </div>
+        <div class="feature-statusline"><span>Sync: 100%</span><span>Build: Premium</span><span>Access: Secure</span></div>
+      `;
       document.querySelectorAll('.tab-btn').forEach((btn, i) => {
         const isActive = i === index;
         btn.classList.toggle('active', isActive);
@@ -1365,7 +1442,7 @@
       const btn = document.createElement('button');
       btn.className = 'tab-btn' + (i === 0 ? ' active' : '');
       btn.type = 'button';
-      btn.textContent = f.title;
+      btn.innerHTML = `<span class="tab-top"><span class="tab-badge">${f.badge}</span>${f.title}</span><span class="tab-sub">${f.subtitle}</span>`;
       btn.id = `feature-tab-${i}`;
       btn.setAttribute('role', 'tab');
       btn.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
