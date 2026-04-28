@@ -164,6 +164,14 @@
     }
     .btn:hover { transform: translateY(-2px); }
 
+    a:focus-visible,
+    button:focus-visible,
+    .tab-btn:focus-visible {
+      outline: 2px solid rgba(243,187,109,.95);
+      outline-offset: 2px;
+      box-shadow: 0 0 0 3px rgba(99,182,255,.35);
+    }
+
     .hero-band {
       width: 100%;
       min-height: min(100vh, 980px);
@@ -224,6 +232,7 @@
 
     .hero-actions { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; }
     .hero-note { margin-top: 10px; color: #cde1ff; font-weight: 600; }
+    .hero-micro { margin-top: 10px; color: #b8d1f3; font-size: .98rem; max-width: 640px; }
 
     .widget-cloud { position: relative; min-height: 610px; }
     .orbit { position: absolute; border: 1px solid rgba(112,178,255,.16); border-radius: 999px; pointer-events: none; }
@@ -288,6 +297,15 @@
       border-color: rgba(132,194,255,.36);
       background: rgba(99,182,255,.16);
     }
+    .launcher-search {
+      margin-bottom: 8px;
+      border-radius: 10px;
+      border: 1px solid rgba(112,178,255,.24);
+      background: rgba(10,18,30,.9);
+      padding: 7px 10px;
+      font-size: .77rem;
+      color: #9ab8df;
+    }
     .launcher-main {
       border-radius: 14px;
       border: 1px solid rgba(112,178,255,.24);
@@ -306,6 +324,18 @@
     }
     .status-badges span:nth-child(2){ border-color: rgba(243,187,109,.28); color: #ffdca8; }
     .status-badges span:nth-child(3){ border-color: rgba(120,222,255,.3); color: #b9f1ff; }
+    .admin-shift {
+      margin-bottom: 10px;
+      border-radius: 11px;
+      border: 1px solid rgba(243,187,109,.32);
+      background: linear-gradient(125deg, rgba(36,31,19,.6), rgba(14,22,34,.88));
+      padding: 8px 10px;
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: .74rem;
+      color: #f2ddb9;
+    }
     .launch-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
     .launch-tile {
       min-height: 96px;
@@ -570,17 +600,43 @@
     }
     .faq-item summary { cursor: pointer; font-weight: 650; color: #e5f0ff; }
     .faq-item p { color: var(--muted); margin-top: 8px; line-height: 1.55; }
-    .timeline .card { position: relative; }
-    .timeline .card::after {
-      content: "";
-      position: absolute;
-      right: -8px;
-      top: 50%;
-      width: 14px;
-      height: 2px;
-      background: rgba(119,185,255,.35);
+    .timeline-wrap {
+      margin-top: 22px;
+      position: relative;
+      padding-top: 28px;
     }
-    .timeline .card:last-child::after { display: none; }
+    .timeline-track {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 14px;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(99,182,255,.75), rgba(243,187,109,.72));
+      box-shadow: 0 0 14px rgba(99,182,255,.4);
+    }
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(5,minmax(0,1fr));
+      gap: 12px;
+    }
+    .timeline-step { position: relative; padding-top: 20px; }
+    .timeline-dot {
+      position: absolute;
+      top: -2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 1px solid rgba(243,187,109,.52);
+      background: radial-gradient(circle at 30% 30%, rgba(243,187,109,.42), rgba(99,182,255,.28));
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      font-size: .82rem;
+      box-shadow: 0 0 16px rgba(99,182,255,.42);
+    }
 
     .cta-band {
       width: 100%;
@@ -606,6 +662,36 @@
     }
     .cta-band::before { top: 22px; }
     .cta-band::after { bottom: 22px; }
+    .cta-layout { display:grid; grid-template-columns: 1.1fr .9fr; gap: 16px; align-items: center; }
+    .cta-mini {
+      border-radius: 16px;
+      border: 1px solid rgba(243,187,109,.32);
+      background: rgba(12,22,36,.9);
+      padding: 16px;
+      box-shadow: inset 0 0 0 1px rgba(243,187,109,.14);
+    }
+    .cta-mini h3 { margin-bottom: 8px; font-size: 1rem; }
+    .cta-mini ul { margin-left: 18px; color: var(--muted); line-height: 1.6; }
+    .accent-strip {
+      margin: 12px 0 16px;
+      display: grid;
+      grid-template-columns: repeat(4,minmax(0,1fr));
+      gap: 8px;
+    }
+    .accent-strip span {
+      border-radius: 999px;
+      border: 1px solid rgba(243,187,109,.28);
+      background: rgba(243,187,109,.1);
+      color: #f8ddb4;
+      font-size: .75rem;
+      text-align: center;
+      padding: 6px 8px;
+      text-transform: lowercase;
+    }
+    .icon-title { display:flex; align-items:center; gap:8px; }
+    .icon-title b { color:#ffd79f; }
+    .client-status { display:inline-block; margin-bottom:8px; padding:4px 9px; border-radius:999px; border:1px solid rgba(243,187,109,.36); background:rgba(243,187,109,.12); color:#ffe1b6; font-size:.75rem; font-weight:700;}
+
     .cta-title {
       font-size: clamp(2.1rem, 4.8vw, 4rem);
       max-width: 930px;
@@ -714,13 +800,24 @@
       .hero-wordmark { opacity: .04; font-size: clamp(2.6rem, 17vw, 6.4rem); }
       .grid-4, .grid-3, .grid-2, .metrics, .faq-grid, .demo-grid { grid-template-columns: 1fr; }
       .hero-actions .btn { width: 100%; }
+      nav { width: 100%; overflow-x: auto; justify-content: flex-start; padding-bottom: 4px; }
+      nav a { flex: 0 0 auto; }
       .launcher { width: 100%; transform: none; }
+      .launcher, .widget-cloud { overflow: visible; }
+      .timeline-wrap { padding-top: 0; }
+      .timeline-track { left: 14px; top: 0; width: 2px; height: 100%; right: auto; background: linear-gradient(180deg, rgba(99,182,255,.75), rgba(243,187,109,.72)); }
+      .timeline { grid-template-columns: 1fr; }
+      .timeline-step { padding-top: 0; padding-left: 40px; }
+      .timeline-dot { left: 14px; transform: translateX(-50%); top: 6px; }
+      .cta-layout { grid-template-columns: 1fr; }
+      .accent-strip { grid-template-columns: repeat(2,minmax(0,1fr)); }
       .launcher-layout { grid-template-columns: 1fr; }
       .float-card, .orbit { display: none; }
     }
 
     @media (prefers-reduced-motion: reduce) {
       * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+      .launcher { transform: none !important; }
     }
   </style>
 </head>
@@ -756,6 +853,7 @@
         <p class="hero-sub">Премиальный помощник для администрации SAMP / CRMP / MTA проектов</p>
         <p>Команды, правила, F9-подсказки, регламент наказаний, внутренние инструменты и обновления — в едином лаунчере, который масштабируется под архитектуру и бренд вашего RP-проекта.</p>
         <p class="hero-note">Единый стандарт работы администрации — в одном лаунчере.</p>
+        <p class="hero-micro">Создан для проектов, где важны порядок, скорость и единый стандарт администрации.</p>
         <div class="hero-badges">
           <span>Premium launcher</span>
           <span>SAMP / CRMP / MTA</span>
@@ -787,10 +885,12 @@
               <div>Обновления</div>
             </aside>
             <div class="launcher-main">
+              <div class="launcher-search">🔎 Быстрый поиск по командам, правилам и кейсам...</div>
+              <div class="admin-shift"><span>Admin shift</span><span>18:00–00:00 / Moderation Live</span></div>
               <div class="status-badges">
+                <span>Rules synced</span>
+                <span>Commands ready</span>
                 <span>License active</span>
-                <span>Project build</span>
-                <span>System online</span>
               </div>
               <div class="launch-grid">
                 <article class="launch-tile"><span>Раздел</span><strong>Команды</strong></article>
@@ -825,7 +925,8 @@
         <article class="card tilt"><h3>Регламент забывается</h3><p>Решения принимаются не по единому стандарту, а по памяти.</p></article>
         <article class="card tilt"><h3>Новички ошибаются</h3><p>Онбординг замедляется и увеличивается риск спорных наказаний.</p></article>
         <article class="card tilt"><h3>Обновления расходятся по чатам</h3><p>Команда использует разные версии материалов и инструкций.</p></article>
-        <article class="card tilt"><h3>Нет единого стандарта</h3><p>Руководству сложнее контролировать качество работы администрации.</p></article>
+        <article class="card tilt"><h3>Нет единого стандарта</h3><p>Без централизованного инструмента администрация работает неравномерно.</p></article>
+        <article class="card tilt"><h3>Сложнее контролировать качество</h3><p>Без единого инструмента руководству труднее держать стабильный уровень работы администрации.</p></article>
       </div>
     </div>
   </section>
@@ -868,13 +969,14 @@
   <section class="band clean reveal">
     <div class="container content">
       <h2>Что получает ваш проект</h2>
+      <div class="accent-strip"><span>единая база</span><span>бренд проекта</span><span>быстрая работа</span><span>обновления</span></div>
       <div class="grid-3">
-        <article class="card tilt"><h3>Единый стандарт администрации</h3><p>Стабильный подход к работе всей команды.</p></article>
-        <article class="card tilt"><h3>Быстрый онбординг новых админов</h3><p>Новые сотрудники быстрее входят в процессы.</p></article>
-        <article class="card tilt"><h3>Меньше ошибок в наказаниях</h3><p>Регламент и правила применяются одинаково.</p></article>
-        <article class="card tilt"><h3>Брендированный launcher под сервер</h3><p>Продукт выглядит как часть вашего проекта.</p></article>
-        <article class="card tilt"><h3>Централизованные обновления</h3><p>Вся администрация работает с актуальной базой.</p></article>
-        <article class="card tilt"><h3>Премиальный вид продукта</h3><p>Коммерческий уровень подачи усиливает доверие.</p></article>
+        <article class="card tilt"><h3 class="icon-title"><b>◆</b>Единый стандарт администрации</h3><p>Стабильный подход к работе всей команды.</p></article>
+        <article class="card tilt"><h3 class="icon-title"><b>◆</b>Быстрый онбординг новых админов</h3><p>Новые сотрудники быстрее входят в процессы.</p></article>
+        <article class="card tilt"><h3 class="icon-title"><b>◆</b>Меньше ошибок в наказаниях</h3><p>Регламент и правила применяются одинаково.</p></article>
+        <article class="card tilt"><h3 class="icon-title"><b>◆</b>Брендированный launcher под сервер</h3><p>Продукт выглядит как часть вашего проекта.</p></article>
+        <article class="card tilt"><h3 class="icon-title"><b>◆</b>Централизованные обновления</h3><p>Вся администрация работает с актуальной базой.</p></article>
+        <article class="card tilt"><h3 class="icon-title"><b>◆</b>Премиальный вид продукта</h3><p>Коммерческий уровень подачи усиливает доверие.</p></article>
       </div>
     </div>
   </section>
@@ -911,19 +1013,6 @@
         <article class="card tilt"><h3>Бренд проекта</h3><p>Название, логотип, цвета и визуальная айдентика.</p></article>
         <article class="card tilt"><h3>Контент</h3><p>Правила, команды, подсказки и внутренняя база материалов.</p></article>
         <article class="card tilt"><h3>Интеграции</h3><p>Telegram, Discord, обновления и отдельная сборка под сервер.</p></article>
-      </div>
-    </div>
-  </section>
-
-  <section class="band gradient reveal">
-    <div class="container content">
-      <h2>Как проходит работа</h2>
-      <div class="grid-5 timeline">
-        <article class="card tilt"><h3>1. Обсуждаем проект</h3><p>Вы рассказываете, какой у вас сервер, какие нужны разделы, стиль и логика.</p></article>
-        <article class="card tilt"><h3>2. Собираем материалы</h3><p>Команды, правила, регламент, ссылки, Telegram/Discord и внутренние инструкции.</p></article>
-        <article class="card tilt"><h3>3. Делаем дизайн</h3><p>Лаунчер оформляется под бренд вашего проекта.</p></article>
-        <article class="card tilt"><h3>4. Выдаём сборку</h3><p>Вы получаете готовую версию Admin Helper под свой сервер.</p></article>
-        <article class="card tilt"><h3>5. Поддерживаем обновления</h3><p>При необходимости дорабатываем разделы и обновляем материалы.</p></article>
       </div>
     </div>
   </section>
@@ -975,14 +1064,30 @@
 
   <section class="band soft reveal">
     <div class="container content">
-      <h2>Как выглядит программа</h2>
+      <h2>Модули лаунчера</h2>
       <div class="grid-3">
-        <article class="card tilt"><h3>Главная</h3><p>Обзор разделов, быстрый старт и состояние версии.</p></article>
-        <article class="card tilt"><h3>Правила</h3><p>Регламенты проекта с чёткой структурой и поиском.</p></article>
-        <article class="card tilt"><h3>Команды</h3><p>Единая база команд для всех ролей администрации.</p></article>
-        <article class="card tilt"><h3>Подсказка</h3><p>Окно помощи для рабочих сценариев в смене.</p></article>
-        <article class="card tilt"><h3>Обновления</h3><p>История изменений и доставка новых данных в один клик.</p></article>
-        <article class="card tilt"><h3>Настройки</h3><p>Персонализация интерфейса и параметров под ваш сервер.</p></article>
+        <article class="card tilt"><span class="tag">Core</span><h3>Главная панель</h3><p>Быстрый обзор состояния и разделов.</p></article>
+        <article class="card tilt"><span class="tag">Rules</span><h3>Правила</h3><p>Регламент и наказания в удобной структуре.</p></article>
+        <article class="card tilt"><span class="tag">Commands</span><h3>Команды</h3><p>База команд проекта по категориям.</p></article>
+        <article class="card tilt"><span class="tag">Fast Help</span><h3>F9-подсказка</h3><p>Быстрый помощник во время работы.</p></article>
+        <article class="card tilt"><span class="tag">Update Hub</span><h3>Обновления</h3><p>Доставка новых материалов и изменений.</p></article>
+        <article class="card tilt"><span class="tag">Personal</span><h3>Настройки</h3><p>Оформление и параметры под сервер.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band gradient reveal">
+    <div class="container content">
+      <h2>Как проходит работа</h2>
+      <div class="timeline-wrap">
+        <div class="timeline-track" aria-hidden="true"></div>
+        <div class="timeline">
+          <article class="timeline-step"><span class="timeline-dot">1</span><div class="card tilt"><h3>Обсуждаем проект</h3><p>Вы рассказываете, какой у вас сервер, какие нужны разделы, стиль и логика.</p></div></article>
+          <article class="timeline-step"><span class="timeline-dot">2</span><div class="card tilt"><h3>Собираем материалы</h3><p>Команды, правила, регламент, ссылки, Telegram/Discord и внутренние инструкции.</p></div></article>
+          <article class="timeline-step"><span class="timeline-dot">3</span><div class="card tilt"><h3>Делаем дизайн</h3><p>Лаунчер оформляется под бренд вашего проекта.</p></div></article>
+          <article class="timeline-step"><span class="timeline-dot">4</span><div class="card tilt"><h3>Выдаём сборку</h3><p>Вы получаете готовую версию Admin Helper под свой сервер.</p></div></article>
+          <article class="timeline-step"><span class="timeline-dot">5</span><div class="card tilt"><h3>Поддерживаем обновления</h3><p>При необходимости дорабатываем разделы и обновляем материалы.</p></div></article>
+        </div>
       </div>
     </div>
   </section>
@@ -991,24 +1096,35 @@
     <div class="container content">
       <h2>FAQ</h2>
       <div class="faq-grid">
-        <details class="faq-item"><summary>Можно ли сделать Admin Helper под мой бренд?</summary><p>Да, под проект настраиваются цвета, структура, разделы и визуальный стиль.</p></details>
-        <details class="faq-item"><summary>Можно ли добавить свои правила и команды?</summary><p>Да, вы добавляете собственный регламент, команды и внутренние материалы.</p></details>
-        <details class="faq-item"><summary>Можно ли подключить обновления?</summary><p>Да, обновления можно выстроить централизованно под ваш процесс работы.</p></details>
-        <details class="faq-item"><summary>Можно ли сделать кабинет клиентов?</summary><p>Да, кабинет клиентов запланирован как отдельный модуль с управлением сборками и лицензиями.</p></details>
+        <details class="faq-item"><summary>Можно ли сделать Admin Helper под мой бренд?</summary><p>Да, мы адаптируем цвета, структуру, разделы и стиль так, чтобы продукт выглядел как родной модуль вашего проекта.</p></details>
+        <details class="faq-item"><summary>Можно ли добавить свои правила и команды?</summary><p>Да, в лаунчер переносится ваш регламент, команды и внутренняя база — без компромиссов по структуре.</p></details>
+        <details class="faq-item"><summary>Можно ли подключить обновления?</summary><p>Да, обновления выстраиваются централизованно, чтобы вся команда работала в одной актуальной версии.</p></details>
+        <details class="faq-item"><summary>Можно ли сделать кабинет клиентов?</summary><p>Да, кабинет клиентов развиваем как отдельный модуль для управления сборками, лицензией, обновлениями и документами.</p></details>
         <details class="faq-item"><summary>Можно ли сделать авторизацию?</summary><p>Да, но для настоящей авторизации нужен backend: например Firebase, Supabase или отдельный сервер. В статическом index.html безопасную авторизацию с паролями делать нельзя.</p></details>
-        <details class="faq-item"><summary>Как заказать адаптацию?</summary><p>Напишите в Telegram, и мы обсудим проект, структуру и этапы адаптации.</p></details>
+        <details class="faq-item"><summary>Как заказать адаптацию?</summary><p>Напишите в Telegram — быстро согласуем стиль проекта, модули, формат сборки и стоимость адаптации.</p></details>
       </div>
     </div>
   </section>
 
   <section id="cta" class="cta-band reveal">
-    <div class="container content">
-      <h2 class="cta-title">Готовы сделать администрацию проекта быстрее и сильнее?</h2>
-      <p class="lead">Admin Helper помогает собрать команды, регламент, подсказки и обновления в единую систему под стиль вашего RP-проекта.</p>
-      <div class="hero-actions">
-        <a class="btn primary" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Заказать Admin Helper</a>
-        <a class="btn gold" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Обсудить проект</a>
+    <div class="container content cta-layout">
+      <div>
+        <h2 class="cta-title">Готовы сделать администрацию проекта быстрее и сильнее?</h2>
+        <p class="lead">Admin Helper помогает собрать команды, регламент, подсказки и обновления в единую систему под стиль вашего RP-проекта.</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Заказать Admin Helper</a>
+          <a class="btn gold" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Обсудить проект</a>
+        </div>
       </div>
+      <aside class="cta-mini">
+        <h3>Что обсудим в Telegram</h3>
+        <ul>
+          <li>стиль проекта</li>
+          <li>регламент и команды</li>
+          <li>формат сборки</li>
+          <li>стоимость адаптации</li>
+        </ul>
+      </aside>
     </div>
   </section>
 
@@ -1050,12 +1166,14 @@
     <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="clientTitle">
       <button class="modal-close" data-close="clientModal" type="button" aria-label="Закрыть">✕</button>
       <h3 id="clientTitle">Кабинет клиентов</h3>
-      <p>Кабинет клиентов находится в разработке. В будущем здесь можно будет управлять сборками, лицензиями и обновлениями. Для доступа и консультации напишите в Telegram.</p>
+      <span class="client-status">В разработке</span>
+      <p>Настоящий кабинет клиентов требует backend и будет развиваться отдельным модулем. Уже сейчас можно согласовать структуру будущего кабинета в Telegram.</p>
       <div class="demo-grid">
         <div class="demo-box">Мои сборки</div>
         <div class="demo-box">Лицензия</div>
         <div class="demo-box">Обновления</div>
         <div class="demo-box">Поддержка</div>
+        <div class="demo-box">Документы</div>
       </div>
       <div class="hero-actions" style="margin-top:14px;">
         <a class="btn gold" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Написать в Telegram</a>
@@ -1089,6 +1207,23 @@
         card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg)';
       });
     });
+
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const launcher = document.querySelector('.launcher');
+    if (launcher && !reduceMotion) {
+      launcher.addEventListener('mousemove', (e) => {
+        const rect = launcher.getBoundingClientRect();
+        const px = (e.clientX - rect.left) / rect.width;
+        const py = (e.clientY - rect.top) / rect.height;
+        const rotateY = (px - 0.5) * 6;
+        const rotateX = (0.5 - py) * 5;
+        launcher.style.transform = `perspective(1020px) rotateY(${rotateY}deg) rotateX(${rotateX}deg)`;
+      });
+      launcher.addEventListener('mouseleave', () => {
+        launcher.style.transform = 'perspective(1020px) rotateY(-9deg) rotateX(4deg)';
+      });
+    }
 
     const features = [
       {
