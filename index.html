@@ -98,7 +98,7 @@
       box-shadow: 0 14px 38px rgba(0, 0, 0, .35);
     }
 
-    .brand { display: flex; align-items: center; gap: 11px; font-weight: 800; }
+    .brand { display: flex; align-items: center; gap: 11px; font-weight: 800; color: var(--text); text-decoration: none; }
     .brand-mark {
       width: 30px;
       height: 30px;
@@ -482,7 +482,8 @@
       text-align: center;
     }
 
-    .grid-4, .grid-3, .grid-2 { display: grid; gap: 12px; margin-top: 18px; }
+    .grid-5, .grid-4, .grid-3, .grid-2 { display: grid; gap: 12px; margin-top: 18px; }
+    .grid-5 { grid-template-columns: repeat(5,minmax(0,1fr)); }
     .grid-4 { grid-template-columns: repeat(4,minmax(0,1fr)); }
     .grid-3 { grid-template-columns: repeat(3,minmax(0,1fr)); }
     .grid-2 { grid-template-columns: repeat(2,minmax(0,1fr)); }
@@ -569,6 +570,17 @@
     }
     .faq-item summary { cursor: pointer; font-weight: 650; color: #e5f0ff; }
     .faq-item p { color: var(--muted); margin-top: 8px; line-height: 1.55; }
+    .timeline .card { position: relative; }
+    .timeline .card::after {
+      content: "";
+      position: absolute;
+      right: -8px;
+      top: 50%;
+      width: 14px;
+      height: 2px;
+      background: rgba(119,185,255,.35);
+    }
+    .timeline .card:last-child::after { display: none; }
 
     .cta-band {
       width: 100%;
@@ -686,6 +698,7 @@
       .hero { grid-template-columns: 1fr; }
       .split-about { grid-template-columns: 1fr; }
       .feature-panel { grid-template-columns: 1fr; }
+      .grid-5 { grid-template-columns: 1fr; }
       .grid-4 { grid-template-columns: repeat(2,minmax(0,1fr)); }
       .grid-3 { grid-template-columns: repeat(2,minmax(0,1fr)); }
       .metrics { grid-template-columns: repeat(2,minmax(0,1fr)); }
@@ -717,8 +730,9 @@
   <div class="site-header-wrap">
     <div class="container">
       <header>
-        <div class="brand"><span class="brand-mark" aria-hidden="true"></span>Admin Helper</div>
+        <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"></span>Admin Helper</a>
         <nav>
+          <a href="#top">Главная</a>
           <a href="#about">О продукте</a>
           <a href="#features">Возможности</a>
           <a href="#audience">Для кого</a>
@@ -727,7 +741,7 @@
           <a href="#contact">Связь</a>
         </nav>
         <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;">
-          <button class="btn ghost" id="openClientModal" type="button">Вход для клиентов</button>
+          <button class="btn ghost" id="openClientModal" type="button">Кабинет клиентов</button>
           <a class="btn gold" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Заказать</a>
         </div>
       </header>
@@ -749,9 +763,8 @@
           <span>Product by A.Almazov</span>
         </div>
         <div class="hero-actions">
-          <a class="btn primary" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Купить доступ</a>
+          <a class="btn primary" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Заказать доступ</a>
           <a class="btn ghost" href="#features">Посмотреть возможности</a>
-          <a class="btn ghost" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Связаться</a>
           <button class="btn ghost" type="button" id="openDemoModal">▶ Как работает</button>
         </div>
       </div>
@@ -803,6 +816,20 @@
     </div>
   </section>
 
+  <section class="band soft reveal">
+    <div class="container content">
+      <h2>Почему проектам нужен Admin Helper</h2>
+      <p class="lead">На RP-проектах регламент, команды и внутренние инструкции часто разбросаны по чатам, документам и сообщениям. Из-за этого администрация тратит время, новички чаще ошибаются, а руководство сложнее удерживает единый стандарт работы.</p>
+      <div class="grid-3">
+        <article class="card tilt"><h3>Команды теряются</h3><p>Важные команды и сценарии расходятся по разным источникам.</p></article>
+        <article class="card tilt"><h3>Регламент забывается</h3><p>Решения принимаются не по единому стандарту, а по памяти.</p></article>
+        <article class="card tilt"><h3>Новички ошибаются</h3><p>Онбординг замедляется и увеличивается риск спорных наказаний.</p></article>
+        <article class="card tilt"><h3>Обновления расходятся по чатам</h3><p>Команда использует разные версии материалов и инструкций.</p></article>
+        <article class="card tilt"><h3>Нет единого стандарта</h3><p>Руководству сложнее контролировать качество работы администрации.</p></article>
+      </div>
+    </div>
+  </section>
+
   <section id="about" class="band clean reveal">
     <div class="container content split-about">
       <div>
@@ -834,6 +861,20 @@
           <article class="feature-main" id="featureMain"></article>
           <article class="feature-side" id="featureSide"></article>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band clean reveal">
+    <div class="container content">
+      <h2>Что получает ваш проект</h2>
+      <div class="grid-3">
+        <article class="card tilt"><h3>Единый стандарт администрации</h3><p>Стабильный подход к работе всей команды.</p></article>
+        <article class="card tilt"><h3>Быстрый онбординг новых админов</h3><p>Новые сотрудники быстрее входят в процессы.</p></article>
+        <article class="card tilt"><h3>Меньше ошибок в наказаниях</h3><p>Регламент и правила применяются одинаково.</p></article>
+        <article class="card tilt"><h3>Брендированный launcher под сервер</h3><p>Продукт выглядит как часть вашего проекта.</p></article>
+        <article class="card tilt"><h3>Централизованные обновления</h3><p>Вся администрация работает с актуальной базой.</p></article>
+        <article class="card tilt"><h3>Премиальный вид продукта</h3><p>Коммерческий уровень подачи усиливает доверие.</p></article>
       </div>
     </div>
   </section>
@@ -874,6 +915,19 @@
     </div>
   </section>
 
+  <section class="band gradient reveal">
+    <div class="container content">
+      <h2>Как проходит работа</h2>
+      <div class="grid-5 timeline">
+        <article class="card tilt"><h3>1. Обсуждаем проект</h3><p>Вы рассказываете, какой у вас сервер, какие нужны разделы, стиль и логика.</p></article>
+        <article class="card tilt"><h3>2. Собираем материалы</h3><p>Команды, правила, регламент, ссылки, Telegram/Discord и внутренние инструкции.</p></article>
+        <article class="card tilt"><h3>3. Делаем дизайн</h3><p>Лаунчер оформляется под бренд вашего проекта.</p></article>
+        <article class="card tilt"><h3>4. Выдаём сборку</h3><p>Вы получаете готовую версию Admin Helper под свой сервер.</p></article>
+        <article class="card tilt"><h3>5. Поддерживаем обновления</h3><p>При необходимости дорабатываем разделы и обновляем материалы.</p></article>
+      </div>
+    </div>
+  </section>
+
   <section id="pricing" class="band clean pricing reveal">
     <div class="container content">
       <h2>Тарифы</h2>
@@ -891,7 +945,7 @@
           <a class="btn ghost" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Заказать Admin Helper</a>
         </article>
         <article class="card tilt recommended">
-          <span class="recommended-badge">Recommended</span>
+          <span class="recommended-badge">Рекомендуем</span>
           <span class="tag">Проект</span>
           <h3>Версия под проект</h3>
           <p>Кастомизация структуры, контента и ключевых разделов под сервер.</p>
@@ -937,23 +991,23 @@
     <div class="container content">
       <h2>FAQ</h2>
       <div class="faq-grid">
-        <details class="faq-item"><summary>Подойдёт ли для моего проекта?</summary><p>Да, Admin Helper создавался как универсальная база для SAMP, CRMP и MTA серверов с возможностью адаптации.</p></details>
-        <details class="faq-item"><summary>Можно ли изменить дизайн?</summary><p>Да, доступна брендовая настройка: цвета, логотипы, структура экранов и визуальные акценты.</p></details>
-        <details class="faq-item"><summary>Можно ли добавить свои правила?</summary><p>Да, правила, команды, подсказки и ссылки настраиваются под регламент вашего проекта.</p></details>
-        <details class="faq-item"><summary>Как происходит обновление?</summary><p>Через встроенный механизм обновлений: новая версия и материалы доставляются централизованно.</p></details>
-        <details class="faq-item"><summary>Можно ли сделать под мой бренд?</summary><p>Да, в версиях под проект и Premium выполняется полноценная адаптация под ваш стиль.</p></details>
-        <details class="faq-item"><summary>Как купить доступ?</summary><p>Оставьте заявку через кнопку заказа и получите персональное коммерческое предложение.</p></details>
+        <details class="faq-item"><summary>Можно ли сделать Admin Helper под мой бренд?</summary><p>Да, под проект настраиваются цвета, структура, разделы и визуальный стиль.</p></details>
+        <details class="faq-item"><summary>Можно ли добавить свои правила и команды?</summary><p>Да, вы добавляете собственный регламент, команды и внутренние материалы.</p></details>
+        <details class="faq-item"><summary>Можно ли подключить обновления?</summary><p>Да, обновления можно выстроить централизованно под ваш процесс работы.</p></details>
+        <details class="faq-item"><summary>Можно ли сделать кабинет клиентов?</summary><p>Да, кабинет клиентов запланирован как отдельный модуль с управлением сборками и лицензиями.</p></details>
+        <details class="faq-item"><summary>Можно ли сделать авторизацию?</summary><p>Да, но для настоящей авторизации нужен backend: например Firebase, Supabase или отдельный сервер. В статическом index.html безопасную авторизацию с паролями делать нельзя.</p></details>
+        <details class="faq-item"><summary>Как заказать адаптацию?</summary><p>Напишите в Telegram, и мы обсудим проект, структуру и этапы адаптации.</p></details>
       </div>
     </div>
   </section>
 
   <section id="cta" class="cta-band reveal">
     <div class="container content">
-      <h2 class="cta-title">Готов усилить администрацию своего проекта?</h2>
-      <p class="lead">Запустите Admin Helper как профессиональный стандарт для вашей команды: быстрее процессы, меньше ошибок, сильнее бренд.</p>
+      <h2 class="cta-title">Готовы сделать администрацию проекта быстрее и сильнее?</h2>
+      <p class="lead">Admin Helper помогает собрать команды, регламент, подсказки и обновления в единую систему под стиль вашего RP-проекта.</p>
       <div class="hero-actions">
-        <a class="btn primary" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Купить Admin Helper</a>
-        <a class="btn gold" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Связаться в Telegram</a>
+        <a class="btn primary" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Заказать Admin Helper</a>
+        <a class="btn gold" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Обсудить проект</a>
       </div>
     </div>
   </section>
@@ -996,7 +1050,13 @@
     <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="clientTitle">
       <button class="modal-close" data-close="clientModal" type="button" aria-label="Закрыть">✕</button>
       <h3 id="clientTitle">Кабинет клиентов</h3>
-      <p>Кабинет клиентов находится в разработке. Для доступа и консультации напишите в Telegram.</p>
+      <p>Кабинет клиентов находится в разработке. В будущем здесь можно будет управлять сборками, лицензиями и обновлениями. Для доступа и консультации напишите в Telegram.</p>
+      <div class="demo-grid">
+        <div class="demo-box">Мои сборки</div>
+        <div class="demo-box">Лицензия</div>
+        <div class="demo-box">Обновления</div>
+        <div class="demo-box">Поддержка</div>
+      </div>
       <div class="hero-actions" style="margin-top:14px;">
         <a class="btn gold" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Написать в Telegram</a>
       </div>
