@@ -16,19 +16,19 @@
   <style>
     :root {
       --bg: #070b12;
-      --bg-soft: #0e1523;
-      --bg-mid: #0a111e;
-      --surface: rgba(16, 24, 38, 0.72);
-      --surface-strong: rgba(12, 20, 31, 0.86);
-      --line: rgba(88, 132, 214, 0.25);
-      --text: #e8f0ff;
-      --muted: #9fb4d9;
-      --neon: #5faeff;
+      --bg-soft: #0b1321;
+      --bg-mid: #0d1626;
+      --surface: rgba(16, 24, 38, 0.74);
+      --surface-strong: rgba(11, 19, 31, 0.92);
+      --line: rgba(106, 145, 214, 0.26);
+      --text: #e9f1ff;
+      --muted: #9db4db;
+      --neon: #62b3ff;
       --gold: #f3ba69;
       --radius-xl: 30px;
       --radius-lg: 22px;
       --radius-md: 16px;
-      --shadow: 0 20px 60px rgba(0, 7, 18, 0.5);
+      --shadow: 0 24px 60px rgba(0, 8, 20, .55);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -37,9 +37,9 @@
       font-family: Inter, Segoe UI, SF Pro Display, Arial, sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at 92% -10%, rgba(95,174,255,0.14), transparent 38%),
-        radial-gradient(circle at 8% 2%, rgba(243,186,105,0.08), transparent 28%),
-        linear-gradient(175deg, #04070d, #0a111d 45%, #070d16 100%);
+        radial-gradient(circle at 90% -10%, rgba(98,179,255,.14), transparent 35%),
+        radial-gradient(circle at 10% 8%, rgba(243,186,105,.08), transparent 28%),
+        linear-gradient(175deg, #04070d, #09111d 44%, #070d16 100%);
       overflow-x: hidden;
     }
 
@@ -47,13 +47,13 @@
       content: "";
       position: fixed;
       inset: 0;
-      pointer-events: none;
       z-index: -1;
+      pointer-events: none;
       background-image:
-        linear-gradient(rgba(90, 122, 185, 0.07) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(90, 122, 185, 0.07) 1px, transparent 1px);
+        linear-gradient(rgba(92, 122, 176, .07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(92, 122, 176, .07) 1px, transparent 1px);
       background-size: 42px 42px;
-      mask-image: radial-gradient(circle at center, black 32%, transparent 86%);
+      mask-image: radial-gradient(circle at center, black 30%, transparent 85%);
     }
 
     .city-glow {
@@ -61,74 +61,65 @@
       inset: auto 0 0;
       height: 34vh;
       z-index: -1;
-      opacity: .64;
+      opacity: .65;
       background:
-        linear-gradient(to top, rgba(0,0,0,.92), transparent),
-        repeating-linear-gradient(90deg, rgba(20,29,43,.65) 0 24px, rgba(9,15,25,.95) 24px 35px),
-        radial-gradient(circle at 45% -10%, rgba(95,174,255,.16), transparent 58%);
+        linear-gradient(to top, rgba(0,0,0,.9), transparent),
+        repeating-linear-gradient(90deg, rgba(20,29,43,.62) 0 25px, rgba(8,14,25,.95) 25px 35px),
+        radial-gradient(circle at 50% -10%, rgba(98,179,255,.18), transparent 60%);
     }
 
     .container {
-      width: min(1180px, calc(100% - 40px));
+      width: min(1440px, calc(100% - 40px));
       margin: 0 auto;
       position: relative;
       z-index: 1;
     }
 
-    .site-header-wrap {
-      position: sticky;
-      top: 14px;
-      z-index: 20;
-      margin-top: 16px;
-    }
+    .content-narrow { max-width: 1240px; }
 
+    .site-header-wrap { position: sticky; top: 14px; z-index: 30; margin-top: 16px; }
     header {
       border-radius: 999px;
       border: 1px solid var(--line);
-      background: rgba(8, 14, 24, 0.76);
-      backdrop-filter: blur(10px);
-      padding: 12px 14px;
+      background: rgba(7, 13, 22, .8);
+      backdrop-filter: blur(12px);
+      padding: 13px 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
-      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.35);
+      gap: 14px;
+      box-shadow: 0 14px 38px rgba(0, 0, 0, .35);
     }
 
     .brand { display: flex; align-items: center; gap: 11px; font-weight: 800; }
     .brand-mark {
-      width: 30px;
-      height: 30px;
-      border-radius: 10px;
+      width: 30px; height: 30px; border-radius: 10px;
       background: linear-gradient(135deg, var(--neon), var(--gold));
-      box-shadow: 0 0 24px rgba(95, 174, 255, .38);
+      box-shadow: 0 0 24px rgba(98,179,255,.42);
       position: relative;
     }
-    .brand-mark::after {
-      content: "";
-      position: absolute;
-      inset: 6px;
-      border-radius: 6px;
-      background: #081120;
-    }
+    .brand-mark::after { content:""; position:absolute; inset:6px; border-radius:6px; background:#081120; }
 
-    nav { display: flex; gap: 7px; flex-wrap: wrap; justify-content: center; }
+    nav { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
     nav a {
       color: var(--muted);
       text-decoration: none;
       font-size: .9rem;
-      font-weight: 600;
+      font-weight: 620;
       padding: 8px 12px;
       border-radius: 999px;
       transition: .2s ease;
+      border: 1px solid transparent;
     }
-    nav a:hover { background: rgba(95,174,255,0.12); color: var(--text); }
+    nav a:hover {
+      color: #eef5ff;
+      border-color: rgba(98,179,255,.3);
+      background: rgba(98,179,255,.1);
+      box-shadow: 0 0 16px rgba(98,179,255,.15);
+    }
 
     .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
       border: 1px solid transparent;
       border-radius: 12px;
       padding: 12px 18px;
@@ -139,195 +130,278 @@
       white-space: nowrap;
     }
     .btn.primary {
-      background: linear-gradient(130deg, #2d86ec, #62b7ff);
-      box-shadow: 0 0 0 1px rgba(119,189,255,0.35), 0 16px 38px rgba(45,122,211,0.42);
+      background: linear-gradient(130deg, #2d87ef, #64bbff);
+      box-shadow: 0 0 0 1px rgba(124,193,255,.35), 0 16px 38px rgba(45,122,211,.42);
     }
     .btn.gold {
       color: #1f1202;
-      background: linear-gradient(130deg, var(--gold), #ffd59c);
-      box-shadow: 0 12px 32px rgba(179,117,45,.35);
+      background: linear-gradient(130deg, var(--gold), #ffd9a6);
+      box-shadow: 0 12px 34px rgba(179,117,45,.35);
     }
     .btn.ghost {
-      background: rgba(18, 30, 47, 0.55);
-      border-color: rgba(95,174,255,.34);
-      color: var(--text);
+      background: rgba(19, 30, 48, .56);
+      border-color: rgba(98,179,255,.34);
+      color: #eaf2ff;
     }
     .btn:hover { transform: translateY(-2px); }
 
     .hero-band {
       width: 100%;
       margin-top: 18px;
-      padding: 62px 0 66px;
-      background:
-        radial-gradient(circle at 85% 10%, rgba(95,174,255,.22), transparent 32%),
-        radial-gradient(circle at 10% 90%, rgba(243,186,105,.16), transparent 36%),
-        linear-gradient(180deg, rgba(11,18,29,.92), rgba(8,14,24,.86));
-      border-top: 1px solid rgba(92, 126, 189, 0.22);
-      border-bottom: 1px solid rgba(92, 126, 189, 0.22);
+      padding: 76px 0 74px;
       position: relative;
       overflow: hidden;
+      background:
+        radial-gradient(circle at 82% 8%, rgba(98,179,255,.24), transparent 34%),
+        radial-gradient(circle at 10% 92%, rgba(243,186,105,.16), transparent 36%),
+        linear-gradient(180deg, rgba(10,18,30,.94), rgba(7,14,24,.88));
+      border-top: 1px solid rgba(98,132,190,.24);
+      border-bottom: 1px solid rgba(98,132,190,.24);
     }
 
-    .hero-band::after {
-      content: "";
+    .hero-wordmark {
       position: absolute;
-      width: 520px;
-      height: 520px;
-      right: -180px;
-      top: -220px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(95,174,255,.2), transparent 70%);
+      top: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: clamp(3.5rem, 15vw, 12rem);
+      font-weight: 900;
+      letter-spacing: .16em;
+      color: rgba(175, 206, 255, 0.06);
       pointer-events: none;
+      white-space: nowrap;
+      text-transform: uppercase;
     }
 
     .hero {
       display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 34px;
+      grid-template-columns: 1.02fr .98fr;
+      gap: 38px;
       align-items: center;
+      position: relative;
     }
 
-    h1 {
-      font-size: clamp(2.5rem, 6.8vw, 5rem);
-      line-height: .96;
-      margin-bottom: 16px;
-      letter-spacing: -.03em;
-    }
-
-    .hero p { color: var(--muted); line-height: 1.65; max-width: 680px; }
-    .hero-sub { font-size: clamp(1.03rem, 2.1vw, 1.36rem); color: #d8e8ff; margin-bottom: 10px; font-weight: 620; }
+    .hero h1 { font-size: clamp(2.6rem, 7vw, 5.2rem); line-height: .95; letter-spacing: -.03em; margin-bottom: 16px; }
+    .hero p { color: var(--muted); line-height: 1.65; max-width: 700px; }
+    .hero-sub { font-size: clamp(1.04rem, 2.1vw, 1.37rem); color: #d9e9ff; margin-bottom: 10px; font-weight: 620; }
 
     .hero-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
     .hero-badges span {
       font-size: .78rem;
       font-weight: 650;
-      color: #cde2ff;
+      color: #d2e6ff;
       padding: 7px 10px;
       border-radius: 999px;
-      border: 1px solid rgba(120, 185, 255, 0.28);
-      background: rgba(16, 28, 43, 0.68);
+      border: 1px solid rgba(128, 191, 255, .28);
+      background: rgba(15, 27, 43, .68);
     }
 
     .hero-actions { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; }
 
-    .widget-cloud { position: relative; min-height: 470px; }
+    .widget-cloud { position: relative; min-height: 560px; }
+    .orbit {
+      position: absolute;
+      border: 1px solid rgba(111, 177, 255, .16);
+      border-radius: 999px;
+      pointer-events: none;
+    }
+    .orbit.one { width: 420px; height: 420px; top: 40px; left: 10px; transform: rotate(18deg); }
+    .orbit.two { width: 520px; height: 520px; top: -10px; left: -40px; transform: rotate(-14deg); }
+
     .launcher {
-      border-radius: var(--radius-lg);
-      border: 1px solid rgba(120,185,255,.35);
-      background: linear-gradient(145deg, rgba(16,27,42,.93), rgba(8,14,23,.9));
-      box-shadow: var(--shadow);
-      padding: 14px;
-      transform: perspective(940px) rotateY(-10deg) rotateX(4deg);
+      position: relative;
+      width: min(640px, 100%);
+      margin-left: auto;
+      border-radius: 24px;
+      border: 1px solid rgba(130,193,255,.38);
+      background:
+        radial-gradient(circle at 12% 8%, rgba(120, 188, 255, .18), transparent 45%),
+        linear-gradient(145deg, rgba(16, 28, 44, .96), rgba(8, 14, 24, .94));
+      box-shadow: 0 34px 70px rgba(0,8,20,.58), inset 0 0 0 1px rgba(128,191,255,.12);
+      padding: 16px;
+      transform: perspective(980px) rotateY(-9deg) rotateX(4deg);
       transform-style: preserve-3d;
     }
 
-    .launcher-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .launcher::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      background: linear-gradient(130deg, rgba(98,179,255,.32), rgba(243,186,105,.18));
+      filter: blur(22px);
+      z-index: -1;
+      opacity: .7;
+    }
+
+    .launcher-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
     .dots { display: flex; gap: 6px; }
     .dots span { width: 8px; height: 8px; border-radius: 50%; }
-    .dots span:nth-child(1) { background: #f36f6f; }
-    .dots span:nth-child(2) { background: #f3ba69; }
-    .dots span:nth-child(3) { background: #69d6ff; }
-    .launcher-title { font-size: .92rem; font-weight: 700; color: #dbe8ff; }
+    .dots span:nth-child(1){ background:#f36f6f; }
+    .dots span:nth-child(2){ background:#f3ba69; }
+    .dots span:nth-child(3){ background:#69d6ff; }
+    .launcher-title { color: #dceaff; font-size: .94rem; font-weight: 700; }
 
-    .launch-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; }
+    .launch-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
     .launch-tile {
-      min-height: 86px;
+      min-height: 94px;
       border-radius: 14px;
-      border: 1px solid rgba(102, 164, 252, 0.25);
-      background: linear-gradient(145deg, rgba(15,29,47,.95), rgba(11,19,31,.9));
-      padding: 12px;
+      border: 1px solid rgba(109,173,255,.28);
+      background: linear-gradient(145deg, rgba(14, 28, 46, .96), rgba(10, 19, 32, .92));
+      padding: 13px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
-    .launch-tile span { font-size: .8rem; color: #9eb8de; }
-    .launch-tile strong { color: #edf5ff; font-size: 1.02rem; }
-    .launch-tile:nth-child(2n) { border-color: rgba(243,186,105,0.28); }
+    .launch-tile span { color: #9eb8de; font-size: .8rem; }
+    .launch-tile strong { color: #eff6ff; font-size: 1.03rem; }
 
     .float-card {
       position: absolute;
       border-radius: 13px;
-      border: 1px solid rgba(124, 189, 255, 0.28);
-      background: rgba(14, 23, 36, 0.78);
-      color: #d4e7ff;
+      border: 1px solid rgba(131, 194, 255, .3);
+      background: rgba(13, 23, 38, .8);
+      color: #d8eaff;
       font-size: .82rem;
       padding: 10px 12px;
-      backdrop-filter: blur(7px);
+      backdrop-filter: blur(8px);
       box-shadow: 0 10px 24px rgba(0,0,0,.35);
       animation: levitate 7s ease-in-out infinite;
     }
-    .f1 { top: -8px; left: -10px; }
-    .f2 { right: -8px; top: 108px; animation-delay: 1.2s; }
-    .f3 { left: 30px; bottom: 86px; animation-delay: 2.1s; }
-    .f4 { right: 20px; bottom: 48px; animation-delay: 3s; }
-    .f5 { right: -6px; bottom: -6px; animation-delay: 3.8s; }
+    .f1 { top: 8px; left: 8px; }
+    .f2 { right: -8px; top: 120px; animation-delay: 1.2s; }
+    .f3 { left: 36px; bottom: 108px; animation-delay: 2.1s; }
+    .f4 { right: 26px; bottom: 72px; animation-delay: 3s; }
+    .f5 { right: 2px; bottom: 8px; animation-delay: 3.8s; }
 
     @keyframes levitate { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
 
-    .band { padding: 62px 0; }
-    .band.soft { background: linear-gradient(180deg, rgba(9,15,25,0.68), rgba(8,13,22,0.52)); }
+    .band { padding: 66px 0; }
+    .band.soft { background: linear-gradient(180deg, rgba(9,15,25,.72), rgba(8,13,22,.56)); }
     .band.clean { background: transparent; }
     .band.gradient {
       background:
-        radial-gradient(circle at 90% 12%, rgba(95,174,255,.16), transparent 34%),
-        radial-gradient(circle at 15% 88%, rgba(243,186,105,.12), transparent 36%),
-        linear-gradient(160deg, rgba(11,18,30,.82), rgba(10,17,28,.56));
-      border-top: 1px solid rgba(92,126,189,.16);
-      border-bottom: 1px solid rgba(92,126,189,.16);
+        radial-gradient(circle at 88% 10%, rgba(98,179,255,.17), transparent 34%),
+        radial-gradient(circle at 16% 86%, rgba(243,186,105,.14), transparent 36%),
+        linear-gradient(160deg, rgba(10,18,30,.86), rgba(9,16,27,.58));
+      border-top: 1px solid rgba(98,132,190,.16);
+      border-bottom: 1px solid rgba(98,132,190,.16);
     }
 
-    h2 { font-size: clamp(1.55rem, 3.1vw, 2.5rem); margin-bottom: 12px; letter-spacing: -.02em; }
-    .lead { color: var(--muted); line-height: 1.75; max-width: 900px; }
+    h2 { font-size: clamp(1.6rem, 3.1vw, 2.6rem); margin-bottom: 12px; letter-spacing: -.02em; }
+    .lead { color: var(--muted); line-height: 1.76; max-width: 900px; }
+
+    .split-about {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 22px;
+      align-items: start;
+    }
+    .about-points {
+      display: grid;
+      gap: 10px;
+    }
+    .about-points article {
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(107, 161, 240, .24);
+      background: rgba(11, 20, 32, .9);
+      padding: 14px;
+    }
+    .about-points h3 { font-size: .98rem; margin-bottom: 6px; color: #ecf4ff; }
+    .about-points p { color: var(--muted); font-size: .92rem; }
+
+    .feature-strip {
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 10px;
+    }
+    .feature-pill {
+      border-radius: 12px;
+      border: 1px solid rgba(105,157,236,.24);
+      background: rgba(10, 18, 30, .8);
+      color: #cfe5ff;
+      font-size: .86rem;
+      padding: 10px 12px;
+      text-align: center;
+    }
 
     .grid-4, .grid-3, .grid-2 { display: grid; gap: 12px; margin-top: 18px; }
-    .grid-4 { grid-template-columns: repeat(4, minmax(0,1fr)); }
-    .grid-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
-    .grid-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .grid-4 { grid-template-columns: repeat(4,minmax(0,1fr)); }
+    .grid-3 { grid-template-columns: repeat(3,minmax(0,1fr)); }
+    .grid-2 { grid-template-columns: repeat(2,minmax(0,1fr)); }
 
     .card {
       border-radius: var(--radius-md);
-      border: 1px solid rgba(102,154,235,.24);
-      background: var(--surface-strong);
+      border: 1px solid rgba(109,163,241,.27);
+      background: rgba(10,18,30,.92);
       padding: 16px;
       transition: transform .28s ease, border-color .28s ease, box-shadow .28s ease;
       transform-style: preserve-3d;
     }
     .card:hover {
-      border-color: rgba(126,193,255,.66);
-      box-shadow: 0 12px 28px rgba(30,90,176,.24), inset 0 0 0 1px rgba(95,174,255,.18);
+      border-color: rgba(129,194,255,.7);
+      box-shadow: 0 14px 30px rgba(25,83,162,.28), inset 0 0 0 1px rgba(98,179,255,.22), 0 0 18px rgba(98,179,255,.14);
     }
-    .card h3 { font-size: 1rem; margin-bottom: 8px; color: #edf4ff; }
+    .card h3 { font-size: 1rem; margin-bottom: 8px; color: #edf5ff; }
     .card p { color: var(--muted); line-height: 1.55; font-size: .95rem; }
 
     .tag {
       display: inline-block;
       font-size: .75rem;
       font-weight: 700;
-      color: #9bcbff;
-      background: rgba(95,174,255,.14);
-      border: 1px solid rgba(124, 189, 255, 0.24);
+      color: #a4d2ff;
+      background: rgba(98,179,255,.14);
+      border: 1px solid rgba(128,191,255,.24);
       border-radius: 999px;
       padding: 5px 9px;
       margin-bottom: 8px;
+    }
+
+    .icon {
+      display: inline-grid;
+      place-items: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 7px;
+      margin-right: 7px;
+      background: rgba(98,179,255,.16);
+      border: 1px solid rgba(128,191,255,.25);
+      font-size: .8rem;
+      vertical-align: middle;
     }
 
     .pricing .card { position: relative; overflow: hidden; }
     .pricing .card::before {
       content: "";
       position: absolute;
-      width: 180px;
-      height: 180px;
+      width: 190px;
+      height: 190px;
       border-radius: 50%;
-      right: -86px;
-      top: -86px;
-      background: radial-gradient(circle, rgba(95,174,255,.25), transparent 70%);
+      right: -88px;
+      top: -88px;
+      background: radial-gradient(circle, rgba(98,179,255,.26), transparent 70%);
       pointer-events: none;
+    }
+    .pricing .card.recommended {
+      border-color: rgba(243,186,105,.52);
+      box-shadow: 0 18px 40px rgba(181,124,52,.25), inset 0 0 0 1px rgba(243,186,105,.18);
+    }
+    .recommended-badge {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      font-size: .74rem;
+      font-weight: 700;
+      color: #1b1104;
+      background: linear-gradient(130deg, var(--gold), #ffdca7);
     }
 
     .faq-list details {
       border-radius: 14px;
-      border: 1px solid rgba(102,154,235,.24);
-      background: var(--surface-strong);
+      border: 1px solid rgba(109,163,241,.25);
+      background: rgba(10,18,30,.92);
       padding: 12px 14px;
     }
     .faq-list details + details { margin-top: 10px; }
@@ -336,14 +410,29 @@
 
     .cta-band {
       width: 100%;
-      padding: 64px 0;
+      padding: 80px 0;
+      position: relative;
+      overflow: hidden;
       background:
-        radial-gradient(circle at 88% 8%, rgba(243,186,105,.24), transparent 35%),
-        radial-gradient(circle at 8% 88%, rgba(95,174,255,.24), transparent 36%),
-        linear-gradient(165deg, rgba(14,24,38,.95), rgba(10,17,28,.85));
-      border-top: 1px solid rgba(92,126,189,.2);
-      border-bottom: 1px solid rgba(92,126,189,.2);
+        radial-gradient(circle at 88% 8%, rgba(243,186,105,.26), transparent 34%),
+        radial-gradient(circle at 8% 88%, rgba(98,179,255,.28), transparent 36%),
+        linear-gradient(165deg, rgba(14,24,38,.97), rgba(9,16,27,.88));
+      border-top: 1px solid rgba(98,132,190,.22);
+      border-bottom: 1px solid rgba(98,132,190,.22);
     }
+    .cta-band::before,
+    .cta-band::after {
+      content: "";
+      position: absolute;
+      width: 520px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(130,193,255,.45), transparent);
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .cta-band::before { top: 22px; }
+    .cta-band::after { bottom: 22px; }
+    .cta-title { font-size: clamp(2rem, 4.4vw, 3.8rem); max-width: 900px; line-height: 1.04; }
 
     footer {
       text-align: center;
@@ -357,22 +446,25 @@
     .reveal { opacity: 0; transform: translateY(26px); transition: all .7s cubic-bezier(.2,.7,.2,1); }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    @media (max-width: 1080px) {
+    @media (max-width: 1200px) {
       .hero { grid-template-columns: 1fr; }
-      .grid-4 { grid-template-columns: repeat(2, minmax(0,1fr)); }
-      .grid-3 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .split-about { grid-template-columns: 1fr; }
+      .grid-4 { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .grid-3 { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .feature-strip { grid-template-columns: repeat(2,minmax(0,1fr)); }
       .widget-cloud { min-height: auto; }
     }
 
-    @media (max-width: 780px) {
-      .container { width: min(1180px, calc(100% - 20px)); }
+    @media (max-width: 860px) {
+      .container { width: min(1440px, calc(100% - 20px)); }
       header { border-radius: 18px; flex-direction: column; }
-      .hero-band { padding: 40px 0 46px; }
-      .band, .cta-band { padding: 44px 0; }
-      .launch-grid, .grid-4, .grid-3, .grid-2 { grid-template-columns: 1fr; }
+      .hero-band { padding: 48px 0 50px; }
+      .band, .cta-band { padding: 46px 0; }
+      .hero-wordmark { opacity: .04; font-size: clamp(2.5rem, 16vw, 6rem); }
+      .launch-grid, .grid-4, .grid-3, .grid-2, .feature-strip { grid-template-columns: 1fr; }
       .hero-actions .btn { width: 100%; }
-      .launcher { transform: none; }
-      .float-card { display: none; }
+      .launcher { transform: none; width: 100%; }
+      .float-card, .orbit { display: none; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -401,6 +493,7 @@
   </div>
 
   <section class="hero-band reveal" id="top">
+    <div class="hero-wordmark">ADMIN HELPER</div>
     <div class="container hero">
       <div>
         <h1>Admin Helper</h1>
@@ -421,10 +514,12 @@
       </div>
 
       <div class="widget-cloud">
+        <div class="orbit one" aria-hidden="true"></div>
+        <div class="orbit two" aria-hidden="true"></div>
         <div class="launcher">
           <div class="launcher-head">
             <div class="dots"><span></span><span></span><span></span></div>
-            <div class="launcher-title">Admin Helper Launcher</div>
+            <div class="launcher-title">Admin Helper Launcher System</div>
           </div>
           <div class="launch-grid">
             <article class="launch-tile"><span>Раздел</span><strong>Команды</strong></article>
@@ -443,30 +538,43 @@
   </section>
 
   <section id="about" class="band clean reveal">
-    <div class="container">
-      <h2>Что такое Admin Helper</h2>
-      <p class="lead">Admin Helper — это коммерческое решение для администрации RP-серверов, которое сокращает рутину, ускоряет работу и стандартизирует действия команды. Администратор быстро открывает нужные команды и регламенты, не теряет контекст диалога с игроком и всегда работает на актуальной версии внутренних материалов.</p>
+    <div class="container content-narrow split-about">
+      <div>
+        <h2>Что такое Admin Helper</h2>
+        <p class="lead">Admin Helper — это коммерческое решение для администрации RP-серверов, которое сокращает рутину, ускоряет работу и стандартизирует действия команды. Администратор быстро открывает нужные команды и регламенты, не теряет контекст диалога с игроком и всегда работает на актуальной версии внутренних материалов.</p>
+      </div>
+      <div class="about-points">
+        <article><h3>Единый стандарт</h3><p>Один инструмент и единые правила для всей администрации.</p></article>
+        <article><h3>Меньше ошибок</h3><p>Регламент, подсказки и команды в быстром доступе.</p></article>
+        <article><h3>Бренд проекта</h3><p>Премиальный лаунчер под стиль и процессы вашего сервера.</p></article>
+      </div>
     </div>
   </section>
 
   <section id="features" class="band soft reveal">
-    <div class="container">
+    <div class="container content-narrow">
       <h2>Ключевые возможности</h2>
+      <div class="feature-strip">
+        <div class="feature-pill">Быстрый workflow</div>
+        <div class="feature-pill">Коммерческий premium UX</div>
+        <div class="feature-pill">Стабильные обновления</div>
+        <div class="feature-pill">Кастомизация под проект</div>
+      </div>
       <div class="grid-4">
-        <article class="card tilt"><span class="tag">F9</span><h3>Подсказка по горячей клавише</h3><p>Моментальный доступ к справке в игровом процессе без потери темпа.</p></article>
-        <article class="card tilt"><span class="tag">База</span><h3>База команд проекта</h3><p>Структурированные команды с понятной навигацией и контекстом применения.</p></article>
-        <article class="card tilt"><span class="tag">Регламент</span><h3>Правила и наказания</h3><p>Единая зона ответственности: правила, регламент и санкции всегда под рукой.</p></article>
-        <article class="card tilt"><span class="tag">Доступ</span><h3>Быстрый доступ к материалам</h3><p>Ссылки, FAQ, внутренние инструкции и документация в одном интерфейсе.</p></article>
-        <article class="card tilt"><span class="tag">Update</span><h3>Автообновления</h3><p>Централизованная доставка новых регламентов и контента без хаоса в чатах.</p></article>
-        <article class="card tilt"><span class="tag">Custom</span><h3>Кастомизация под проект</h3><p>Гибкая адаптация структуры, контента, бренда и логики лаунчера под сервер.</p></article>
-        <article class="card tilt"><span class="tag">UX</span><h3>Удобный лаунчер</h3><p>Современный workflow для администратора: от старта до решения кейса за секунды.</p></article>
-        <article class="card tilt"><span class="tag">Premium</span><h3>Премиальный внешний вид</h3><p>Серьёзная коммерческая подача для укрепления имиджа проекта и команды.</p></article>
+        <article class="card tilt"><span class="tag">F9</span><h3><span class="icon">⌨</span>Подсказка по горячей клавише</h3><p>Моментальный доступ к справке в игровом процессе без потери темпа.</p></article>
+        <article class="card tilt"><span class="tag">База</span><h3><span class="icon">⚙</span>База команд проекта</h3><p>Структурированные команды с понятной навигацией и контекстом применения.</p></article>
+        <article class="card tilt"><span class="tag">Регламент</span><h3><span class="icon">📘</span>Правила и наказания</h3><p>Единая зона ответственности: правила, регламент и санкции всегда под рукой.</p></article>
+        <article class="card tilt"><span class="tag">Доступ</span><h3><span class="icon">🔗</span>Быстрый доступ к материалам</h3><p>Ссылки, FAQ, внутренние инструкции и документация в одном интерфейсе.</p></article>
+        <article class="card tilt"><span class="tag">Update</span><h3><span class="icon">⟳</span>Автообновления</h3><p>Централизованная доставка новых регламентов и контента без хаоса в чатах.</p></article>
+        <article class="card tilt"><span class="tag">Custom</span><h3><span class="icon">🎛</span>Кастомизация под проект</h3><p>Гибкая адаптация структуры, контента, бренда и логики лаунчера под сервер.</p></article>
+        <article class="card tilt"><span class="tag">UX</span><h3><span class="icon">🧩</span>Удобный лаунчер</h3><p>Современный workflow для администратора: от старта до решения кейса за секунды.</p></article>
+        <article class="card tilt"><span class="tag">Premium</span><h3><span class="icon">✦</span>Премиальный внешний вид</h3><p>Серьёзная коммерческая подача для укрепления имиджа проекта и команды.</p></article>
       </div>
     </div>
   </section>
 
   <section id="audience" class="band clean reveal">
-    <div class="container">
+    <div class="container content-narrow">
       <h2>Для кого программа</h2>
       <div class="grid-3">
         <article class="card tilt"><h3>Владельцы RP-проектов</h3><p>Контроль стандартов и единый инструмент для всей администрации.</p></article>
@@ -478,7 +586,7 @@
   </section>
 
   <section class="band soft reveal">
-    <div class="container">
+    <div class="container content-narrow">
       <h2>Почему это удобно</h2>
       <div class="grid-2">
         <article class="card tilt"><h3>Меньше ошибок в наказаниях</h3><p>Регламент и правила всегда перед глазами в нужный момент.</p></article>
@@ -490,7 +598,7 @@
   </section>
 
   <section class="band gradient reveal">
-    <div class="container">
+    <div class="container content-narrow">
       <h2>Адаптация под ваш проект</h2>
       <p class="lead">Admin Helper можно персонализировать под любой сервер: название и логотип проекта, фирменные цвета, разделы с правилами и командами, ссылки на Telegram / Discord, собственная схема обновлений и внешний вид лаунчера.</p>
       <div class="grid-3">
@@ -502,18 +610,37 @@
   </section>
 
   <section id="pricing" class="band clean pricing reveal">
-    <div class="container">
+    <div class="container content-narrow">
       <h2>Тарифы и покупка</h2>
       <div class="grid-3">
-        <article class="card tilt"><span class="tag">Старт</span><h3>Базовая версия</h3><p>Готовая стандартная конфигурация Admin Helper.</p><p><strong>Стоимость:</strong> обсуждается индивидуально</p><a class="btn ghost" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Заказать Admin Helper</a></article>
-        <article class="card tilt"><span class="tag">Проект</span><h3>Версия под проект</h3><p>Кастомизация структуры, контента и ключевых разделов под сервер.</p><p><strong>Стоимость:</strong> обсуждается индивидуально</p><a class="btn primary" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Заказать Admin Helper</a></article>
-        <article class="card tilt"><span class="tag">Premium</span><h3>Premium-адаптация</h3><p>Полный бренд-пакет, персональный дизайн лаунчера и приоритетные обновления.</p><p><strong>Стоимость:</strong> обсуждается индивидуально</p><a class="btn gold" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Заказать Admin Helper</a></article>
+        <article class="card tilt">
+          <span class="tag">Старт</span>
+          <h3>Базовая версия</h3>
+          <p>Готовая стандартная конфигурация Admin Helper.</p>
+          <p><strong>Стоимость:</strong> обсуждается индивидуально</p>
+          <a class="btn ghost" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Заказать Admin Helper</a>
+        </article>
+        <article class="card tilt recommended">
+          <span class="recommended-badge">Рекомендуем</span>
+          <span class="tag">Проект</span>
+          <h3>Версия под проект</h3>
+          <p>Кастомизация структуры, контента и ключевых разделов под сервер.</p>
+          <p><strong>Стоимость:</strong> обсуждается индивидуально</p>
+          <a class="btn primary" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Заказать Admin Helper</a>
+        </article>
+        <article class="card tilt">
+          <span class="tag">Premium</span>
+          <h3>Premium-адаптация</h3>
+          <p>Полный бренд-пакет, персональный дизайн лаунчера и приоритетные обновления.</p>
+          <p><strong>Стоимость:</strong> обсуждается индивидуально</p>
+          <a class="btn gold" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Заказать Admin Helper</a>
+        </article>
       </div>
     </div>
   </section>
 
   <section class="band soft reveal">
-    <div class="container">
+    <div class="container content-narrow">
       <h2>Как выглядит программа</h2>
       <div class="grid-3">
         <article class="card tilt"><h3>Главная</h3><p>Обзор разделов, быстрый старт и состояние версии.</p></article>
@@ -527,7 +654,7 @@
   </section>
 
   <section id="faq" class="band clean reveal">
-    <div class="container">
+    <div class="container content-narrow">
       <h2>FAQ</h2>
       <div class="faq-list">
         <details><summary>Подойдёт ли для моего проекта?</summary><p>Да, Admin Helper создавался как универсальная база для SAMP, CRMP и MTA серверов с возможностью адаптации.</p></details>
@@ -541,8 +668,8 @@
   </section>
 
   <section id="cta" class="cta-band reveal">
-    <div class="container">
-      <h2>Готов усилить администрацию своего проекта?</h2>
+    <div class="container content-narrow">
+      <h2 class="cta-title">Готов усилить администрацию своего проекта?</h2>
       <p class="lead">Запустите Admin Helper как профессиональный стандарт для вашей команды: быстрее процессы, меньше ошибок, сильнее бренд.</p>
       <div class="hero-actions">
         <a class="btn primary" href="https://t.me/ahelperAlmazov" target="_blank" rel="noopener">Купить Admin Helper</a>
@@ -552,7 +679,7 @@
   </section>
 
   <section id="contact" class="band clean reveal">
-    <div class="container">
+    <div class="container content-narrow">
       <h2>Связь</h2>
       <p class="lead">Хотите Admin Helper под свой проект? Напишите автору, чтобы обсудить дизайн, регламент, команды, обновления и стоимость адаптации.</p>
       <div class="grid-3">
