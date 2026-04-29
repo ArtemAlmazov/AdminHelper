@@ -12,11 +12,11 @@
   <meta property="og:title" content="Admin Helper — premium-лаунчер для администрации RP-проектов" />
   <meta property="og:description" content="Премиальный помощник для администрации SAMP / CRMP / MTA: команды, правила, F9-подсказка, регламент и обновления в одном лаунчере." />
   <meta property="og:url" content="https://artemalmazov.github.io/AdminHelper/" />
-  <meta property="og:image" content="https://artemalmazov.github.io/AdminHelper/favicon.png" />
+  <meta property="og:image" content="https://artemalmazov.github.io/AdminHelper/assets/promo-banner.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Admin Helper — premium-лаунчер для администрации RP-проектов" />
   <meta name="twitter:description" content="Команды, правила, F9-подсказка, регламент и обновления в одном премиальном лаунчере." />
-  <meta name="twitter:image" content="https://artemalmazov.github.io/AdminHelper/favicon.png" />
+  <meta name="twitter:image" content="https://artemalmazov.github.io/AdminHelper/assets/promo-banner.png" />
   <style>
     :root {
       --bg: #060a12;
@@ -108,20 +108,16 @@
       color: #f0f7ff;
       text-shadow: 0 0 16px rgba(99,182,255,.35);
     }
-    .brand-mark {
-      width: 30px;
-      height: 30px;
+    .brand-logo {
+      width: 34px;
+      height: 34px;
       border-radius: 10px;
-      background: linear-gradient(130deg, var(--neon), var(--gold));
-      box-shadow: 0 0 22px rgba(99,182,255,.45);
-      position: relative;
-    }
-    .brand-mark::after {
-      content: "";
-      position: absolute;
-      inset: 6px;
-      border-radius: 6px;
-      background: #081120;
+      object-fit: contain;
+      filter: drop-shadow(0 0 12px rgba(99,182,255,.35));
+      background: rgba(8,17,32,.75);
+      box-shadow: inset 0 0 0 1px rgba(120,183,255,.22);
+      padding: 2px;
+      flex-shrink: 0;
     }
 
     nav { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
@@ -537,6 +533,59 @@
     .feature-showcase h3 { font-size: 1.55rem; margin-bottom: 6px; }
     .feature-showcase p { color: var(--muted); line-height: 1.7; }
 
+    .avatar-card {
+      position: absolute;
+      right: -14px;
+      bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: min(300px, 78%);
+      border-radius: 20px;
+      border: 1px solid rgba(243,187,109,.34);
+      background: linear-gradient(150deg, rgba(11,20,34,.94), rgba(10,18,30,.96));
+      padding: 10px;
+      box-shadow: 0 18px 42px rgba(0,7,18,.52), 0 0 26px rgba(99,182,255,.18), 0 0 18px rgba(243,187,109,.2);
+      z-index: 3;
+    }
+    .avatar-card img {
+      width: 82px;
+      height: 82px;
+      border-radius: 20px;
+      object-fit: contain;
+      background: rgba(7,13,22,.7);
+      box-shadow: inset 0 0 0 1px rgba(120,183,255,.2), 0 0 18px rgba(99,182,255,.3);
+      flex-shrink: 0;
+    }
+    .avatar-card strong { display: block; font-size: .92rem; color: #eef6ff; }
+    .avatar-card span { display: block; margin-top: 3px; font-size: .78rem; color: #b3cceb; }
+
+    .tab-icon { width: 30px; height: 30px; border-radius: 10px; object-fit: contain; box-shadow: 0 0 12px rgba(99,182,255,.3); background: rgba(9,16,26,.78); padding: 3px; }
+    .showcase-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+    .showcase-icon { width: 58px; height: 58px; border-radius: 16px; object-fit: contain; background: rgba(11,20,34,.85); padding: 6px; box-shadow: 0 0 18px rgba(99,182,255,.24); border: 1px solid rgba(113,172,255,.25); }
+
+    .card-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 10px;
+      object-fit: contain;
+      background: rgba(10,18,30,.84);
+      border: 1px solid rgba(109,163,241,.26);
+      padding: 4px;
+      margin-bottom: 10px;
+      box-shadow: 0 0 12px rgba(99,182,255,.22);
+    }
+
+    .footer-logo {
+      width: 26px;
+      height: 26px;
+      object-fit: contain;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      box-shadow: 0 0 10px rgba(99,182,255,.24);
+    }
+
+
     .feature-side {
       border-radius: 14px;
       border: 1px solid rgba(109,163,241,.24);
@@ -923,7 +972,11 @@
       .cta-layout { grid-template-columns: 1fr; }
       .accent-strip { grid-template-columns: repeat(2,minmax(0,1fr)); }
       .launcher-layout { grid-template-columns: 1fr; }
-      .float-card, .orbit { display: none; }
+       .float-card, .orbit { display: none; }
+      .avatar-card { position: relative; right: auto; bottom: auto; width: 100%; margin-top: 14px; }
+      .avatar-card img { width: 74px; height: 74px; }
+      .tab-btn .tab-top { align-items: flex-start; }
+      .showcase-icon { width: 52px; height: 52px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -938,7 +991,7 @@
   <div class="site-header-wrap">
     <div class="container">
       <header>
-        <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"></span>Admin Helper</a>
+        <a class="brand" href="#top"><img class="brand-logo" src="assets/logo-icon.png" alt="" aria-hidden="true" /><span>Admin Helper</span></a>
         <nav>
           <a href="#top">Главная</a>
           <a href="#about">О продукте</a>
@@ -1017,6 +1070,10 @@
               </div>
             </div>
           </div>
+        </div>
+        <div class="avatar-card">
+          <img src="assets/avatar-almazov.png" alt="Artem Almazov — Admin Helper" />
+          <div><strong>Artem Almazov</strong><span>Face of Admin Helper</span></div>
         </div>
         <div class="float-card f1" aria-hidden="true">🧭 Команды</div>
         <div class="float-card f2" aria-hidden="true">📘 Правила</div>
@@ -1141,6 +1198,7 @@
     const features = [
       {
         badge: 'Core',
+        icon: 'assets/icon-f9.png',
         title: 'F9-подсказка администратора',
         subtitle: 'Быстрый помощник в рабочем процессе',
         text: 'Горячий вызов справки прямо в рабочем процессе: быстрое действие без потери темпа и контекста.',
@@ -1150,6 +1208,7 @@
       },
       {
         badge: 'Commands',
+        icon: 'assets/icon-commands.png',
         title: 'База команд проекта',
         subtitle: 'Команды по ролям и категориям',
         text: 'Команды структурированы по ролям и задачам, чтобы администратор не тратил время на поиск в чатах.',
@@ -1159,6 +1218,7 @@
       },
       {
         badge: 'Rules',
+        icon: 'assets/icon-rules.png',
         title: 'Правила и наказания',
         subtitle: 'Актуальный регламент в одном месте',
         text: 'Актуальный регламент доступен в один клик, что снижает ошибки и повышает прозрачность решений.',
@@ -1168,6 +1228,7 @@
       },
       {
         badge: 'Resources',
+        icon: 'assets/icon-settings.png',
         title: 'Быстрый доступ к материалам',
         subtitle: 'Внутренние ссылки и база знаний',
         text: 'Внутренние ссылки, инструкции и базы знаний собраны в одной панели для всей администрации.',
@@ -1177,6 +1238,7 @@
       },
       {
         badge: 'Updates',
+        icon: 'assets/icon-updates.png',
         title: 'Автообновления',
         subtitle: 'Централизованная доставка изменений',
         text: 'Лаунчер централизованно доставляет новые материалы и версии без ручной пересылки файлов.',
@@ -1186,6 +1248,7 @@
       },
       {
         badge: 'Custom',
+        icon: 'assets/icon-license.png',
         title: 'Кастомизация под проект',
         subtitle: 'Бренд и структура под ваш сервер',
         text: 'Настройка бренда, структуры и модулей под конкретную экономику и процессы RP-сервера.',
@@ -1201,7 +1264,10 @@
     function renderFeature(index) {
       const f = features[index];
       main.innerHTML = `
-        <span class="showcase-label">${f.badge}</span>
+        <div class="showcase-head">
+          <span class="showcase-label">${f.badge}</span>
+          <img class="showcase-icon" src="${f.icon}" alt="" aria-hidden="true" />
+        </div>
         <div>
           <h3>${f.title}</h3>
           <p>${f.text}</p>
@@ -1236,7 +1302,7 @@
       const btn = document.createElement('button');
       btn.className = 'tab-btn' + (i === 0 ? ' active' : '');
       btn.type = 'button';
-      btn.innerHTML = `<span class="tab-top"><span class="tab-badge">${f.badge}</span>${f.title}</span><span class="tab-sub">${f.subtitle}</span>`;
+      btn.innerHTML = `<span class="tab-top"><img class="tab-icon" src="${f.icon}" alt="" aria-hidden="true" /><span class="tab-badge">${f.badge}</span>${f.title}</span><span class="tab-sub">${f.subtitle}</span>`;
       btn.id = `feature-tab-${i}`;
       btn.setAttribute('role', 'tab');
       btn.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
